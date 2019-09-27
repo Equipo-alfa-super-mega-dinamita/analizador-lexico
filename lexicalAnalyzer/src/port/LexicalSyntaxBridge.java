@@ -1,4 +1,4 @@
-package lexicalAnalyzer;
+package port;
 
 public class LexicalSyntaxBridge {
 }
