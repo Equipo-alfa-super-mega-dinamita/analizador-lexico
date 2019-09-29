@@ -30,8 +30,4 @@ public class Token {
         return myTokenString;
     }
 
-    public static final int
-            ID = 1,
-            INT = 2,
-            REAL = 3;
 }
