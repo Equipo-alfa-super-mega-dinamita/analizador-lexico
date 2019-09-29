@@ -6,6 +6,7 @@ public class SymbolTable {
     HashSet<String> reservedWordList;
     public SymbolTable(){
         reservedWordList = new HashSet<>();
+        IniResWordList();
     }
     private void IniResWordList(){
         reservedWordList.add("abort");
@@ -60,5 +61,10 @@ public class SymbolTable {
         reservedWordList.add("var");
         reservedWordList.add("when");
         reservedWordList.add("writes");
+    }
+    
+    public boolean isResWordList(String word){
+        boolean ans = reservedWordList.contains(word);
+        return ans;
     }
 }
