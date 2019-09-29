@@ -28,7 +28,7 @@ public class SymbolTable {
         reservedWordList.add("fi");
         reservedWordList.add("file");
         reservedWordList.add("final");
-        reservedWordList.add("global"); // ° _ °
+        reservedWordList.add("global");
         reservedWordList.add("if");
         reservedWordList.add("import");
         reservedWordList.add("in");
