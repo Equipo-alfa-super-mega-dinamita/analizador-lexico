@@ -3,49 +3,29 @@ package lexicalAnalyzer;
 public class Token {
     private int row;
     private int column;
-    private int idType;
+    private TokenType type;
     private String lexeme;
 
-    public Token(int row, int column, String lexeme, int idType) {
+    public Token(int row, int column, String lexeme, TokenType type) {
         this.row = row;
         this.column = column;
         this.lexeme = lexeme;
-        this.idType = idType;
+        this.type = type;
     }
 
     public Token(int row, int column) {
         this.row = row;
         this.column = column;
-        this.idType = -1;
-    }
-
-    private String getNameType(int idType) {
-        String ans;
-        switch (idType) {
-            case 1:
-                ans = "id";
-                break;
-            case 2:
-                ans = "integer";
-                break;
-            case 3:
-                ans = "real";
-                break;
-            default:
-                ans = "Fatal Error";
-
-        }
-        return ans;
+        this.type = TokenType.none;
     }
 
     @Override
     public String toString() {
         String myTokenString = "";
-        String aux = getNameType(this.idType);
-        if (aux.equals(this.lexeme)) {
-            myTokenString = "<" + aux + "," + row + "," + column + ">";
+        if ((type.toString()).equals("tk_"+this.lexeme)) {
+            myTokenString = "<" + type + "," + row + "," + column + ">";
         } else {
-            myTokenString = "<" + aux + "," + lexeme + "," + row + "," + column + ">";
+            myTokenString = "<" + type + "," + lexeme + "," + row + "," + column + ">";
         }
         return myTokenString;
     }
