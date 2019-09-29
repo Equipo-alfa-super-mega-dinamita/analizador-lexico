@@ -2,6 +2,7 @@ package lexicalAnalyzer;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ScriptReader {
     private ArrayList<String> commandLines;
@@ -36,5 +37,11 @@ public class ScriptReader {
                 System.out.println("Error: Close File");
             }
         }
+    }
+    public char getChar(int row,int column){
+        char myCharAns;
+        Scanner myScanner = new Scanner(commandLines.get(row));
+        myCharAns = myScanner.next().charAt(column);
+        return myCharAns;
     }
 }
