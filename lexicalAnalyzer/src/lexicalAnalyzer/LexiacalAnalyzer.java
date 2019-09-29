@@ -27,7 +27,7 @@ public class LexiacalAnalyzer {
         by
         select
         do, od
-        (Pag 9)
+        (Pag 9) ////////////////////////////////////// ????????
         receive
         reply
         co, oc
