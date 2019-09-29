@@ -62,8 +62,8 @@ public class SymbolTable {
         reservedWordList.add("when");
         reservedWordList.add("writes");
     }
-    
-    public boolean isResWordList(String word){
+
+    public boolean isResWord(String word){
         boolean ans = reservedWordList.contains(word);
         return ans;
     }

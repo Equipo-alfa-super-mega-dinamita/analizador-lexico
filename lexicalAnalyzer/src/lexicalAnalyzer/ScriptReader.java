@@ -38,7 +38,7 @@ public class ScriptReader {
             }
         }
     }
-    public char getChar(int row,int column){
+        public char getChar(int row,int column){
         char myCharAns;
         Scanner myScanner = new Scanner(commandLines.get(row));
         myCharAns = myScanner.next().charAt(column);
