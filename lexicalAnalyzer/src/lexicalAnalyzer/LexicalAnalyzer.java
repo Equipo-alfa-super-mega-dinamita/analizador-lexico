@@ -65,12 +65,7 @@ public class LexicalAnalyzer {
                 } else {
                     return new Token(tokenRow, tokenColumn, "-", TokenType.tk_minus);
                 }
-            case '!':
-                lastChar = reader.getNextChar();
-                if (lastChar == '=') {
-                    lastChar = reader.getNextChar();
-                    return new Token(tokenRow, tokenColumn, "!=", TokenType.tk_ne);
-                } else {
+                else{
                     return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                 }
             case '?':
@@ -86,10 +81,10 @@ public class LexicalAnalyzer {
                 return new Token(tokenRow, tokenColumn, ")", TokenType.tk_rparen);
             case '[':
                 lastChar = reader.getNextChar();
-                if (lastChar == ']') {
+                if( lastChar == ']'){
                     lastChar = reader.getNextChar();
                     return new Token(tokenRow, tokenColumn, "[]", TokenType.tk_square);
-                } else {
+                }else{
                     return new Token(tokenRow, tokenColumn, "[", TokenType.tk_lbracket);
                 }
             case ']':
@@ -107,71 +102,76 @@ public class LexicalAnalyzer {
 
             case '*':
                 lastChar = reader.getNextChar();
-                if (lastChar == '*') {
+                if(lastChar == '*'){
                     lastChar = reader.getNextChar();
-                    if (lastChar == ':') {
+                    if(lastChar == ':'){
                         lastChar = reader.getNextChar();
-                        if (lastChar == '=') {
+                        if(lastChar == '='){
                             lastChar = reader.getNextChar();
                             new Token(tokenRow, tokenColumn, "**:=", TokenType.tk_aug_expon);
-                        } else {
+                        }else{
                             new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                         }
-                    } else {
+                    }
+                    else{
                         return new Token(tokenRow, tokenColumn, "**", TokenType.tk_expon);
                     }
-                } else if (lastChar == ':') {
+                }
+                else if(lastChar == ':'){
                     lastChar = reader.getNextChar();
-                    if (lastChar == '=') {
+                    if(lastChar == '='){
                         lastChar = reader.getNextChar();
                         return new Token(tokenRow, tokenColumn, "*:=", TokenType.tk_aug_aster);
-                    } else {
+                    }else{
                         return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                     }
-                } else {
+                }
+                else{
                     lastChar = reader.getNextChar();
                     return new Token(tokenRow, tokenColumn, "*", TokenType.tk_aster);
                 }
             case '/':
                 lastChar = reader.getNextChar();
-                if (lastChar == ':') {
+                if(lastChar == ':'){
                     lastChar = reader.getNextChar();
-                    if (lastChar == '=') {
+                    if(lastChar == '='){
                         lastChar = reader.getNextChar();
                         return new Token(tokenRow, tokenColumn, "/:=", TokenType.tk_aug_div);
-                    } else {
+                    }else{
                         return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                     }
-                } else if (lastChar == '/') {
+                }
+                else if(lastChar == '/'){
                     lastChar = reader.getNextChar();
                     return new Token(tokenRow, tokenColumn, "//", TokenType.tk_parallel);
-                } else {
+                }
+                else{
                     return new Token(tokenRow, tokenColumn, "/", TokenType.tk_div);
                 }
             case '&':
                 lastChar = reader.getNextChar();
-                if (lastChar == ':') {
+                if(lastChar == ':'){
                     lastChar = reader.getNextChar();
-                    if (lastChar == '=') {
+                    if(lastChar == '='){
                         lastChar = reader.getNextChar();
                         return new Token(tokenRow, tokenColumn, "&:=", TokenType.tk_aug_and);
-                    } else {
+                    }else{
                         return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                     }
-                } else {
+                }else{
                     return new Token(tokenRow, tokenColumn, "&", TokenType.tk_and);
                 }
             case '%':
                 lastChar = reader.getNextChar();
-                if (lastChar == ':') {
+                if(lastChar == ':'){
                     lastChar = reader.getNextChar();
-                    if (lastChar == '=') {
+                    if(lastChar == '='){
                         lastChar = reader.getNextChar();
                         return new Token(tokenRow, tokenColumn, "%:=", TokenType.tk_aug_remdr);
-                    } else {
+                    }else{
                         return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                     }
-                } else {
+                }else{
                     return new Token(tokenRow, tokenColumn, "%", TokenType.tk_remdr);
                 }
 
@@ -179,33 +179,83 @@ public class LexicalAnalyzer {
                 lastChar = reader.getNextChar();
                 return new Token(tokenRow, tokenColumn, "^", TokenType.tk_hat);
 
-            case '|':
+            case '+':
                 lastChar = reader.getNextChar();
-                if(lastChar == '|'){
+                if(lastChar == ':'){
+                    lastChar = reader.getNextChar();
+                    if(lastChar == '='){
+                        lastChar = reader.getNextChar();
+                        return new Token(tokenRow, tokenColumn, "+:=", TokenType.tk_aug_plus);
+                    }else{
+                        return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
+                    }
+                }else if(lastChar == '+'){
+                    lastChar = reader.getNextChar();
+                    return new Token(tokenRow, tokenColumn, "++", TokenType.tk_incr);
+                }
+                else{
+                    return new Token(tokenRow, tokenColumn, "+", TokenType.tk_plus);
+                }
+            case '<':
+                lastChar = reader.getNextChar();
+                if(lastChar == '<'){
                     lastChar = reader.getNextChar();
                     if(lastChar == ':'){
                         lastChar = reader.getNextChar();
                         if(lastChar == '='){
                             lastChar = reader.getNextChar();
-                            return new Token(tokenRow,tokenColumn,"||:=",TokenType.tk_aug_concat);
+                            return new Token(tokenRow, tokenColumn, "<<:=", TokenType.tk_aug_lshift);
                         }else{
-                            return new Token(tokenRow,tokenColumn,"ERROR",TokenType.ERROR);
+                            return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                         }
                     }else{
-                        return new Token(tokenRow,tokenColumn,"||",TokenType.tk_concat);
+                        return new Token(tokenRow, tokenColumn, "<<", TokenType.tk_lshift);
                     }
+
+
+                }else if(lastChar == '='){
+
+                    lastChar = reader.getNextChar();
+                    return new Token(tokenRow, tokenColumn, "<=", TokenType.tk_le);
+
                 }else{
-                    return new Token(tokenRow,tokenColumn,"|",TokenType.tk_or);
+                    return new Token(tokenRow, tokenColumn, "<", TokenType.tk_lt);
+                }
+            case '>':
+                lastChar = reader.getNextChar();
+                if(lastChar == '>'){
+                    lastChar = reader.getNextChar();
+                    if(lastChar == ':'){
+                        lastChar = reader.getNextChar();
+                        if(lastChar == '='){
+                            lastChar = reader.getNextChar();
+                            return new Token(tokenRow, tokenColumn, ">>:=", TokenType.tk_aug_rshift);
+                        }else{
+                            return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
+                        }
+                    }else{
+                        return new Token(tokenRow, tokenColumn, ">>", TokenType.tk_rshift);
+                    }
+                }else if(lastChar == '='){
+                    lastChar = reader.getNextChar();
+                    return new Token(tokenRow, tokenColumn, ">=", TokenType.tk_ge);
+
+                }else{
+                    return new Token(tokenRow, tokenColumn, ">", TokenType.tk_gt);
                 }
 
-            case '~':
-                lastChar = reader.getNextChar();
-                if (lastChar == '=') {
-                    lastChar = reader.getNextChar();
-                    return new Token(tokenRow,tokenColumn,"~=",TokenType.tk_ne);
-                }else{
-                    return new Token(tokenRow, tokenColumn, "~", TokenType.tk_not);
-                }
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         return null;
