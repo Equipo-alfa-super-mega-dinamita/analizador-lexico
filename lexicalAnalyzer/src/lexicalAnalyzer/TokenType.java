@@ -5,6 +5,7 @@ public enum TokenType {
     ERROR,
     //nuevos
     tk_id,
+    tk_eof,
     //Reserved words
 
     tk_P,
