@@ -23,6 +23,9 @@ public class Token {
 
     @Override
     public String toString() {
+        if(this.type == TokenType.ERROR){
+            return ">>> Error lexico(linea:"+row+",posicion:"+column+")";
+        }
         String myTokenString = "";
         SymbolTable myTable = new SymbolTable(true);
         if ((type.toString()).equals("tk_"+this.lexeme)/*||(!myTable.isEnAlph(lexeme.charAt(0)))*/) {

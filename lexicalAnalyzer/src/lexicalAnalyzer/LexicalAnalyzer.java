@@ -14,6 +14,7 @@ public class LexicalAnalyzer {
     public LexicalAnalyzer(String fileName) {
         this.reader = new ScriptReader(fileName);
         lastChar = reader.getNextChar();
+        this.symbolTable = new SymbolTable();
     }
 
     private void ignoreEmptySpacesAndLineComments() {
@@ -246,7 +247,9 @@ public class LexicalAnalyzer {
                 } else {
                     return new Token(tokenRow, tokenColumn, "<", TokenType.tk_lt);
                 }
-
+            case '=':
+                lastChar = reader.getNextChar();
+                return new Token(tokenRow, tokenColumn, "=", TokenType.tk_eq);
             case '>':
                 lastChar = reader.getNextChar();
                 if (lastChar == '>') {
@@ -308,8 +311,11 @@ public class LexicalAnalyzer {
             case '.':
                 return new Token(tokenRow, tokenColumn, "PUTO EL QUE LO LEA", TokenType.tk_period);
         }
+        if((lastChar >= 'a' && lastChar <= 'z') || (lastChar >= 'A' && lastChar <= 'Z')){
+            return identifyKeywordOrIdentifier();
+        }
 
-        return null;
+        return new Token(tokenRow,tokenColumn,"ERROR",TokenType.ERROR);
     }
 
     //
@@ -340,7 +346,7 @@ public class LexicalAnalyzer {
     TokenType getTypeOfReservedWord(String word) {
         TokenType types[] = TokenType.values();
         for (TokenType type : types) {
-            if (("tk_" + word).equals(type)) {
+            if (("tk_" + word).equals(type.toString())) {
                 return type;
             }
         }
@@ -348,7 +354,7 @@ public class LexicalAnalyzer {
     }
 
     public static void main(String args[]) {
-        /*ScriptReader sr = new ScriptReader("prueba.txt");
+        ScriptReader sr = new ScriptReader("prueba.txt");
         char myChar = 'x';
         boolean flag = true;
         while (flag) {
@@ -361,14 +367,17 @@ public class LexicalAnalyzer {
                 } else {
                     System.out.println(myChar);
             }
-        }*/
-        LexicalAnalyzer lexer = new LexicalAnalyzer("prueba.txt");
+        }
+        /*LexicalAnalyzer lexer = new LexicalAnalyzer("prueba.txt");
         Token myToken = lexer.nextToken();
         while (myToken.type != TokenType.tk_eof) {
+            if(myToken.type == TokenType.ERROR){
+                break;
+            }
             System.out.println(myToken);
             myToken = lexer.nextToken();
         }
-        System.out.println(myToken);
+        System.out.println(myToken);*/
 
     }
 }
