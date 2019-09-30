@@ -17,8 +17,8 @@ public class LexicalAnalyzer {
         //to do
         //caracter es EOF?
         //to do
-        tokenRow = reader.row;
-        tokenColumn = reader.column;
+        tokenRow = reader.getRow();
+        tokenColumn = reader.getColumn();
         switch (lastChar) {
             case ',':
                 lastChar = reader.getNextChar();
