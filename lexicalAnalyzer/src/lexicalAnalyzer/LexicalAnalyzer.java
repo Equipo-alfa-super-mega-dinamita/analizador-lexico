@@ -354,7 +354,7 @@ public class LexicalAnalyzer {
     }
 
     public static void main(String args[]) {
-        ScriptReader sr = new ScriptReader("prueba.txt");
+        /*ScriptReader sr = new ScriptReader("prueba.txt");
         char myChar = 'x';
         boolean flag = true;
         while (flag) {
@@ -367,8 +367,8 @@ public class LexicalAnalyzer {
                 } else {
                     System.out.println(myChar);
             }
-        }
-        /*LexicalAnalyzer lexer = new LexicalAnalyzer("prueba.txt");
+        }*/
+        LexicalAnalyzer lexer = new LexicalAnalyzer("prueba.txt");
         Token myToken = lexer.nextToken();
         while (myToken.type != TokenType.tk_eof) {
             if(myToken.type == TokenType.ERROR){
@@ -377,7 +377,7 @@ public class LexicalAnalyzer {
             System.out.println(myToken);
             myToken = lexer.nextToken();
         }
-        System.out.println(myToken);*/
+        System.out.println(myToken);
 
     }
 }
