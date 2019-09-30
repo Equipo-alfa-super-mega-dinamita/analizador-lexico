@@ -10,6 +10,9 @@ public class ScriptReader {
     private FileReader fr;
     private BufferedReader buffer;
 
+    public int row;
+    public int column;
+
     public ScriptReader(String fileName) {
         commandLines = new ArrayList<>();
         read(fileName);
@@ -43,5 +46,9 @@ public class ScriptReader {
         Scanner myScanner = new Scanner(commandLines.get(row));
         myCharAns = myScanner.next().charAt(column);
         return myCharAns;
+    }
+
+    public char getNextChar(){
+        return 'a';
     }
 }

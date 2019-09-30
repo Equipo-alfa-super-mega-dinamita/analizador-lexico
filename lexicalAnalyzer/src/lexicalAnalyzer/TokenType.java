@@ -2,7 +2,9 @@ package lexicalAnalyzer;
 
 public enum TokenType {
     none,
-
+    ERROR,
+    //nuevos
+    tk_id,
     //Reserved words
 
     tk_P,
@@ -138,14 +140,4 @@ public enum TokenType {
     tk_aug_concat,
     tk_aug_rshift,
     tk_aug_lshift
-
-
-
-
-
-
-
-
-
-
 }
