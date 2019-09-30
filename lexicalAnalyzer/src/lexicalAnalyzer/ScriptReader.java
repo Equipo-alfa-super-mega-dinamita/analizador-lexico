@@ -12,10 +12,13 @@ public class ScriptReader {
 
     public int row;
     public int column;
+    public int temporalLen;
 
     public ScriptReader(String fileName) {
         commandLines = new ArrayList<>();
         read(fileName);
+        this.row = 0;
+        this.column = 0;
     }
 
     private void read(String fileName) {
@@ -24,7 +27,7 @@ public class ScriptReader {
             this.fr = new FileReader(myFile);
             this.buffer = new BufferedReader(fr);
             String currentLine;
-            while ((currentLine=buffer.readLine())!=null){
+            while ((currentLine = buffer.readLine()) != null) {
                 commandLines.add(currentLine);
             }
         } catch (Exception eOpen) {
@@ -32,7 +35,7 @@ public class ScriptReader {
             System.out.println("Error: Open File");
         } finally {
             try {
-                if(fr!=null){
+                if (fr != null) {
                     fr.close();
                 }
             } catch (Exception eClose) {
@@ -41,14 +44,32 @@ public class ScriptReader {
             }
         }
     }
-    public char getChar(int row,int column){
+
+    public char getChar(int row, int column) {
         char myCharAns;
         Scanner myScanner = new Scanner(commandLines.get(row));
         myCharAns = myScanner.next().charAt(column);
         return myCharAns;
     }
 
-    public char getNextChar(){
-        return 'a';
+    public char getNextChar() {
+        if (row == 0 && column == 0) {
+            temporalLen = commandLines.get(row).length();
+            return getChar(row, column);
+        } else {
+            column += 1;
+            if (column >= temporalLen) {
+                row += 1;
+                if (row >= commandLines.size()) {
+                    return '¶';
+                } else {
+                    column = 0;
+                    temporalLen = commandLines.get(row).length();
+                    return getChar(row, column);
+                }
+
+            }
+            return getChar(row, column);
+        }
     }
 }
