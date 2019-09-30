@@ -59,7 +59,14 @@ public class ScriptReader {
         myCharAns = myScanner.nextLine().charAt(column);
         return myCharAns;
     }
-
+    public void nextRow(){
+        this.row+=1;
+        this.column = 0;
+    }
+    public void setRowColumn(int i, int j){
+        this.row = i;
+        this.column = j;
+    }
     public char getNextChar() {
         char ans;
         if (row == 0 && column == 0) {
@@ -75,13 +82,18 @@ public class ScriptReader {
                 } else {
                     column = 0;
                     temporalLen = commandLines.get(row).length();
-                    ans =getChar(row, column);
-                    column += 1;
-                    return ans;
+                    if (temporalLen != 0) {
+                        ans = getChar(row, column);
+                        column += 1;
+                        return ans;
+                    } else {
+                        return '#';
+                    }
                 }
-
+            }else if(row >= commandLines.size()){
+                return '¶';
             }
-            ans =getChar(row, column);
+            ans = getChar(row, column);
             column += 1;
             return ans;
         }

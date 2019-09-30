@@ -16,11 +16,48 @@ public class LexicalAnalyzer {
         lastChar = reader.getNextChar();
     }
 
-
-    Token nextToken() {
+    private void ignoreEmptySpacesAndLineComments() {
         //ignorar espacios
         while (lastChar == ' ') {
             lastChar = reader.getNextChar();
+        }
+        //Comentario de linea
+        while (lastChar == '#') {
+            reader.nextRow();
+            lastChar = reader.getNextChar();
+        }
+    }
+    private boolean ignoreMultiLineComments(){
+        //comentario multiple linea =======> por revisar
+        if (lastChar == '/') {
+            int i = reader.getRow();
+            int j = reader.getColumn();
+            char aux = reader.getNextChar();
+            if (aux == '*') {
+                lastChar = reader.getNextChar();
+                aux = reader.getNextChar();
+                while (lastChar != '*' && aux != '/') {
+                    lastChar = reader.getNextChar();
+                    aux = reader.getNextChar();
+                    if (lastChar == '¶' || aux == '¶') {
+                        return false;
+                    }
+                }
+                lastChar = reader.getNextChar();
+            } else {
+                reader.setRowColumn(i, j);
+            }
+        }
+        return true;
+    }
+
+
+    Token nextToken() {
+        ignoreEmptySpacesAndLineComments();
+        if(!ignoreMultiLineComments()){
+            //en caso de que termine el documento antes de encontrar el cierre de comentario
+            //==========================>> por revisar
+            return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
         }
         tokenRow = reader.getRow();
         tokenColumn = reader.getColumn();
@@ -315,24 +352,23 @@ public class LexicalAnalyzer {
         char myChar = 'x';
         boolean flag = true;
         while (flag) {
-            System.out.println(myChar+":"+sr.getRow()+","+sr.getColumn());
+            //System.out.println(myChar+":"+sr.getRow()+","+sr.getColumn());
                 myChar = sr.getNextChar();
                 if (myChar == '¶') {
                     flag = false;
                 } else if (myChar == ' ') {
                     System.out.println(true);
-                } else if (myChar == '\t') {
-                    System.out.println(false);
                 } else {
                     System.out.println(myChar);
             }
         }*/
         LexicalAnalyzer lexer = new LexicalAnalyzer("prueba.txt");
         Token myToken = lexer.nextToken();
-        while(myToken.type!=TokenType.tk_eof){
+        while (myToken.type != TokenType.tk_eof) {
             System.out.println(myToken);
             myToken = lexer.nextToken();
         }
         System.out.println(myToken);
+
     }
 }
