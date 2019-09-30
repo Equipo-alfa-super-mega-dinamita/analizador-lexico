@@ -239,5 +239,20 @@ public class LexicalAnalyzer {
     public static void main(String args[]) {
         char lastChar = '8';
         System.out.println((lastChar >= 'a' && lastChar <= 'z') || (lastChar >= 'A' && lastChar <= 'Z') || (lastChar == '_') || (lastChar >= '0' && lastChar <= '9'));
+        ScriptReader sr = new ScriptReader("prueba.txt");
+        char myChar;
+        boolean flag = true;
+        while (flag){
+            myChar = sr.getNextChar();
+            if(myChar=='¶'){
+                flag = false;
+            }else if(myChar==' '){
+                System.out.println(true);
+            }else if(myChar=='\t'){
+                System.out.println(false);
+            }else{
+                System.out.println(myChar);
+            }
+        }
     }
 }
