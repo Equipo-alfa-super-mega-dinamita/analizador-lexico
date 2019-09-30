@@ -65,10 +65,9 @@ public class ScriptReader {
         if (row == 0 && column == 0) {
             temporalLen = commandLines.get(row).length();
             ans = getChar(row, column);
-            column++;
+            column += 1;
             return ans;
         } else {
-            column += 1;
             if (column >= temporalLen) {
                 row += 1;
                 if (row >= commandLines.size()) {
@@ -77,11 +76,13 @@ public class ScriptReader {
                     column = 0;
                     temporalLen = commandLines.get(row).length();
                     ans =getChar(row, column);
+                    column += 1;
                     return ans;
                 }
 
             }
             ans =getChar(row, column);
+            column += 1;
             return ans;
         }
     }

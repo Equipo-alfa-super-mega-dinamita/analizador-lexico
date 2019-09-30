@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 public class SymbolTable {
     HashSet<String> reservedWordList;
+    HashSet<String> enAlphabet;
     public SymbolTable(){
         reservedWordList = new HashSet<>();
         IniResWordList();
@@ -97,5 +98,79 @@ public class SymbolTable {
     public boolean isResWord(String word){
         boolean ans = reservedWordList.contains(word);
         return ans;
+    }
+
+    public SymbolTable(boolean bool){
+        enAlphabet = new HashSet<>();
+        iniEnAlphabet();
+    }
+
+    public boolean isEnAlph(char word){
+        boolean ans = enAlphabet.contains(word);
+        return ans;
+    }
+
+    private void iniEnAlphabet(){
+        enAlphabet.add("a");
+        enAlphabet.add("b");
+        enAlphabet.add("c");
+        enAlphabet.add("d");
+        enAlphabet.add("e");
+        enAlphabet.add("f");
+        enAlphabet.add("g");
+        enAlphabet.add("h");
+        enAlphabet.add("i");
+        enAlphabet.add("j");
+        enAlphabet.add("k");
+        enAlphabet.add("l");
+        enAlphabet.add("m");
+        enAlphabet.add("n");
+        enAlphabet.add("o");
+        enAlphabet.add("q");
+        enAlphabet.add("r");
+        enAlphabet.add("s");
+        enAlphabet.add("t");
+        enAlphabet.add("u");
+        enAlphabet.add("v");
+        enAlphabet.add("w");
+        enAlphabet.add("x");
+        enAlphabet.add("y");
+        enAlphabet.add("z");
+        enAlphabet.add("A");
+        enAlphabet.add("B");
+        enAlphabet.add("C");
+        enAlphabet.add("D");
+        enAlphabet.add("E");
+        enAlphabet.add("F");
+        enAlphabet.add("G");
+        enAlphabet.add("H");
+        enAlphabet.add("I");
+        enAlphabet.add("J");
+        enAlphabet.add("K");
+        enAlphabet.add("L");
+        enAlphabet.add("M");
+        enAlphabet.add("N");
+        enAlphabet.add("O");
+        enAlphabet.add("P");
+        enAlphabet.add("Q");
+        enAlphabet.add("R");
+        enAlphabet.add("S");
+        enAlphabet.add("T");
+        enAlphabet.add("U");
+        enAlphabet.add("V");
+        enAlphabet.add("W");
+        enAlphabet.add("X");
+        enAlphabet.add("Y");
+        enAlphabet.add("Z");
+        enAlphabet.add("0");
+        enAlphabet.add("1");
+        enAlphabet.add("2");
+        enAlphabet.add("3");
+        enAlphabet.add("4");
+        enAlphabet.add("5");
+        enAlphabet.add("6");
+        enAlphabet.add("7");
+        enAlphabet.add("8");
+        enAlphabet.add("9");
     }
 }

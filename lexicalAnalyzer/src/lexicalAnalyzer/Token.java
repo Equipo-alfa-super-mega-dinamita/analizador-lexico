@@ -1,9 +1,11 @@
 package lexicalAnalyzer;
 
+import symboltable.SymbolTable;
+
 public class Token {
     private int row;
     private int column;
-    private TokenType type;
+    public TokenType type;
     private String lexeme;
 
     public Token(int row, int column, String lexeme, TokenType type) {
@@ -22,7 +24,8 @@ public class Token {
     @Override
     public String toString() {
         String myTokenString = "";
-        if ((type.toString()).equals("tk_"+this.lexeme)) {
+        SymbolTable myTable = new SymbolTable(true);
+        if ((type.toString()).equals("tk_"+this.lexeme)/*||(!myTable.isEnAlph(lexeme.charAt(0)))*/) {
             myTokenString = "<" + type + "," + row + "," + column + ">";
         } else {
             myTokenString = "<" + type + "," + lexeme + "," + row + "," + column + ">";
