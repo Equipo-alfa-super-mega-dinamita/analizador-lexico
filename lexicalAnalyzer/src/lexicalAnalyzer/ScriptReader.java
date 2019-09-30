@@ -48,14 +48,17 @@ public class ScriptReader {
     public char getChar(int row, int column) {
         char myCharAns;
         Scanner myScanner = new Scanner(commandLines.get(row));
-        myCharAns = myScanner.next().charAt(column);
+        myCharAns = myScanner.nextLine().charAt(column);
         return myCharAns;
     }
 
     public char getNextChar() {
+        char ans;
         if (row == 0 && column == 0) {
             temporalLen = commandLines.get(row).length();
-            return getChar(row, column);
+            ans = getChar(row, column);
+            column++;
+            return ans;
         } else {
             column += 1;
             if (column >= temporalLen) {
@@ -65,11 +68,13 @@ public class ScriptReader {
                 } else {
                     column = 0;
                     temporalLen = commandLines.get(row).length();
-                    return getChar(row, column);
+                    ans =getChar(row, column);
+                    return ans;
                 }
 
             }
-            return getChar(row, column);
+            ans =getChar(row, column);
+            return ans;
         }
     }
 }
