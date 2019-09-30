@@ -92,10 +92,11 @@ public class SymbolTable {
     };
     public SymbolTable(){
         reservedWordList = new HashSet<>();
+        IniResWordList();
     }
-    private void IniResWordList(){
+    private void IniResWordList()       {
         for( String s : reservedWords){
-            reservedWordList.add("xor");
+            reservedWordList.add(s);
         }
     }
 
