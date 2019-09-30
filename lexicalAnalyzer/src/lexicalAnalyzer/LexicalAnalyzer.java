@@ -19,7 +19,7 @@ public class LexicalAnalyzer {
 
     private void ignoreEmptySpacesAndLineComments() {
         //ignorar espacios
-        while (lastChar == ' ') {
+        while (lastChar == ' ' ||lastChar == '\n') {
             lastChar = reader.getNextChar();
         }
         //Comentario de linea
