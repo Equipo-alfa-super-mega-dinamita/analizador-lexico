@@ -11,43 +11,27 @@ public class LexicalAnalyzer {
     Token currentToken;
     char lastChar;
 
-    void readChar(){
-        lastChar = reader.getNextChar();
-    }
-
 
     Token nextToken() {
         //ignorar espacios
         //to do
         //caracter es EOF?
         //to do
-        tokenRow = reader.row;
-        tokenColumn = reader.column;
+        tokenRow = reader.getRow();
+        tokenColumn = reader.getColumn();
         switch (lastChar) {
             case ',':
                 lastChar = reader.getNextChar();
                 return new Token(tokenRow, tokenColumn, ",", TokenType.tk_comma);
             case ':':
                 lastChar = reader.getNextChar();
-                if(lastChar == '='){
-                    lastChar = reader.getNextChar();
-                    if(lastChar == ':'){
-                        lastChar = reader.getNextChar();
-                        return new Token(tokenRow, tokenColumn, ":=:", TokenType.tk_swap);
-                    }else{
-                        return new Token(tokenRow, tokenColumn, ":=", TokenType.tk_assign);
-                    }
-                }else{
-                    return new Token(tokenRow, tokenColumn, ":", TokenType.tk_colon);
-                }
-
+                return new Token(tokenRow, tokenColumn, ":", TokenType.tk_colon);
             case '-':
                 lastChar = reader.getNextChar();
                 if (lastChar == '-') {
                     lastChar = reader.getNextChar();
                     return new Token(tokenRow, tokenColumn, "--", TokenType.tk_decr);
-                }
-                else if (lastChar == ':') {
+                } else if (lastChar == ':') {
                     lastChar = reader.getNextChar();
                     if (lastChar == '=') {
                         lastChar = reader.getNextChar();
@@ -56,19 +40,12 @@ public class LexicalAnalyzer {
                         lastChar = reader.getNextChar();
                         return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                     }
-                }
-                else if (lastChar == '>') {
+                } else if (lastChar == '>') {
                     lastChar = reader.getNextChar();
                     return new Token(tokenRow, tokenColumn, "->", TokenType.tk_arrow);
-                }
-                else {
-                    return new Token(tokenRow,tokenColumn,"-",TokenType.tk_minus);
-                }
-            case '!':
-                lastChar = reader.getNextChar();
-                if(lastChar == '=' ){
+                } else {
                     lastChar = reader.getNextChar();
-                    return new Token(tokenRow,tokenColumn,"!=",TokenType.tk_ne);
+                    return new Token(tokenRow, tokenColumn, "-", TokenType.tk_minus);
                 }
                 else{
                     return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);

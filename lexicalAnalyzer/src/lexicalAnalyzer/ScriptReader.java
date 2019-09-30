@@ -10,9 +10,17 @@ public class ScriptReader {
     private FileReader fr;
     private BufferedReader buffer;
 
-    public int row;
-    public int column;
-    public int temporalLen;
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    private int row;
+    private int column;
+    private int temporalLen;
 
     public ScriptReader(String fileName) {
         commandLines = new ArrayList<>();
