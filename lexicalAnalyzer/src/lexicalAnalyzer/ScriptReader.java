@@ -83,11 +83,10 @@ public class ScriptReader {
                     column = 0;
                     temporalLen = commandLines.get(row).length();
                     if (temporalLen != 0) {
-                        ans = getChar(row, column);
-                        column += 1;
+                        ans = '\n';
                         return ans;
                     } else {
-                        return '#';
+                        return '\n';
                     }
                 }
             }else if(row >= commandLines.size()){
