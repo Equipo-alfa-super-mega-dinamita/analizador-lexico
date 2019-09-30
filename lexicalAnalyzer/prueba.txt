@@ -1,1 +1,7 @@
-hola /* puto el que lo lea */ hola
+hola
+esto
+es
+un
+salto
+de
+linea
