@@ -92,6 +92,7 @@ public enum TokenType {
     tk_xor,
 
     //Symbols
+    tk_semicolon,
     tk_comma,
     tk_colon,
     tk_eq,
@@ -140,5 +141,17 @@ public enum TokenType {
     tk_aug_and,
     tk_aug_concat,
     tk_aug_rshift,
-    tk_aug_lshift
+    tk_aug_lshift,
+
+
+    tk_num_real,
+    tk_num_int_oct,
+    tk_num_int_dec,
+    tk_num_int_hex,
+
+
+
+
+
+
 }
