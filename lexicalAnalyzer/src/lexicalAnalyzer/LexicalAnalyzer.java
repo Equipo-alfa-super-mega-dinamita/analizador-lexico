@@ -31,38 +31,41 @@ public class LexicalAnalyzer {
             lastChar = reader.getNextChar();
         }
     }
-    private boolean ignoreMultiLineComments(){
+
+    private void ignoreMultiLineComments() {
         //comentario multiple linea =======> por revisar
-        if (lastChar == '/') {
+        while (lastChar == '/') {
             int i = reader.getRow();
             int j = reader.getColumn();
             char aux = reader.getNextChar();
             if (aux == '*') {
-                lastChar = reader.getNextChar();
-                aux = reader.getNextChar();
-                while (lastChar != '*' && aux != '/') {
+                boolean flash = true;
+                while(flash){
                     lastChar = reader.getNextChar();
-                    aux = reader.getNextChar();
-                    if (lastChar == '¶' || aux == '¶') {
-                        return false;
+                    if(lastChar == '*'){
+                        lastChar = reader.getNextChar();
+                        if(lastChar == '/'){
+                            flash = false;
+                            lastChar = reader.getNextChar();
+                            ignoreEmptySpacesAndLineComments();
+                        }
+                    }else if(lastChar == '¶'){
+                        return;
                     }
                 }
-                lastChar = reader.getNextChar();
             } else {
                 reader.setRowColumn(i, j);
+                return;
             }
         }
-        return true;
+        return;
     }
 
 
     Token nextToken() {
         ignoreEmptySpacesAndLineComments();
-        if(!ignoreMultiLineComments()){
-            //en caso de que termine el documento antes de encontrar el cierre de comentario
-            //==========================>> por revisar
-            return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
-        }
+        ignoreMultiLineComments();
+        ignoreEmptySpacesAndLineComments();
         tokenRow = reader.getRow();
         tokenColumn = reader.getColumn();
         //caracter es EOF?
