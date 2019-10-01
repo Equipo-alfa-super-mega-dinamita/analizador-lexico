@@ -31,7 +31,7 @@ public class LexicalAnalyzer {
 
     private void ignoreMultiLineComments() {
         //comentario multiple linea =======> por revisar
-        if (lastChar == '/') {
+        while (lastChar == '/') {
             int i = reader.getRow();
             int j = reader.getColumn();
             char aux = reader.getNextChar();
@@ -44,6 +44,7 @@ public class LexicalAnalyzer {
                         if(lastChar == '/'){
                             flash = false;
                             lastChar = reader.getNextChar();
+                            ignoreEmptySpacesAndLineComments();
                         }
                     }else if(lastChar == '¶'){
                         return;
@@ -51,6 +52,7 @@ public class LexicalAnalyzer {
                 }
             } else {
                 reader.setRowColumn(i, j);
+                return;
             }
         }
         return;
