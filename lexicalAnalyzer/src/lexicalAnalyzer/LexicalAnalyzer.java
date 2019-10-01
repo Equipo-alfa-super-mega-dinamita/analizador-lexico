@@ -312,12 +312,12 @@ public class LexicalAnalyzer {
                 }
 
             case '.':
+                lastChar = reader.getNextChar();
                 return new Token(tokenRow, tokenColumn, "PUTO EL QUE LO LEA", TokenType.tk_period);
         }
         if ((lastChar >= 'a' && lastChar <= 'z') || (lastChar >= 'A' && lastChar <= 'Z')) {
             return identifyKeywordOrIdentifier();
         }
-        System.out.println(lastChar);
         return new Token(tokenRow, tokenColumn, "ERROR", TokenType.ERROR);
     }
 
