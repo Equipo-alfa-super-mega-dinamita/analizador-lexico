@@ -7,7 +7,7 @@ global sizes
    var S : int
 body sizes
    getarg(uno, N); getarg(dos, PR); S := N/PR
-   if N mod PR != zero ->
+   if N mod PR /*!=*/ zero ->
      write("N must be a multiple of PR"); stop (uno)
    fi
 end
