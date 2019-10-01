@@ -61,6 +61,7 @@ public class SymbolTable {
             "procedure",
             "process",
             "ptr",
+            "read",
             "real",
             "rec",
             "receive",
@@ -88,7 +89,9 @@ public class SymbolTable {
             "val",
             "var",
             "vm",
+            "write",
             "xor"
+
     };
     public SymbolTable(){
         reservedWordList = new HashSet<>();
