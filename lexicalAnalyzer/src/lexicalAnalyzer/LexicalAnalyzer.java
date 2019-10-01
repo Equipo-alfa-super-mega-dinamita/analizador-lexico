@@ -92,7 +92,16 @@ public class LexicalAnalyzer {
                 } else {
                     return new Token(tokenRow, tokenColumn, ":", TokenType.tk_colon);
                 }
+            case '!':
+                lastChar = reader.getNextChar();
+                if(lastChar == '='){
+                    lastChar = reader.getNextChar();
+                    return new Token(tokenRow, tokenColumn, "!=", TokenType.tk_ne);
 
+                }
+                else{
+                    return new Token(tokenRow, tokenColumn, "!", TokenType.tk_not);
+                }
             case '-':
                 lastChar = reader.getNextChar();
                 if (lastChar == '-') {
@@ -507,7 +516,6 @@ public class LexicalAnalyzer {
             lexema += lastChar;
             lastChar = reader.getNextChar();
         } while ((lastChar >= 'a' && lastChar <= 'z') || (lastChar >= 'A' && lastChar <= 'Z') || (lastChar == '_') || (lastChar >= '0' && lastChar <= '9'));
-
         //revisar si el lexema es una palabra reservada. Si lo es retornar el token respectivo, si no, tk_id
         if (symbolTable.isResWord(lexema)) {
             return (new Token(tokenRow, tokenColumn, lexema, getTypeOfReservedWord(lexema)));

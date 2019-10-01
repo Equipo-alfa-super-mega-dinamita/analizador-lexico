@@ -65,6 +65,7 @@ public enum TokenType {
     tk_procedure,
     tk_process,
     tk_ptr,
+    tk_read,
     tk_real,
     tk_rec,
     tk_receive,
@@ -91,6 +92,7 @@ public enum TokenType {
     tk_val,
     tk_var,
     tk_vm,
+    tk_write,
     tk_xor,
 
     //Symbols
