@@ -317,6 +317,20 @@ public class LexicalAnalyzer {
                 } else {
                     return new Token(tokenRow, tokenColumn, "~", TokenType.tk_not);
                 }
+
+            case '"':
+                String lexemaString = "";
+                lastChar = reader.getNextChar();
+                while(lastChar != '"'){
+                    if(lastChar == '¶'){
+                        return new Token(tokenRow, tokenColumn, "ERROR", TokenType.ERROR);
+                    }
+                    lexemaString += lastChar;
+                    lastChar = reader.getNextChar();
+                }
+                lastChar = reader.getNextChar();
+                return new Token(tokenRow,tokenColumn,'"'+lexemaString+'"',TokenType.tk_cadena);
+
             default:
                 if (Pattern.matches("[a-zA-Z]", Character.toString(lastChar))) {
                     return identifyKeywordOrIdentifier();
@@ -520,6 +534,5 @@ public class LexicalAnalyzer {
             myToken = lexer.nextToken();
         }
         System.out.println(myToken);
-
     }
 }

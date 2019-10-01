@@ -6,6 +6,7 @@ public enum TokenType {
     //nuevos
     tk_id,
     tk_eof,
+    tk_cadena,
     //Reserved words
 
     tk_P,
