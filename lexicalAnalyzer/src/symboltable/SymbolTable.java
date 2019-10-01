@@ -110,7 +110,8 @@ public class SymbolTable {
     }
 
     public boolean isEnAlph(char word){
-        return (word >= 'a' && word <= 'z') || (word >= 'A' && word <= 'Z') || (word == '_') || (word >= '0' && word <= '9');
+        return (word >= 'a' && word <= 'z') || (word >= 'A' && word <= 'Z')
+                || (word == '_') || word == '"'||word == '\''||(word >= '0' && word <= '9');
     }
 
 }
