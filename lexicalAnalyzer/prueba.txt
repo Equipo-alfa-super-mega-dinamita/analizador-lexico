@@ -1,1 +1,13 @@
-.000l+2
+global sizes
+   # matrix dimension, default Diez
+   var N := Diez
+   # number of processes, default dos
+   var PR := dos
+   # strip size
+   var S : int
+body sizes
+   getarg(uno, N); getarg(dos, PR); S := N/PR
+   if N mod PR /*!=*/ zero ->
+     write("N must be a multiple of PR"); stop (uno)
+   fi
+end
