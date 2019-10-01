@@ -22,7 +22,7 @@ public class LexicalAnalyzer {
 
     private void ignoreEmptySpacesAndLineComments() {
         //ignorar espacios
-        while (lastChar == ' ' ||lastChar == '\n' || lastChar == '\t') {
+        while (lastChar == ' ' || lastChar == '\n' || lastChar == '\t') {
             lastChar = reader.getNextChar();
         }
         //Comentario de linea
@@ -40,16 +40,16 @@ public class LexicalAnalyzer {
             char aux = reader.getNextChar();
             if (aux == '*') {
                 boolean flash = true;
-                while(flash){
+                while (flash) {
                     lastChar = reader.getNextChar();
-                    if(lastChar == '*'){
+                    if (lastChar == '*') {
                         lastChar = reader.getNextChar();
-                        if(lastChar == '/'){
+                        if (lastChar == '/') {
                             flash = false;
                             lastChar = reader.getNextChar();
                             ignoreEmptySpacesAndLineComments();
                         }
-                    }else if(lastChar == '¶'){
+                    } else if (lastChar == '¶') {
                         return;
                     }
                 }
@@ -318,11 +318,10 @@ public class LexicalAnalyzer {
                     return new Token(tokenRow, tokenColumn, "~", TokenType.tk_not);
                 }
             default:
-                if(Pattern.matches("[a-zA-Z]", Character.toString(lastChar))){
+                if (Pattern.matches("[a-zA-Z]", Character.toString(lastChar))) {
                     return identifyKeywordOrIdentifier();
                 }
-                if(Pattern.matches("[0-9/.]", Character.toString(lastChar)   ))
-                {
+                if (Pattern.matches("[0-9/.]", Character.toString(lastChar))) {
                     return identifyNumber();
 
                 }
@@ -330,179 +329,130 @@ public class LexicalAnalyzer {
         }
 
 
-        return new Token(tokenRow,tokenColumn,"ERROR",TokenType.ERROR);
+        return new Token(tokenRow, tokenColumn, "ERROR", TokenType.ERROR);
     }
 
     //
 
-    Token testNumbers(){
+    Token testNumbers() {
         String input_number = ".4131";
         String lexema = "";
         boolean tokenFound = false;
         String state = "start";
         TokenType num_type = TokenType.ERROR;
         char c = lastChar;
-        while(!tokenFound){
-
-            switch (state){
-
+        while (!tokenFound) {
+            switch (state) {
                 case "start":
-
-                    if(c >= '0' && c <= '7'){
+                    if (c >= '0' && c <= '7') {
                         state = "int7";
                         num_type = TokenType.tk_num_int_dec;
-                    }
-                    else if( c == '8' || c == '9' ){
+                    } else if (c == '8' || c == '9') {
                         state = "int10";
                         num_type = TokenType.tk_num_int_dec;
-                    }
-                    else if( c == '.'){
+                    } else if (c == '.') {
                         state = "period";
                         num_type = TokenType.tk_period;
-                    }
-                    else{
+                    } else {
                         System.out.println("El primer carácter no es válido.");
                         return new Token(tokenRow, tokenColumn, "", TokenType.ERROR);
                     }
                     break;
-
                 case "int7":
-                    if(c >= '0' && c <= '7'){
+                    if (c >= '0' && c <= '7') {
                         break;
-                    }
-                    else if( c == '8' || c == '9' ){
+                    } else if (c == '8' || c == '9') {
                         state = "int10";
-                    }else if( c == '.'){
+                    } else if (c == '.') {
                         state = "real";
                         num_type = TokenType.tk_num_real;
-                    }else if(Pattern.matches("[a-fA-F]", Character.toString(lastChar)   )){
+                    } else if (Pattern.matches("[a-fA-F]", Character.toString(lastChar))) {
                         state = "hex";
                         num_type = TokenType.ERROR;
-                    }else if(Character.toUpperCase(c) == 'Q'){
+                    } else if (Character.toUpperCase(c) == 'Q') {
                         num_type = TokenType.tk_num_int_oct;
                         tokenFound = true;
-                    }
-                    else if(Character.toUpperCase(c) == 'X'){
+                    } else if (Character.toUpperCase(c) == 'X') {
                         num_type = TokenType.tk_num_int_hex;
                         tokenFound = true;
-                    }
-                    else{
+                    } else {
                         tokenFound = true;
                     }
                     break;
-
-
-
                 case "hex":
-
-                    if(Pattern.matches("[0-9a-fA-F]", Character.toString(lastChar))){
+                    if (Pattern.matches("[0-9a-fA-F]", Character.toString(lastChar))) {
                         break;
-                    }
-                    else if(Character.toUpperCase(c) == 'X'){
+                    } else if (Character.toUpperCase(c) == 'X') {
                         num_type = TokenType.tk_num_int_hex;
                         tokenFound = true;
 
-                    }else{
+                    } else {
                         tokenFound = true;
                     }
                     break;
-
-
                 case "int10":
-
-                    if(c >= '0' && c <= '9'){
+                    if (c >= '0' && c <= '9') {
                         break;
-                    }
-                    else if( c == '.'){
+                    } else if (c == '.') {
                         state = "real";
                         num_type = TokenType.tk_num_real;
-                    }
-                    else if(Pattern.matches("[a-fA-F]", Character.toString(lastChar))){
+                    } else if (Pattern.matches("[a-fA-F]", Character.toString(lastChar))) {
                         state = "hex";
                         num_type = TokenType.ERROR;
-                    }
-                    else if(Character.toUpperCase(c) == 'X'){
+                    } else if (Character.toUpperCase(c) == 'X') {
                         num_type = TokenType.tk_num_int_hex;
                         tokenFound = true;
-                    }else{
+                    } else {
                         tokenFound = true;
                     }
-
                     break;
-
                 case "period":
-
-                    if(c >= '0' && c <= '9'){
-
+                    if (c >= '0' && c <= '9') {
                         state = "real";
                         num_type = TokenType.tk_num_real;
-
-                    }else{
-
+                    } else {
                         tokenFound = true;
                     }
-
                     break;
-
                 case "real":
-                    if(c >= '0' && c <= '9'){
+                    if (c >= '0' && c <= '9') {
                         break;
-                    }
-                    else if(Character.toUpperCase(c) == 'E' ){
-                        lexema+= c;
+                    } else if (Character.toUpperCase(c) == 'E') {
+                        lexema += c;
                         c = reader.getNextChar();
-                        if(c == '+' || c == '-'){
-                            lexema+= c;
+                        if (c == '+' || c == '-') {
+                            lexema += c;
                             c = reader.getNextChar();
-                            if(c>= '0' && c<= '9'){
+                            if (c >= '0' && c <= '9') {
                                 state = "realexp";
                                 num_type = TokenType.tk_num_real;
-
-                            }else{
+                            } else {
                                 num_type = TokenType.ERROR;
                                 tokenFound = true;
                             }
-
-                        }
-                        else if(c>= '0' && c<= '9')
-                        {
-
-
+                        } else if (c >= '0' && c <= '9') {
+                            state = "realexp";
+                            num_type = TokenType.tk_num_real;
+                        } else {
+                            num_type = TokenType.ERROR;
+                            tokenFound = true;
                         }
                     }
-
-
                     break;
-
-                case "exp":
-
-                    break;
-
-                case "explus":
-
-                    break;
-
                 case "realexp":
-
+                    if (c >= '0' && c <= '9') {
+                        break;
+                    } else {
+                        tokenFound = true;
+                    }
                     break;
-
             }
-
-            if(!tokenFound) c = reader.getNextChar();
-
-
-
+            lexema += c;
+            if (!tokenFound) {
+                c = reader.getNextChar();
+            }
         }
-        int count = 0;
-        char lastChar = input_number.charAt(count);
-        do {
-            lexema += lastChar;
-            lastChar = input_number.charAt(count);
-        } while ((lastChar >= '0' && lastChar <= '9'));
         return (new Token(tokenRow, tokenColumn, lexema, num_type));
-
-
-
     }
 
 
@@ -541,7 +491,6 @@ public class LexicalAnalyzer {
     }
 
 
-
     public static void main(String args[]) {
         /*ScriptReader sr = new ScriptReader("prueba.txt");
         char myChar = 'x';
@@ -560,7 +509,7 @@ public class LexicalAnalyzer {
         LexicalAnalyzer lexer = new LexicalAnalyzer("prueba.txt");
         Token myToken = lexer.nextToken();
         while (myToken.type != TokenType.tk_eof) {
-            if(myToken.type == TokenType.ERROR){
+            if (myToken.type == TokenType.ERROR) {
                 break;
             }
             System.out.println(myToken);
