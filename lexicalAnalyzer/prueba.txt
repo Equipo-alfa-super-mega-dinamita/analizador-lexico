@@ -1,1 +1,1 @@
-$./srgrind/srgrind.sh and ../srtex/scan.l
+.000l+2

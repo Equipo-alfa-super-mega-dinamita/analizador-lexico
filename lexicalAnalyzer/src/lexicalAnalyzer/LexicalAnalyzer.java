@@ -334,23 +334,23 @@ public class LexicalAnalyzer {
 
     //
 
-    Token testNumbers() {
-        String input_number = ".4131";
+    Token identifyNumber() {
         String lexema = "";
         boolean tokenFound = false;
         String state = "start";
         TokenType num_type = TokenType.ERROR;
-        char c = lastChar;
+
         while (!tokenFound) {
+            System.out.println(state);
             switch (state) {
                 case "start":
-                    if (c >= '0' && c <= '7') {
+                    if (lastChar >= '0' && lastChar <= '7') {
                         state = "int7";
                         num_type = TokenType.tk_num_int_dec;
-                    } else if (c == '8' || c == '9') {
+                    } else if (lastChar == '8' || lastChar == '9') {
                         state = "int10";
                         num_type = TokenType.tk_num_int_dec;
-                    } else if (c == '.') {
+                    } else if (lastChar == '.') {
                         state = "period";
                         num_type = TokenType.tk_period;
                     } else {
@@ -359,20 +359,20 @@ public class LexicalAnalyzer {
                     }
                     break;
                 case "int7":
-                    if (c >= '0' && c <= '7') {
+                    if (lastChar >= '0' && lastChar <= '7') {
                         break;
-                    } else if (c == '8' || c == '9') {
+                    } else if (lastChar == '8' || lastChar == '9') {
                         state = "int10";
-                    } else if (c == '.') {
+                    } else if (lastChar == '.') {
                         state = "real";
                         num_type = TokenType.tk_num_real;
                     } else if (Pattern.matches("[a-fA-F]", Character.toString(lastChar))) {
                         state = "hex";
                         num_type = TokenType.ERROR;
-                    } else if (Character.toUpperCase(c) == 'Q') {
+                    } else if (Character.toUpperCase(lastChar) == 'Q') {
                         num_type = TokenType.tk_num_int_oct;
                         tokenFound = true;
-                    } else if (Character.toUpperCase(c) == 'X') {
+                    } else if (Character.toUpperCase(lastChar) == 'X') {
                         num_type = TokenType.tk_num_int_hex;
                         tokenFound = true;
                     } else {
@@ -382,7 +382,7 @@ public class LexicalAnalyzer {
                 case "hex":
                     if (Pattern.matches("[0-9a-fA-F]", Character.toString(lastChar))) {
                         break;
-                    } else if (Character.toUpperCase(c) == 'X') {
+                    } else if (Character.toUpperCase(lastChar) == 'X') {
                         num_type = TokenType.tk_num_int_hex;
                         tokenFound = true;
 
@@ -391,15 +391,15 @@ public class LexicalAnalyzer {
                     }
                     break;
                 case "int10":
-                    if (c >= '0' && c <= '9') {
+                    if (lastChar >= '0' && lastChar <= '9') {
                         break;
-                    } else if (c == '.') {
+                    } else if (lastChar == '.') {
                         state = "real";
                         num_type = TokenType.tk_num_real;
                     } else if (Pattern.matches("[a-fA-F]", Character.toString(lastChar))) {
                         state = "hex";
                         num_type = TokenType.ERROR;
-                    } else if (Character.toUpperCase(c) == 'X') {
+                    } else if (Character.toUpperCase(lastChar) == 'X') {
                         num_type = TokenType.tk_num_int_hex;
                         tokenFound = true;
                     } else {
@@ -407,7 +407,7 @@ public class LexicalAnalyzer {
                     }
                     break;
                 case "period":
-                    if (c >= '0' && c <= '9') {
+                    if (lastChar >= '0' && lastChar <= '9') {
                         state = "real";
                         num_type = TokenType.tk_num_real;
                     } else {
@@ -415,47 +415,51 @@ public class LexicalAnalyzer {
                     }
                     break;
                 case "real":
-                    if (c >= '0' && c <= '9') {
+                    if (lastChar >= '0' && lastChar <= '9') {
+                        System.out.println("numero");
                         break;
-                    } else if (Character.toUpperCase(c) == 'E') {
-                        lexema += c;
-                        c = reader.getNextChar();
-                        if (c == '+' || c == '-') {
-                            lexema += c;
-                            c = reader.getNextChar();
-                            if (c >= '0' && c <= '9') {
+                    } else if (Character.toUpperCase(lastChar) == 'E') {
+                        lexema += lastChar;
+                        lastChar = reader.getNextChar();
+                        if (lastChar == '+' || lastChar == '-') {
+                            lexema += lastChar;
+                            lastChar = reader.getNextChar();
+                            if (lastChar >= '0' && lastChar <= '9') {
                                 state = "realexp";
                                 num_type = TokenType.tk_num_real;
                             } else {
                                 num_type = TokenType.ERROR;
                                 tokenFound = true;
                             }
-                        } else if (c >= '0' && c <= '9') {
+                        } else if (lastChar >= '0' && lastChar <= '9') {
                             state = "realexp";
                             num_type = TokenType.tk_num_real;
                         } else {
                             num_type = TokenType.ERROR;
                             tokenFound = true;
                         }
+                    }else {
+                        tokenFound = true;
                     }
                     break;
                 case "realexp":
-                    if (c >= '0' && c <= '9') {
+                    if (lastChar >= '0' && lastChar <= '9') {
                         break;
                     } else {
                         tokenFound = true;
                     }
                     break;
             }
-            lexema += c;
+            lexema += lastChar;
             if (!tokenFound) {
-                c = reader.getNextChar();
+                lastChar = reader.getNextChar();
             }
         }
+
         return (new Token(tokenRow, tokenColumn, lexema, num_type));
     }
 
-
+/*
     Token identifyNumber() {
 
         String lexema = "";
@@ -464,7 +468,7 @@ public class LexicalAnalyzer {
             lastChar = reader.getNextChar();
         } while ((lastChar >= '0' && lastChar <= '9'));
         return (new Token(tokenRow, tokenColumn, lexema, TokenType.tk_int));
-    }
+    }*/
 
     Token identifyKeywordOrIdentifier() {
         String lexema = "";
