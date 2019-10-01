@@ -354,7 +354,6 @@ public class LexicalAnalyzer {
         TokenType num_type = TokenType.ERROR;
 
         while (!tokenFound) {
-            System.out.println(state);
             switch (state) {
                 case "start":
                     if (lastChar >= '0' && lastChar <= '7') {
