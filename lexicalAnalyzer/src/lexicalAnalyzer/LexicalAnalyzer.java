@@ -329,6 +329,25 @@ public class LexicalAnalyzer {
                 }
                 lastChar = reader.getNextChar();
                 return new Token(tokenRow,tokenColumn,'"'+lexemaString+'"',TokenType.tk_cadena);
+            case '\'':
+                String lexemaChar = "\'";
+                lastChar = reader.getNextChar();
+                if(lastChar == '\\'){
+                    lastChar = reader.getNextChar();
+                    if(!(lastChar >= 'a' && lastChar <= 'z')){ //Caracteres permitidos luego de backslash
+                        return new Token(tokenRow, tokenColumn, "ERROR", TokenType.ERROR);
+                    }
+                    lexemaChar+='\\';
+                }else if(lastChar == '\''){
+                    return new Token(tokenRow, tokenColumn, "ERROR", TokenType.ERROR);
+                }
+                lexemaChar+=lastChar;
+                lastChar = reader.getNextChar();
+                if(lastChar != '\''){
+                    return new Token(tokenRow, tokenColumn, "ERROR", TokenType.ERROR);
+                }
+                lastChar = reader.getNextChar();
+                return new Token(tokenRow,tokenColumn,lexemaChar+'\'',TokenType.tk_caracter);
 
             default:
                 if (Pattern.matches("[a-zA-Z]", Character.toString(lastChar))) {
