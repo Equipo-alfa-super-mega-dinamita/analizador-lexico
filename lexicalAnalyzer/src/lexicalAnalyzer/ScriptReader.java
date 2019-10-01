@@ -59,21 +59,28 @@ public class ScriptReader {
         myCharAns = myScanner.nextLine().charAt(column);
         return myCharAns;
     }
-    public void nextRow(){
-        this.row+=1;
+
+    public void nextRow() {
+        this.row += 1;
         this.column = 0;
     }
-    public void setRowColumn(int i, int j){
+
+    public void setRowColumn(int i, int j) {
         this.row = i;
         this.column = j;
     }
+
     public char getNextChar() {
-        char ans;
+        /*char ans;
         if (row == 0 && column == 0) {
             temporalLen = commandLines.get(row).length();
-            ans = getChar(row, column);
-            column += 1;
-            return ans;
+            if(temporalLen != 0){
+                ans = getChar(row, column);
+                column += 1;
+                return ans;
+            }else{
+                return '¶';
+            }
         } else {
             if (column >= temporalLen) {
                 row += 1;
@@ -95,7 +102,16 @@ public class ScriptReader {
             ans = getChar(row, column);
             column += 1;
             return ans;
+        }*/
+        //Archivo vacio o me quede sin filas
+        if (commandLines.size() == 0 || row >= commandLines.size()) {
+            return '¶';
         }
+        //Fila vacia o terminada. Desplazar fila.
+        if (commandLines.get(row).length() == 0 || column >= commandLines.get(row).length()) {
+            nextRow();
+            return '\n';
+        }
+        return getChar(row,column++);
     }
-    //puto el que no le compile
 }
