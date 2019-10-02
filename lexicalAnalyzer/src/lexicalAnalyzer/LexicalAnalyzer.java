@@ -33,7 +33,6 @@ public class LexicalAnalyzer {
     }
 
     private void ignoreMultiLineComments() {
-        //comentario multiple linea =======> por revisar
         while (lastChar == '/') {
             int i = reader.getRow();
             int j = reader.getColumn();
@@ -126,7 +125,6 @@ public class LexicalAnalyzer {
                 lastChar = reader.getNextChar();
                 return new Token(tokenRow, tokenColumn, "?", TokenType.tk_qmark);
 
-            //case '.':  TO-DO  El punto es problemático por los números reales.
             case '(':
                 lastChar = reader.getNextChar();
                 return new Token(tokenRow, tokenColumn, "(", TokenType.tk_lparen);
@@ -499,16 +497,6 @@ public class LexicalAnalyzer {
         return (new Token(tokenRow, tokenColumn, lexema, num_type));
     }
 
-/*
-    Token identifyNumber() {
-
-        String lexema = "";
-        do {
-            lexema += lastChar;
-            lastChar = reader.getNextChar();
-        } while ((lastChar >= '0' && lastChar <= '9'));
-        return (new Token(tokenRow, tokenColumn, lexema, TokenType.tk_int));
-    }*/
 
     Token identifyKeywordOrIdentifier() {
         String lexema = "";
@@ -535,20 +523,6 @@ public class LexicalAnalyzer {
 
 
     public static void main(String args[]) {
-        /*ScriptReader sr = new ScriptReader("prueba.txt");
-        char myChar = 'x';
-        boolean flag = true;
-        while (flag) {
-            //System.out.println(myChar+":"+sr.getRow()+","+sr.getColumn());
-                myChar = sr.getNextChar();
-                if (myChar == '¶') {
-                    flag = false;
-                } else if (myChar == ' ') {
-                    System.out.println(true);
-                } else {
-                    System.out.println(myChar);
-            }
-        }*/
         LexicalAnalyzer lexer = new LexicalAnalyzer("prueba.txt");
         Token myToken = lexer.nextToken();
         while (myToken.type != TokenType.tk_eof) {

@@ -71,38 +71,6 @@ public class ScriptReader {
     }
 
     public char getNextChar() {
-        /*char ans;
-        if (row == 0 && column == 0) {
-            temporalLen = commandLines.get(row).length();
-            if(temporalLen != 0){
-                ans = getChar(row, column);
-                column += 1;
-                return ans;
-            }else{
-                return '¶';
-            }
-        } else {
-            if (column >= temporalLen) {
-                row += 1;
-                if (row >= commandLines.size()) {
-                    return '¶';
-                } else {
-                    column = 0;
-                    temporalLen = commandLines.get(row).length();
-                    if (temporalLen != 0) {
-                        ans = '\n';
-                        return ans;
-                    } else {
-                        return '\n';
-                    }
-                }
-            }else if(row >= commandLines.size()){
-                return '¶';
-            }
-            ans = getChar(row, column);
-            column += 1;
-            return ans;
-        }*/
         //Archivo vacio o me quede sin filas
         if (commandLines.size() == 0 || row >= commandLines.size()) {
             return '¶';
