@@ -29,6 +29,10 @@ public class Token {
         if(this.type == TokenType.tk_eof){
             return "";
         }
+        if((type.toString()).equals("tk_num_real")){
+            return ("<" + type + "," + lexeme + "," + (row+1) + "," + column + ">");
+        }
+
         String myTokenString = "";
         SymbolTable myTable = new SymbolTable(true);
         if ((type.toString()).equals("tk_"+this.lexeme)||(!myTable.isEnAlph(lexeme.charAt(0)))) {
