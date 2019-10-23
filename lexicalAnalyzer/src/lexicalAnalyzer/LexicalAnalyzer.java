@@ -2,7 +2,6 @@ package lexicalAnalyzer;
 
 import symboltable.SymbolTable;
 
-import javax.swing.*;
 import java.util.regex.Pattern;
 
 public class LexicalAnalyzer {
@@ -12,7 +11,7 @@ public class LexicalAnalyzer {
     SymbolTable symbolTable;
 
     Token currentToken;
-    char lastChar;
+    Character lastChar;
 
     public LexicalAnalyzer(String fileName) {
         this.reader = new ScriptReader(fileName);
@@ -122,6 +121,7 @@ public class LexicalAnalyzer {
                 }
 
             case '?':
+
                 lastChar = reader.getNextChar();
                 return new Token(tokenRow, tokenColumn, "?", TokenType.tk_qmark);
 
@@ -503,7 +503,7 @@ public class LexicalAnalyzer {
         do {
             lexema += lastChar;
             lastChar = reader.getNextChar();
-        } while ((lastChar >= 'a' && lastChar <= 'z') || (lastChar >= 'A' && lastChar <= 'Z') || (lastChar == '_') || (lastChar >= '0' && lastChar <= '9'));
+        } while (Pattern.matches("[a-zA-Z0-9/_]", Character.toString(lastChar)));
         //revisar si el lexema es una palabra reservada. Si lo es retornar el token respectivo, si no, tk_id
         if (symbolTable.isResWord(lexema)) {
             return (new Token(tokenRow, tokenColumn, lexema, getTypeOfReservedWord(lexema)));
@@ -523,7 +523,7 @@ public class LexicalAnalyzer {
 
 
     public static void main(String args[]) {
-        LexicalAnalyzer lexer = new LexicalAnalyzer("prueba.txt");
+        LexicalAnalyzer lexer = new LexicalAnalyzer("2.txt");
         Token myToken = lexer.nextToken();
         while (myToken.type != TokenType.tk_eof) {
             if (myToken.type == TokenType.ERROR) {
@@ -533,5 +533,7 @@ public class LexicalAnalyzer {
             myToken = lexer.nextToken();
         }
         System.out.println(myToken);
+
+
     }
 }

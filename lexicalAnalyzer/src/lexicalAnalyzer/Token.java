@@ -35,8 +35,14 @@ public class Token {
 
         String myTokenString = "";
         SymbolTable myTable = new SymbolTable(true);
-        if ((type.toString()).equals("tk_"+this.lexeme)||(!myTable.isEnAlph(lexeme.charAt(0)))) {
-            myTokenString = "<" + type + "," + (row+1) + "," + column + ">";
+        if ((!myTable.isEnAlph(lexeme.charAt(0))) || (type.toString()).equals("tk_"+this.lexeme) ) {
+            if ((!myTable.isEnAlph(lexeme.charAt(0))) ){
+                myTokenString = "<" + type + "," + (row+1) + "," + column + ">";
+            }
+            else if( (type.toString()).equals("tk_"+this.lexeme) ) {
+                myTokenString = "<" + lexeme + "," + (row+1) + "," + column + ">";
+            }
+
         } else {
             myTokenString = "<" + type + "," + lexeme + "," + (row+1) + "," + column + ">";
         }

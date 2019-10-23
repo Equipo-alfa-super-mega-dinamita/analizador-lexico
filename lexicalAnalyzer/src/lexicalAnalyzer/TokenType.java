@@ -41,6 +41,7 @@ public enum TokenType {
     tk_final,
     tk_forward,
     tk_global,
+    tk_getarg,
     tk_high,
     tk_if,
     tk_import,
