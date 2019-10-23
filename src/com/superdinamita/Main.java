@@ -7,7 +7,7 @@ import com.superdinamita.lexicalAnalyzer.TokenType;
 public class Main {
 
     public static void main(String args[]) {
-        LexicalAnalyzer lexer = new LexicalAnalyzer("2.txt");
+        LexicalAnalyzer lexer = new LexicalAnalyzer("data/3.txt");
         Token myToken = lexer.nextToken();
         while (myToken.type != TokenType.tk_eof) {
             if (myToken.type == TokenType.ERROR) {
