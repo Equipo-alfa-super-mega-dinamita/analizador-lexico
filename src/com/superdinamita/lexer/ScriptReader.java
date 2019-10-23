@@ -1,10 +1,11 @@
-package com.superdinamita.lexicalAnalyzer;
+package com.superdinamita.lexer;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ScriptReader {
+
     private ArrayList<String> commandLines;
     private File myFile;
     private FileReader fr;

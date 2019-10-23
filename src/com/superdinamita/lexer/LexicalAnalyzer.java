@@ -1,4 +1,4 @@
-package com.superdinamita.lexicalAnalyzer;
+package com.superdinamita.lexer;
 
 import com.superdinamita.symboltable.SymbolTable;
 

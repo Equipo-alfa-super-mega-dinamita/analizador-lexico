@@ -1,4 +1,4 @@
-package com.superdinamita.lexicalAnalyzer;
+package com.superdinamita.lexer;
 
 public enum TokenType {
     none,
