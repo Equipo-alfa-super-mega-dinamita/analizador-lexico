@@ -1,6 +1,6 @@
-package lexicalAnalyzer;
+package com.superdinamita.lexicalAnalyzer;
 
-import symboltable.SymbolTable;
+import com.superdinamita.symboltable.SymbolTable;
 
 import java.util.regex.Pattern;
 
@@ -60,7 +60,7 @@ public class LexicalAnalyzer {
     }
 
 
-    Token nextToken() {
+    public Token nextToken() {
         ignoreEmptySpacesAndLineComments();
         ignoreMultiLineComments();
         ignoreEmptySpacesAndLineComments();
@@ -522,18 +522,5 @@ public class LexicalAnalyzer {
     }
 
 
-    public static void main(String args[]) {
-        LexicalAnalyzer lexer = new LexicalAnalyzer("2.txt");
-        Token myToken = lexer.nextToken();
-        while (myToken.type != TokenType.tk_eof) {
-            if (myToken.type == TokenType.ERROR) {
-                break;
-            }
-            System.out.println(myToken);
-            myToken = lexer.nextToken();
-        }
-        System.out.println(myToken);
 
-
-    }
 }
