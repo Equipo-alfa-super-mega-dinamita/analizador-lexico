@@ -1,4 +1,4 @@
-package com.superdinamita.symboltable;
+package com.superdinamita.symbolTable;
 
 import java.util.HashSet;
 

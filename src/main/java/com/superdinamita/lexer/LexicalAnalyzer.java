@@ -1,6 +1,6 @@
 package com.superdinamita.lexer;
 
-import com.superdinamita.symboltable.SymbolTable;
+import com.superdinamita.symbolTable.SymbolTable;
 
 import java.util.regex.Pattern;
 

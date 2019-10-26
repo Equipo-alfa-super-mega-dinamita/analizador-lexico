@@ -1,5 +1,5 @@
 A : B | C
-A : {ant} | A | {all}
+A : {{ant}} | A | {all}
 B : {big} | C | {bad}
 B :  {  bus.delete(   )         } | A | {boss   }
-B :                 ?
+B :  ?
