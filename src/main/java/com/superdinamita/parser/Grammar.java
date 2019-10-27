@@ -1,10 +1,18 @@
 package com.superdinamita.parser;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Grammar {
 
-    public Symbol startSymbol;
+    HashMap<String, Symbol> symbols;
+    Symbol startSymbol;
 
-    public Grammar() {
+    public Grammar (ArrayList<Rule> rules) {
+        symbols = new HashMap();
+        for (Rule rule : rules) {
 
+        }
     }
+
 }

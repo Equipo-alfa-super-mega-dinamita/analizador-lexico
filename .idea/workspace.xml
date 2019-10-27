@@ -2,38 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0a3b67c-b3a6-4d0e-aaed-5e64f73223df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/App.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/lexer/LexicalAnalyzer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/lexer/ScriptReader.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/lexer/Token.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/lexer/TokenType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/parser/Grammar.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/parser/GrammarReader.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/parser/PredictionSet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/parser/Rule.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/parser/Symbol.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/parser/SymbolType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/parser/SyntaxAnalizer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/superdinamita/symbolTable/SymbolTable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/language-processor-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.superdinamita.AppTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/com.superdinamita.AppTest.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/superdinamita/AppTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Empty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Terminal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Variable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/lexer/TokenType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/lexer/TokenType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Grammar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Grammar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/GrammarReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/GrammarReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/PredictionSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/PredictionSet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Rule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Symbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Symbol.java" afterDir="false" />
     </list>
@@ -45,6 +19,13 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="analizador-lexico" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -143,7 +124,7 @@
       <option name="presentableId" value="Default" />
       <updated>1572121731188</updated>
       <workItem from="1572121737901" duration="625000" />
-      <workItem from="1572123108625" duration="10265000" />
+      <workItem from="1572123108625" duration="14035000" />
     </task>
     <servers />
   </component>

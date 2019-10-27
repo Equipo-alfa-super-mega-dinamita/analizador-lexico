@@ -14,7 +14,6 @@ public class GrammarReader {
     private ArrayList<Rule> rules;
 
     public GrammarReader(String filename){
-        grammar = new Grammar();
         rules = new ArrayList<>();
         read(filename);
     }
@@ -35,6 +34,8 @@ public class GrammarReader {
                     rules.add(r);
                 }
             }
+            grammar = new Grammar(rules);
+
 
         }
         catch (Exception e){

@@ -7,35 +7,32 @@ import java.util.List;
 
 import static com.superdinamita.parser.SymbolType.*;
 
-public class Symbol {
+@Data
+public abstract class Symbol {
 
      String value;
-     SymbolType type;
      Token token;
      List<Rule> rules;
 
 
-    public Symbol(String s) throws Exception {
+
+    public Symbol(String s)  {
 
         if(s.matches("[A-Za-z][A-Za-z0-9]*")){ //Formato propio de nuestra sintaxis de gramáticas.
             value = s;
-            type = variable;
         }
         else if ( s.matches(  "\\{(.*)}")  ){
             value = s.substring(1, s.length() -1).trim();
-            type = terminal;
         }
         else if (s.equals("?")) {
             value = "EMPTY_SYMBOL";
-            type = empty;
         }
-        else throw new Exception("Found invalid symbol");
     }
 
-    void evaluar(SyntaxAnalizer syntaxAnalizer){
-
+    void evaluar(SyntaxAnalizer g){
+/*
         if( this.type == terminal ) {
-            emparejar(token);
+            //////// emparejar(token);
             //if(!this.soyvacio) nuevotoken;
         }
         else if( this.type == variable){
@@ -49,6 +46,7 @@ public class Symbol {
             }
             //evaluar error si nunguna regla tiene.
         }
+*/
     }
 
     void emparejar(TokenType t){
