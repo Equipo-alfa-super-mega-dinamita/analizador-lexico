@@ -1,5 +1,9 @@
 package com.superdinamita.parser;
 
+import com.superdinamita.lexer.Token;
+import com.superdinamita.lexer.TokenType;
+
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,11 +29,22 @@ public class Variable extends Symbol {
     }
 
     @Override
+    public HashSet<TokenType> firsts() {
+        HashSet<TokenType> firsts = new HashSet<>();
+        for (Rule rule : rules) {
+            //firsts.addAll();
+            //TODO
+        }
+        return firsts;
+
+    }
+
+    @Override
     public String toString() {
-        return "Variable{" +
-                //"rules=" + rules +
-                "value='" + value + '\'' +
-                "}\n";
+        return "\nVariable: {" +
+                "\nrules=" + rules +
+                "\nvalue='" + value + '\'' +
+                "\n}";
     }
 
     public void addRule(Rule rule) {

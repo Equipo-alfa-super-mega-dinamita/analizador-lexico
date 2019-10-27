@@ -24,12 +24,15 @@ public class App {
         myToken = lexer.nextToken();
         }
         System.out.println(myToken);*/
-        GrammarReader gr = new GrammarReader("grammar/test.txt");
+
 
 
         try {
-            /*SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);
-            sa.analyse();*/
+            GrammarReader gr = new GrammarReader("grammar/test.txt");
+            /*
+                SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);
+                sa.analyse();
+            */
         } catch (Exception exception) {
             System.out.println(exception);
             exception.printStackTrace();

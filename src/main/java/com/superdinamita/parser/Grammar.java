@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public class Grammar {
 
+
+
     HashMap<String, Variable> symbols;
     Symbol startSymbol;
     Empty empty;
@@ -20,9 +22,9 @@ public class Grammar {
 
     @Override
     public String toString() {
-        return "Grammar{\n" +
-                "symbols=" + symbols +
-                ", startSymbol=" + startSymbol +
+        return "\nGrammar: {" +
+                "\nsymbols=" + symbols +
+                ",\nstartSymbol=" + startSymbol +
                 '}';
     }
 
@@ -38,8 +40,13 @@ public class Grammar {
 
     }
 
-
     public Symbol empty() {
         return this.empty;
+    }
+
+    public void generatePredictionSets() {
+
+
+
     }
 }

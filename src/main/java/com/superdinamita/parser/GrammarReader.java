@@ -63,6 +63,7 @@ public class GrammarReader {
                 }
             }
             System.out.println(grammar);
+            grammar.generatePredictionSets();
 
 
         }

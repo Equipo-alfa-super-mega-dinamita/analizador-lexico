@@ -1,5 +1,9 @@
 package com.superdinamita.parser;
 
+import com.superdinamita.lexer.TokenType;
+
+import java.util.HashSet;
+
 public class Empty extends Symbol{
 
 
@@ -8,11 +12,17 @@ public class Empty extends Symbol{
 
     @Override
     public String toString() {
-        return "Empty{epsilon}";
+        return "Empty: {}";
     }
 
     @Override
     void eval(SyntaxAnalizer g) {
 
+    }
+
+    @Override
+    public HashSet<TokenType> firsts() {
+        //TODO
+        return null;
     }
 }

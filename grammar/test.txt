@@ -1,7 +1,7 @@
 A : B | C
-A : {ant} | A | {all}
+A : {tk_const} | A | {tk_final}
 
 //kono giorno giovanna.
 
-B : {big} | C
-B : {bus} | A
+B : {tk_optype} | C
+B : {tk_semicolon} | A

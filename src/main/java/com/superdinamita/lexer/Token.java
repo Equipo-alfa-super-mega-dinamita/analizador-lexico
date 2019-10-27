@@ -1,5 +1,4 @@
 package com.superdinamita.lexer;
-
 import com.superdinamita.symbolTable.SymbolTable;
 
 public class Token {
