@@ -15,7 +15,7 @@ public class Terminal extends Symbol {
     @Override
     public String toString() {
         return "\nTerminal: {" +
-                "\ntoken=" + token +
+                "\ntoken=" + expected +
                 "\n,value='" + value + '\'' +
                 "\n}";
     }
@@ -24,7 +24,7 @@ public class Terminal extends Symbol {
 
         this.value = s;
         try {
-            token = TokenType.valueOf(s);
+            expected = TokenType.valueOf(s);
         }catch (Exception e){
             System.out.println(e);
             throw new Exception("El token "+ s + " no es válido. Revisa la gramática.");
@@ -38,11 +38,11 @@ public class Terminal extends Symbol {
         Token received = syntaxAnalizer.token();
         if(received.type != this.expected){
             throw new Exception("<"+received.row+","+received.column+"> Error sintactico: se encontro: "+received.lexeme
-                    +"; Se esperaba: "+ mapTypeToExpected((this.expected)));
+                    +"; Se esperaba: "+ Symbol.mapTypeToExpected((this.expected)));
         }
     }
 
-    }
+
 
     @Override
     public HashSet<TokenType> firsts() {

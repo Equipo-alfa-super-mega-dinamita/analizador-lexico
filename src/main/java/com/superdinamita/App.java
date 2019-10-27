@@ -26,8 +26,8 @@ public class App {
         System.out.println(myToken);*/
 
 
-
         try {
+            GrammarReader gr = new GrammarReader("grammar/test.txt");
             /*SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);
             sa.analyse();*/
             //System.out.println("El analisis sintactico ha finalizado exitosamente.");

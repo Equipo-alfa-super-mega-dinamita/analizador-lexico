@@ -53,7 +53,7 @@ public class GrammarReader {
                             tempSymbol = grammar.empty();  //Simbolo vacío.
                         }
                         else{
-                            throw new Exception("Found invalid symbol");
+                            throw new Exception("Found invalid symbol: " + symbol);
                         }
                         symbols.add( tempSymbol );
                     }

@@ -4,6 +4,7 @@ package com.superdinamita.parser;
 import com.superdinamita.lexer.TokenType;
 
 import java.util.HashSet;
+import java.util.List;
 
 public abstract class Symbol {
 
@@ -48,7 +49,7 @@ Pseudo codigo
 
      }
 
-     String mapTypeToExpected(TokenType type){
+     static String mapTypeToExpected(TokenType type){
           switch(type){
                case none:
                     return "this shouldn't happen D:";

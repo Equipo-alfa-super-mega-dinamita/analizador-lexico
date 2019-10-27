@@ -1,7 +1,7 @@
-A : B C |
-{ant} A {all}
+A : B |C
+A : {tk_P} | A | {tk_V}
 
 //kono giorno giovanna.
 
-B : {big} C
-| {bus} A
+B : {tk_ge} | C
+B : {tk_lt} | A
