@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 public class Terminal extends Symbol {
 
-    TokenType token;
+    TokenType expected;
 
     @Override
     public String toString() {
@@ -33,7 +33,14 @@ public class Terminal extends Symbol {
     }
 
     @Override
-    void eval(SyntaxAnalizer syntaxAnalizer) {
+    void eval(SyntaxAnalizer syntaxAnalizer) throws Exception {
+        //Emparejar
+        Token received = syntaxAnalizer.token();
+        if(received.type != this.expected){
+            throw new Exception("<"+received.row+","+received.column+"> Error sintactico: se encontro: "+received.lexeme
+                    +"; Se esperaba: "+ mapTypeToExpected((this.expected)));
+        }
+    }
 
     }
 

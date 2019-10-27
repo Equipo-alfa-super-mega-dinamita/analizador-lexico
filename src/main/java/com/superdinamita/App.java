@@ -28,11 +28,9 @@ public class App {
 
 
         try {
-            GrammarReader gr = new GrammarReader("grammar/test.txt");
-            /*
-                SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);
-                sa.analyse();
-            */
+            /*SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);
+            sa.analyse();*/
+            //System.out.println("El analisis sintactico ha finalizado exitosamente.");
         } catch (Exception exception) {
             System.out.println(exception);
             exception.printStackTrace();

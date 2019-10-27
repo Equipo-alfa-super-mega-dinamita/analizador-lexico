@@ -1,0 +1,22 @@
+Grammar{
+    simbolos[]{
+        reglas[]{
+            produccion[  ] {
+                terminal | variable | vacio {
+
+                    metodoEvaluateCustom(){
+                        if(terminal){
+                            //comprobar si es lo esperado
+                            //llamar nextToken
+                        }else{
+                            variable.metodo()
+                        }else{
+                            nada
+                        }
+                    }
+                }
+            }
+            conjunto prediccion[]
+        }
+    }
+}

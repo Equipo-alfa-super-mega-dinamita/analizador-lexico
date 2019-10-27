@@ -17,15 +17,18 @@ public class Variable extends Symbol {
     }
 
     @Override
-    void eval(SyntaxAnalizer g) {
+    void eval(SyntaxAnalizer g) throws Exception {
 
         for (Rule rule : rules) {
             if (rule.contains(g.token())) { //Está en el conjunto de predicción de la regla?
-                for (Symbol s : rule.symbols) { //por cada cosa del lado derecho
+                for (Symbol s : rule.symbols) { //por cada cosa del lado derecho, ITERAR EN ORDEN
                     s.eval(g);
                 }
+                return;
             }
         }
+        //ERROR
+        syntaxError(rules);
     }
 
     @Override

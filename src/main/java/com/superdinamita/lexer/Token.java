@@ -2,10 +2,10 @@ package com.superdinamita.lexer;
 import com.superdinamita.symbolTable.SymbolTable;
 
 public class Token {
-    private int row;
-    private int column;
+    public int row;
+    public int column;
     public TokenType type;
-    private String lexeme;
+    public String lexeme;
 
     public Token(int row, int column, String lexeme, TokenType type) {
         this.row = row;

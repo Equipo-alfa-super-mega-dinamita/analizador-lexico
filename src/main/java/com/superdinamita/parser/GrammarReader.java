@@ -18,8 +18,6 @@ public class GrammarReader {
     }
 
     private void read(String filename) {
-
-
         try {
             grammarFile = new File(filename);
             fr = new FileReader(grammarFile);

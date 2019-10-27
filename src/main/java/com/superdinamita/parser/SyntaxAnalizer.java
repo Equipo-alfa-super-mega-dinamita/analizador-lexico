@@ -16,7 +16,7 @@ public class SyntaxAnalizer {
         this.lexer = lexer;
         this.token = lexer.nextToken();
         if(token.type == TokenType.ERROR){
-            throw new Exception(token.type.toString());
+            throw new Exception(token.toString());
         }
     }
 
@@ -27,7 +27,7 @@ public class SyntaxAnalizer {
     public void nextToken() throws Exception {
         this.token = lexer.nextToken();
         if(token.type == TokenType.ERROR){
-            throw new Exception(token.type.toString());
+            throw new Exception(token.toString());
         }
     }
 

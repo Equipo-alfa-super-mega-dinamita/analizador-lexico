@@ -17,7 +17,8 @@ public class Empty extends Symbol{
 
     @Override
     void eval(SyntaxAnalizer g) {
-
+        //Emparejar empty?
+        return;
     }
 
     @Override
