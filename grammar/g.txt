@@ -1,0 +1,112 @@
+ASSIGMENT: {tk_id} AUG;
+AUG: A
+ | C
+ | E
+ | G
+ | I;
+
+EXPR: K
+    | O
+    | Q
+    | S
+    | U
+    | Z
+    | C1;
+//all
+A: {tk_swap} {tk_id};
+B: {tk_id};
+
+// int/real
+C: {tk_aug_plus} D
+ | {tk_aug_minus} D
+ | {tk_aug_expon} D
+ | {tk_aug_div} D
+ | {tk_aug_aster} D;
+D EXPR;
+
+//bool/int
+E: {tk_aug_or} F
+ | {tk_aug_and} F;
+F: EXPR;
+
+//String/char
+G : {tk_aug_concat} H;
+H : EXPR;
+
+//int
+I: {tk_aug_lshift} J
+ | {tk_aug_rshift} J
+J: {tk_id}
+ | {tk_num_int_oct}
+ | {tk_num_int_dec}
+ | {tk_num_int_hex}
+ | EXPR;
+
+//////////
+K: L KP;
+KP: {tk_or} L KP
+   | {tk_xor} L KP
+   | ¿;
+L  | O LP;
+LP:  {tk_and} O LP
+   | ¿;
+
+//real str
+O: Q OP;
+OP: {tk_le} Q OP
+  | {tk_ge} Q OP
+  | {tk_lt} Q OP
+  | {tk_gt} Q OP
+  | {tk_ne} Q OP
+  | {tk_eq} Q OP
+  | ¿;
+
+//int
+Q: S QP;
+QP: {tk_rshift} S QP
+  | {tk_lshift} S QP
+  | ¿
+
+S: U SP;
+SP: {tk_concat} U SP
+  | ¿;
+
+// int real
+U: V UP;
+UP: {tk_minus} V UP
+  | {tk_plus} V UP
+  | ¿;
+  
+V: W VP;
+VP:{tk_mod} W VP
+  | {tk_remdr} W VP
+  | {tk_div} W VP
+  | {tk_aster} W VP
+  | ¿;
+W: X {tk_expon} W
+ | Y;
+ ////////////
+Y: {tk_qmark} Y
+  | {tk_addr} Y
+  | {tk_decr} Y
+  | {tk_incr} Y
+  | {tk_minus} Y
+  | {tk_plus}  Y
+  | {tk_not} Y
+  | Z;
+Z: A1 ZP;
+ZP: {tk_hat} ZP;
+  | {tk_decr} ZP
+  | {tk_incr} ZP
+  | ¿;
+
+A1: {tk_id}
+    | {tk_num_int_oct}
+    | {tk_num_int_dec}
+    | {tk_num_int_hex}
+    | {tk_true}
+    | {tk_false}
+    | {tk_cadena}
+    | {tk_caracter}
+    | {tk_num_real}
+    | {tk_lparem} K {tk_rparem};
