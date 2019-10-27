@@ -30,10 +30,12 @@ public class Rule {
         for ( String symbol: ss) {
             this.symbols.add(  new Symbol(symbol.trim()));
         }
-
         for ( Symbol sa:
              this.symbols) {
             System.out.println(sa);
         }
     }
+
+
+
 }

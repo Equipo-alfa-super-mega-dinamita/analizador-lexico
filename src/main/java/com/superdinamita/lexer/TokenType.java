@@ -9,7 +9,6 @@ public enum TokenType {
     tk_cadena,
     tk_caracter,
     //Reserved words
-
     tk_P,
     tk_V,
     tk_af,
@@ -95,7 +94,6 @@ public enum TokenType {
     tk_vm,
     tk_write,
     tk_xor,
-
     //Symbols
     tk_semicolon,
     tk_comma,
@@ -147,16 +145,8 @@ public enum TokenType {
     tk_aug_concat,
     tk_aug_rshift,
     tk_aug_lshift,
-
-
     tk_num_real,
     tk_num_int_oct,
     tk_num_int_dec,
-    tk_num_int_hex,
-
-
-
-
-
-
+    tk_num_int_hex
 }

@@ -29,9 +29,11 @@ public class GrammarReader {
             String line;
             while (( line = buffer.readLine()) != null)
             {
-                Rule r = new Rule(line);
-                System.out.println(r);
-                rules.add(r);
+                if(!line.isEmpty()){
+                    Rule r = new Rule(line);
+                    System.out.println(r);
+                    rules.add(r);
+                }
             }
 
         }
@@ -49,11 +51,7 @@ public class GrammarReader {
                 e.printStackTrace();
                 System.out.println("Error: Close File");
             }
-
-
         }
-
     }
-
 
 }

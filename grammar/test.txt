@@ -1,5 +1,4 @@
 A : B | C
-A : {{ant}} | A | {all}
-B : {big} | C | {bad}
-B :  {  bus.delete(   )         } | A | {boss   }
-B :  ?
+A : {ant} | A | {all}
+B : {big} | C
+B : {bus} | A
