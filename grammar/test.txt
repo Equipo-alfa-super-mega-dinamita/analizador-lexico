@@ -1,4 +1,7 @@
 A : B | C
 A : {ant} | A | {all}
+
+//kono giorno giovanna.
+
 B : {big} | C
 B : {bus} | A

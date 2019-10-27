@@ -9,4 +9,3 @@ next fi op ni co cap
 
 # Tipos de dato
 char string int bool
-

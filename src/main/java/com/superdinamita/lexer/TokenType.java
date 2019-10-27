@@ -148,5 +148,5 @@ public enum TokenType {
     tk_num_real,
     tk_num_int_oct,
     tk_num_int_dec,
-    tk_num_int_hex
+    tk_num_int_hex;
 }

@@ -21,7 +21,7 @@ public class SyntaxAnalizer {
     }
 
     public void analyse() throws Exception{
-        grammar.startSymbol.evaluar(this);
+        grammar.startSymbol.eval(this);
     }
 
     public void nextToken() throws Exception {
@@ -31,4 +31,7 @@ public class SyntaxAnalizer {
         }
     }
 
+    public Token token() {
+        return token;
+    }
 }

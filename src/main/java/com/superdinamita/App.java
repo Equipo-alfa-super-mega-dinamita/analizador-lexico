@@ -7,6 +7,8 @@ import com.superdinamita.lexer.TokenType;
 import com.superdinamita.parser.GrammarReader;
 import com.superdinamita.parser.SyntaxAnalizer;
 
+import java.awt.*;
+
 public class App {
     public static void main(String[] args) {
 
@@ -24,13 +26,13 @@ public class App {
         System.out.println(myToken);*/
         GrammarReader gr = new GrammarReader("grammar/test.txt");
 
-        //GrammarReader gr = new GrammarReader("grammar/test.txt");
 
         try {
-            SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);
-            sa.analyse();
+            /*SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);
+            sa.analyse();*/
         } catch (Exception exception) {
             System.out.println(exception);
+            exception.printStackTrace();
         }
     }
 }
