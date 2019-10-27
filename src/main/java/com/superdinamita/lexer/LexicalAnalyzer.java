@@ -5,8 +5,8 @@ import com.superdinamita.symbolTable.SymbolTable;
 import java.util.regex.Pattern;
 
 public class LexicalAnalyzer {
-    int tokenRow;
-    int tokenColumn;
+    public int tokenRow;
+    public int tokenColumn;
     ScriptReader reader;
     SymbolTable symbolTable;
 

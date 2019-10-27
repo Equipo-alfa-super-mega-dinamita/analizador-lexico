@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 public class GrammarReader {
-    Grammar grammar;
+    public Grammar grammar;
     private File grammarFile;
     private FileReader fr;
     private BufferedReader buffer;

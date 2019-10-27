@@ -1,20 +1,18 @@
 package com.superdinamita.parser;
 
 import com.superdinamita.lexer.Token;
-import lombok.Data;
+import com.superdinamita.lexer.TokenType;
 
 import java.util.List;
 
 import static com.superdinamita.parser.SymbolType.*;
 
-@Data
 public class Symbol {
 
      String value;
      SymbolType type;
      Token token;
      List<Rule> rules;
-
 
 
     public Symbol(String s) throws Exception {
@@ -34,7 +32,7 @@ public class Symbol {
         else throw new Exception("Found invalid symbol");
     }
 
-    void evaluar(SyntaxAnalizer g){
+    void evaluar(SyntaxAnalizer syntaxAnalizer){
 
         if( this.type == terminal ) {
             emparejar(token);
@@ -42,8 +40,7 @@ public class Symbol {
         }
         else if( this.type == variable){
 
-            for( rule   :  rules ){
-
+            for( rule : rules ){
                 if (rule.contains(token)){ //Está en el conjunto de predicción de la regla?
                     for( Symbol s  :  rule.symbols ){ //por cada cosa del lado derecho
                         s.evaluar(token);
@@ -52,12 +49,9 @@ public class Symbol {
             }
             //evaluar error si nunguna regla tiene.
         }
-
     }
 
+    void emparejar(TokenType t){
 
-
-
-
-
+    }
 }
