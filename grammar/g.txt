@@ -1,48 +1,67 @@
-ASSIGMENT: {tk_id} AUG;
+//Falta : funciones identificadores extendidos parantesis ()
+VARCONST: TYPE {tk_id} ARRAY ASSIG CON VCEND;
+TYPE: {tk_var}
+   | {tk_const};
+ARRAY: {tk_lbracket} ARDAT VAL
+     | ¿;
+VAL: {tk_comma} ARDAT VAL
+   | {tk_colon} ARDAT {tk_rbracket}
+   | {tk_rbracket};
+ARDAT: {tk_num_int_dec}
+   | IDENT
+   | {tk_num_int_oct}
+   | {tk_num_int_hex};
+ASSIG: B
+     | ¿;
+CON: {tk_comma} {tk_id} ARRAY ASSIG CON
+   | {tk_colon} {tk_id} ARRAY ASSIG CON
+   | ¿;
+VCEND: {tk_colon} DAT SEMICOLON;
+DAT: {tk_int}
+   | {tk_bool}
+   | {tk_real}
+   | {tk_char}
+   | {tk_string}
+   | {tk_file}
+   | {tk_ptr};
+SEMICOLON: {tk_semicolon}
+   | ¿;
+ASSIGNMENTS:  {tk_id} AUG;
 AUG: A
+ | B
  | C
  | E
  | G
  | I;
-
-EXPR: K
-    | O
-    | Q
-    | S
-    | U
-    | Z
-    | C1;
-//all
-A: {tk_swap} {tk_id};
-B: {tk_id};
-
+//Assignment operators
+//swap
+A: {tk_swap} IDENT;
+// assign
+B: {tk_assign} B1;
+B1: K;
 // int/real
 C: {tk_aug_plus} D
  | {tk_aug_minus} D
  | {tk_aug_expon} D
  | {tk_aug_div} D
  | {tk_aug_aster} D;
-D EXPR;
+D: K;
 
-//bool/int
+//Assignment bool or and
 E: {tk_aug_or} F
  | {tk_aug_and} F;
-F: EXPR;
+F: K;
 
-//String/char
+//Assignment concat
 G : {tk_aug_concat} H;
-H : EXPR;
+H : K;
 
-//int
+//Assignment shift
 I: {tk_aug_lshift} J
  | {tk_aug_rshift} J
-J: {tk_id}
- | {tk_num_int_oct}
- | {tk_num_int_dec}
- | {tk_num_int_hex}
- | EXPR;
+J: K;
 
-//////////
+//////////Operators
 K: L KP;
 KP: {tk_or} L KP
    | {tk_xor} L KP
@@ -65,7 +84,7 @@ OP: {tk_le} Q OP
 Q: S QP;
 QP: {tk_rshift} S QP
   | {tk_lshift} S QP
-  | ¿
+  | ¿;
 
 S: U SP;
 SP: {tk_concat} U SP
@@ -83,7 +102,7 @@ VP:{tk_mod} W VP
   | {tk_div} W VP
   | {tk_aster} W VP
   | ¿;
-W: X {tk_expon} W
+W: Y {tk_expon} W
  | Y;
  ////////////
 Y: {tk_qmark} Y
@@ -100,7 +119,7 @@ ZP: {tk_hat} ZP;
   | {tk_incr} ZP
   | ¿;
 
-A1: {tk_id}
+A1: IDENT
     | {tk_num_int_oct}
     | {tk_num_int_dec}
     | {tk_num_int_hex}
@@ -110,3 +129,12 @@ A1: {tk_id}
     | {tk_caracter}
     | {tk_num_real}
     | {tk_lparem} K {tk_rparem};
+
+
+IDENT: {tk_id} NEXTIDENT;
+NEXTIDENT: {tk_period} {tk_id} NEXTIDENT
+         | FUNC
+         | ¿;
+FUNC: {tk_lparen} K NEXTF;
+NEXTF: {tk_comma} K NEXTF
+     | {tk_lparen};
