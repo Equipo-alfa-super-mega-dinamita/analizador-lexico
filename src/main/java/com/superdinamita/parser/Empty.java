@@ -11,11 +11,12 @@ public class Empty extends Symbol{
 
     public Empty() {
         this.hasEmpty = true;
+        this.value = "Empty:{}";
     }
 
     @Override
     public String toString() {
-        return "\tEmpty: {}\t";
+        return this.value;
     }
 
     @Override

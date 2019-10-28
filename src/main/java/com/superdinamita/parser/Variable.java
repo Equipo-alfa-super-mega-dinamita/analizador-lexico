@@ -1,16 +1,16 @@
 package com.superdinamita.parser;
 
+import com.superdinamita.lexer.Token;
 import com.superdinamita.lexer.TokenType;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 public class Variable extends Symbol {
 
 
     List<Rule> rules;
-    HashMap<TokenType, Rule> firsts;
-    HashSet<TokenType> firstsSet;
+    HashMap<TokenType, Rule> predictionSet;
+    HashSet<TokenType> firsts;
     HashSet<TokenType> follows;
     Grammar grammar;
 
@@ -19,17 +19,18 @@ public class Variable extends Symbol {
     public Variable(String s, Grammar grammar) {
         this.value = s;
         this.rules = new LinkedList<>();
-        this.firsts = new HashMap<>();
-        this.firstsSet = new HashSet<>();
+        this.firsts = new HashSet<>();
         this.follows = new HashSet<>();
         this.grammar = grammar;
         this.hasEmpty = false;
+        this.predictionSet = new HashMap<>();
+
     }
 
     @Override
     void eval(SyntaxAnalizer g) throws Exception {
-        if (!firstsSet.contains(g.token().type)) syntaxError(rules);
-        Rule rule = firsts.get(g.token().type);
+        if (!predictionSet.containsKey(g.token().type)) syntaxError(rules, g);
+        Rule rule = predictionSet.get(g.token().type);
         if (rule.contains(g.token().type)) { //Está en el conjunto de predicción de la regla?
             for (Symbol s : rule.symbols) { //por cada cosa del lado derecho, ITERAR EN ORDEN
                 s.eval(g);
@@ -37,19 +38,24 @@ public class Variable extends Symbol {
         }
     }
 
-    @Override
-    public HashSet<TokenType> firsts() {
-        return firstsSet;
-    }
+    public void mapRule( Set<TokenType> tokensSet, Rule rule ) throws Exception{
 
-
-
-    private void addFirsts(Set<TokenType> firsts, Rule rule) {
-        for (TokenType token : firsts) {
-            this.firsts.put(token, rule);
-            this.firstsSet.add(token);
+        for (TokenType token : tokensSet) {
+            if(this.predictionSet.containsKey(token)){
+                String message = "Se ha detectado que el token " + token + " mapea a dos reglas distintas."
+                 + "Las reglas " + rule + " y " + predictionSet.get(token);
+                throw new Exception(message);
+            }
+            this.predictionSet.put(token, rule);
         }
     }
+
+
+    @Override
+    public Set<TokenType> firsts() {
+        return firsts;
+    }
+
 
     @Override
     public String toString() {
@@ -72,7 +78,7 @@ public class Variable extends Symbol {
             int n = rule.symbols.size();
             for (int i = 0; i < n; i++) {
                 symbol = rule.symbols.get(i);
-                addFirsts(symbol.firsts(), rule);
+                this.firsts.addAll(symbol.firsts());
                 if (symbol.hasEmpty) {
                     if (n - i == 1) { // ¿NO es el ultimo?
                         this.hasEmpty = true;
@@ -89,27 +95,23 @@ public class Variable extends Symbol {
 
         boolean changed = false;
         Symbol symbol;
-        //int initialLocalSize = this.follows.size();
 
         for (Rule rule : rules) {
             int n = rule.symbols.size();
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++) { //For each symbol...
                 symbol = rule.symbols.get(i);
                 if(symbol instanceof Variable){
-                    Variable variable = (Variable) symbol;
-
-                    System.out.println("--->" + variable.value);
-                    HashSet<TokenType> subFirsts = Variable.firsts(rule.symbols.subList(i + 1, n));
-                    System.out.println(subFirsts + "\n\n");
-
-                    this.follows.addAll(subFirsts);
+                    Variable variable = (Variable) symbol; //A
+                    HashSet<TokenType> subFirsts = Variable.firsts(rule.symbols.subList(i + 1, n));  //Beta
+                    int initialSize = variable.follows.size();
+                    variable.follows.addAll(subFirsts);
                     if (subFirsts.contains(TokenType.EPSILON)) {
-                        this.follows.remove(TokenType.EPSILON);
+                        variable.follows.remove(TokenType.EPSILON);
                         variable.follows.addAll(this.follows);
                     }
+                    if(  initialSize!= variable.follows.size() ) changed = true;
                 }
             }
-
         }
         return changed;
 
@@ -117,15 +119,15 @@ public class Variable extends Symbol {
 
 
     public static HashSet<TokenType> firsts(List<Symbol> symbols){
-        System.out.println(symbols);
         HashSet<TokenType> temp = new HashSet<>();
-        Symbol s = Grammar.empty();
+        Symbol s;
         int n = symbols.size();
-        for (int i = 0; i < n; i++) {
+        if( n == 0) return new HashSet<>(Collections.singleton(TokenType.EPSILON));
+        for (int i = 0; i < n; i++) { //For each symbol
             s = symbols.get(i);
             temp.addAll(s.firsts());
             if(s.hasEmpty) {
-                if (n - i == 1) { // ¿NO es el ultimo?
+                if (n - i == 1) { // ¿es el ultimo?
                     temp.add(TokenType.EPSILON);
                     break;
                 }

@@ -9,7 +9,7 @@ public enum TokenType {
     //nuevos
     EPSILON,
     tk_id,
-    tk_eof,
+    EOF,
     tk_cadena,
     tk_caracter,
     //Reserved words

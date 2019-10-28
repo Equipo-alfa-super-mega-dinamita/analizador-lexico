@@ -19,7 +19,7 @@ public class Token {
         if(this.type == TokenType.ERROR){
             return ">>> Error lexico(linea:"+(row+1)+",posicion:"+column+")";
         }
-        if(this.type == TokenType.tk_eof){
+        if(this.type == TokenType.EOF){
             return "";
         }
         if((type.toString()).equals("tk_num_real")){

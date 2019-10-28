@@ -11,7 +11,7 @@ public class Rule {
     @Override
     public String toString() {
         String string =
-         "Rule:{" +
+         "Rule:\n{" +
         "symbols= [";
         for ( Symbol symbol:
             symbols) {
@@ -22,6 +22,8 @@ public class Rule {
     }
 
     public final List<Symbol> symbols;
+    //public
+
 
     public Rule(List<Symbol> symbols) throws Exception {
 

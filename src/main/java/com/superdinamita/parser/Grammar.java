@@ -1,6 +1,9 @@
 package com.superdinamita.parser;
 
+import com.superdinamita.lexer.TokenType;
+
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Grammar {
 
@@ -58,6 +61,25 @@ public class Grammar {
         }*/
         generateFirsts();
         generateFollows();
+        for(Variable variable: variables.values()){
+            System.out.println(variable.value);
+            System.out.println(variable.firsts);
+            System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
+            System.out.println(variable.follows);
+            System.out.println();
+            HashSet<TokenType> set, firsts, follows;
+            for(Rule rule :variable.rules){
+                set = new HashSet<>();
+                firsts = Variable.firsts(rule.symbols);
+                if( firsts.contains(TokenType.EPSILON)){
+                    firsts.remove(TokenType.EPSILON);
+                    set.addAll(variable.follows);
+                }
+                set.addAll(firsts);
+                variable.mapRule(set, rule);
+            }
+            System.out.println(variable.predictionSet);
+        }
 
 
 
@@ -72,32 +94,20 @@ public class Grammar {
                 changed = variable.createFirsts();
             }
         } while (changed);
-        System.out.println("Conjunto de PRIMEROS");
-        for (Variable variable : variables.values()){
-            System.out.println(variable.value);
-            System.out.println(variable.firstsSet);
-            System.out.println("Epsilon: "+ variable.hasEmpty);
 
-        }
 
     }
 
     public void generateFollows() {
 
+        this.initialVariable.follows.add(TokenType.EOF);
         boolean changed;
         do {
             changed = false;
             for (Variable variable : variables.values()) {
-                changed = variable.createNexts();
+                if(variable.createNexts()) changed = true;
             }
         } while (changed);
-        System.out.println("Conjunto de SIGUIENTES");
-        for (Variable variable : variables.values()){
-            System.out.println(variable.value);
-            System.out.println(variable.follows);
-            //System.out.println("Epsilon: "+ variable.hasEmpty);
-
-        }
     }
 
 
