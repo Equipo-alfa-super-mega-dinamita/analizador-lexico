@@ -1,7 +1,9 @@
-//Falta : funciones identificadores extendidos parantesis ()
+//Falta : funciones
+//Declaracion de variables y constantes
 VARCONST: TYPE {tk_id} ARRAY ASSIG CON VCEND;
 TYPE: {tk_var}
    | {tk_const};
+//En caso que sea un arreglo [a,...,b]
 ARRAY: {tk_lbracket} ARDAT VAL
      | ¿;
 VAL: {tk_comma} ARDAT VAL
@@ -11,11 +13,14 @@ ARDAT: {tk_num_int_dec}
    | IDENT
    | {tk_num_int_oct}
    | {tk_num_int_hex};
+//En caso que se haga una asignacion "="
 ASSIG: B
      | ¿;
+//En caso que se sigan declarando identificadores
 CON: {tk_comma} {tk_id} ARRAY ASSIG CON
    | {tk_colon} {tk_id} ARRAY ASSIG CON
    | ¿;
+//El final de la declaracion
 VCEND: {tk_colon} DAT SEMICOLON;
 DAT: {tk_int}
    | {tk_bool}
@@ -26,13 +31,15 @@ DAT: {tk_int}
    | {tk_ptr};
 SEMICOLON: {tk_semicolon}
    | ¿;
-ASSIGNMENTS:  {tk_id} AUG;
+// Manejo de las asignaciones especiales. //Pensar en caso de una id.fun()
+ASSIGNMENTS:  IDENT AUG;
 AUG: A
  | B
  | C
  | E
  | G
  | I;
+
 //Assignment operators
 //swap
 A: {tk_swap} IDENT;
@@ -130,11 +137,13 @@ A1: IDENT
     | {tk_num_real}
     | {tk_lparem} K {tk_rparem};
 
-
+//Identificadores dado que puede ser id1.id2.id3.fun()
 IDENT: {tk_id} NEXTIDENT;
 NEXTIDENT: {tk_period} {tk_id} NEXTIDENT
          | FUNC
          | ¿;
+
+//se toma que se tiene un identidicador o palabra reservada y lo siguiente solo se encarga del parentesis (a,...,b)
 FUNC: {tk_lparen} K NEXTF;
 NEXTF: {tk_comma} K NEXTF
      | {tk_lparen};
