@@ -1,4 +1,7 @@
-//Falta : funciones
+//Las formas que una setencia puede tener
+INI: VARCONST
+   | ASSIGNMENTS
+   | Y
 //Declaracion de variables y constantes
 VARCONST: TYPE {tk_id} ARRAY ASSIG CON VCEND;
 TYPE: {tk_var}
@@ -28,9 +31,11 @@ DAT: {tk_int}
    | {tk_char}
    | {tk_string}
    | {tk_file}
-   | {tk_ptr};
+   | {tk_ptr}
+   | IDENT;
 SEMICOLON: {tk_semicolon}
    | ¿;
+
 // Manejo de las asignaciones especiales. //Pensar en caso de una id.fun()
 ASSIGNMENTS:  IDENT AUG;
 AUG: A
