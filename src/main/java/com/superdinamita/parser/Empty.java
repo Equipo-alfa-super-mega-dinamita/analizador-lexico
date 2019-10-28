@@ -8,12 +8,14 @@ import java.util.Set;
 
 public class Empty extends Symbol{
 
+
     public Empty() {
+        this.hasEmpty = true;
     }
 
     @Override
     public String toString() {
-        return "Empty: {}";
+        return "\tEmpty: {}\t";
     }
 
     @Override
@@ -24,6 +26,6 @@ public class Empty extends Symbol{
 
     @Override
     public Set<TokenType> firsts() {
-        return new HashSet<>(Collections.singletonList(TokenType.none));
+        return new HashSet<>();
     }
 }

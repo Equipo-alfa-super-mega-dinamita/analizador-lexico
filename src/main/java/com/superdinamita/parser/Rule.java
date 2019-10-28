@@ -11,14 +11,14 @@ public class Rule {
     @Override
     public String toString() {
         String string =
-         "\nRule:{" +
-        "\nsymbols= [";
+         "Rule:{" +
+        "symbols= [";
         for ( Symbol symbol:
             symbols) {
-            string+= "\n\t" + symbol.value;
+            string+= "\t" + symbol.value;
 
         };
-    return string + "\n]";
+    return string + "]";
     }
 
     public final List<Symbol> symbols;
@@ -30,13 +30,10 @@ public class Rule {
 
     }
 
-    boolean contains(Token token) {
+    boolean contains(TokenType token) {
         //TODO Acá se verifica si es parte del conjunto de predicción.
         return false;
     }
 
 
-    public HashSet<TokenType> firsts() {
-        return PredictionSet.firsts(symbols);
-    }
 }

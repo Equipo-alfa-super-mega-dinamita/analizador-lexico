@@ -34,7 +34,7 @@ public class Grammar {
 
     public Variable getVariable(String variableName) {
         if(!variables.containsKey(variableName)){
-            variables.put(variableName, new Variable(variableName));
+            variables.put(variableName, new Variable(variableName, this));
         }
         return variables.get(variableName);
 
@@ -56,11 +56,50 @@ public class Grammar {
                 throw new Exception("La gramática tiene símbolos alcanzables. El símbolo " + var.value +" nunca puede aparecer tras sutituir la variable inicial.");
             }
         }*/
-        for (Variable variable : variables.values()) {
-            variable.firsts();//TODO Decidir la concurrencia de creación de conjuntos.
+        generateFirsts();
+        generateFollows();
+
+
+
+    }
+
+    public void generateFirsts() {
+
+        boolean changed;
+        do {
+            changed = false;
+            for (Variable variable : variables.values()) {
+                changed = variable.createFirsts();
+            }
+        } while (changed);
+        System.out.println("Conjunto de PRIMEROS");
+        for (Variable variable : variables.values()){
+            System.out.println(variable.value);
+            System.out.println(variable.firstsSet);
+            System.out.println("Epsilon: "+ variable.hasEmpty);
+
         }
 
     }
+
+    public void generateFollows() {
+
+        boolean changed;
+        do {
+            changed = false;
+            for (Variable variable : variables.values()) {
+                changed = variable.createNexts();
+            }
+        } while (changed);
+        System.out.println("Conjunto de SIGUIENTES");
+        for (Variable variable : variables.values()){
+            System.out.println(variable.value);
+            System.out.println(variable.follows);
+            //System.out.println("Epsilon: "+ variable.hasEmpty);
+
+        }
+    }
+
 
 
 }

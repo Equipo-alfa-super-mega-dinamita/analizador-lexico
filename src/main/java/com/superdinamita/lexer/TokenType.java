@@ -1,9 +1,13 @@
 package com.superdinamita.lexer;
 
 public enum TokenType {
+    //TODO :BORRAR LO DE ABAJO (NO TODO, OBVIO)
+    ant, all, big, bus, boss, cat, cow,
+    //TODO :BORRAR LO DE ARRIBA
     none,
     ERROR,
     //nuevos
+    EPSILON,
     tk_id,
     tk_eof,
     tk_cadena,

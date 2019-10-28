@@ -9,6 +9,7 @@ import java.util.Set;
 public abstract class Symbol {
 
      String value;
+     boolean hasEmpty;
      abstract void eval(SyntaxAnalizer g) throws Exception;
 
      public abstract Set<TokenType> firsts();

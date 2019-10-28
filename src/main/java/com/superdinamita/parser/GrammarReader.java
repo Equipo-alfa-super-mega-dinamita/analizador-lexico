@@ -60,10 +60,7 @@ public class GrammarReader {
                     grammar.addRule(variable, new Rule(symbols));
                 }
             }
-            System.out.println(grammar);
             grammar.generatePredictionSets();
-
-
         }
         catch (Exception e){
             e.printStackTrace();
