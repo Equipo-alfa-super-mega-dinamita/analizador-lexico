@@ -20,7 +20,7 @@ public class Empty extends Symbol{
 
     @Override
     void eval(SyntaxAnalizer g) {
-        //TODO Emparejar empty?
+        //Emparejar empty(?)
         return;
     }
 
