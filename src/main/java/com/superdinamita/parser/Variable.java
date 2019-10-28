@@ -1,19 +1,25 @@
 package com.superdinamita.parser;
 
-import com.superdinamita.lexer.Token;
 import com.superdinamita.lexer.TokenType;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Variable extends Symbol {
 
 
     List<Rule> rules;
+    boolean done;
+    boolean hasEmpty;
+    HashMap<TokenType, Rule> firsts;
+
+
+
     public Variable(String s) {
         this.value = s;
-        rules = new LinkedList<>();
+        this.rules = new LinkedList<>();
+        this.done = false;
+        this.hasEmpty = false;
+        firsts = new HashMap<>();
     }
 
     @Override
@@ -32,13 +38,23 @@ public class Variable extends Symbol {
     }
 
     @Override
-    public HashSet<TokenType> firsts() {
-        HashSet<TokenType> firsts = new HashSet<>();
-        for (Rule rule : rules) {
-            //firsts.addAll();
-            //TODO
+    public Set<TokenType> firsts() {
+        if(!this.done){
+            createFirsts();
         }
-        return firsts;
+        return firsts.keySet();
+    }
+
+    private void createFirsts(){
+
+        firsts = new HashMap<>();
+        for (int i = 0; i < rules.size(); i++) {
+            HashSet<TokenType> r = rules.get(i).firsts();
+            for (TokenType tokenType : r) {
+                if(firsts.containsKey(tokenType)) System.out.println("Llave repetida al crear el conjunto PRIMEROS");
+                firsts.put(tokenType, rules.get(i));
+            }
+        }
 
     }
 

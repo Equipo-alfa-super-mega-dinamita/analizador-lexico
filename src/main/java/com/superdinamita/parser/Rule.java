@@ -21,13 +21,12 @@ public class Rule {
     return string + "\n]";
     }
 
-    public PredictionSet set;
     public final List<Symbol> symbols;
 
-    public Rule(List<Symbol> symbols) {
+    public Rule(List<Symbol> symbols) throws Exception {
 
         this.symbols = symbols;
-        this.set = new PredictionSet(); //TODO Generar conjuntos de predicción.
+        if(symbols.isEmpty()) throw new Exception("Las reglas no pueden estár vacías, si no producen nada, deben producir el símbolo vacío.");
 
     }
 
@@ -36,26 +35,8 @@ public class Rule {
         return false;
     }
 
-    public void createFirsts() throws Exception{
-        if(symbols.isEmpty()){
-            throw new Exception("Las reglas no pueden estar vacía. Si ves esto, algo salió muy mal.");
-        }
 
-        Symbol firstSymbol = symbols.get(0);
-
-        set.addFirsts(firstSymbol);
-
-
+    public HashSet<TokenType> firsts() {
+        return PredictionSet.firsts(symbols);
     }
-
-    public HashSet<TokenType> getFirsts() throws Exception {
-
-        if(set.firsts.size() == 0){
-            createFirsts();
-        }
-        return set.firsts;
-    }
-
-
-
 }

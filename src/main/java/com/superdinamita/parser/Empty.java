@@ -2,10 +2,11 @@ package com.superdinamita.parser;
 
 import com.superdinamita.lexer.TokenType;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Empty extends Symbol{
-
 
     public Empty() {
     }
@@ -17,13 +18,12 @@ public class Empty extends Symbol{
 
     @Override
     void eval(SyntaxAnalizer g) {
-        //Emparejar empty?
+        //TODO Emparejar empty?
         return;
     }
 
     @Override
-    public HashSet<TokenType> firsts() {
-        //TODO
-        return null;
+    public Set<TokenType> firsts() {
+        return new HashSet<>(Collections.singletonList(TokenType.none));
     }
 }

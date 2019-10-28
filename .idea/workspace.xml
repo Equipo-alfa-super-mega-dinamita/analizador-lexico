@@ -2,13 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0a3b67c-b3a6-4d0e-aaed-5e64f73223df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsonSchemas.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/lexer/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/lexer/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Empty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Grammar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Grammar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/GrammarReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/GrammarReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/PredictionSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/PredictionSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Rule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Symbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Symbol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/SyntaxAnalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/SyntaxAnalizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Terminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Terminal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Variable.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -113,6 +118,9 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="showServicesTree" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -128,6 +136,7 @@
       <workItem from="1572148638384" duration="7424000" />
       <workItem from="1572156252946" duration="7000" />
       <workItem from="1572189878105" duration="1218000" />
+      <workItem from="1572194783018" duration="17285000" />
     </task>
     <servers />
   </component>

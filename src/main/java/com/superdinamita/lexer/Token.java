@@ -14,12 +14,6 @@ public class Token {
         this.type = type;
     }
 
-    public Token(int row, int column) {
-        this.row = row;
-        this.column = column;
-        this.type = TokenType.none;
-    }
-
     @Override
     public String toString() {
         if(this.type == TokenType.ERROR){

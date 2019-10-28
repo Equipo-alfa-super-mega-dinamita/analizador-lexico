@@ -3,9 +3,9 @@ package com.superdinamita.parser;
 import com.superdinamita.lexer.Token;
 import com.superdinamita.lexer.TokenType;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 
 public class Terminal extends Symbol {
@@ -45,8 +45,8 @@ public class Terminal extends Symbol {
 
 
     @Override
-    public HashSet<TokenType> firsts() {
+    public Set<TokenType> firsts() {
         //TODO
-        return null;
+        return new HashSet<>(Collections.singletonList(this.expected));
     }
 }

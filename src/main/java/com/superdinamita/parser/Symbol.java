@@ -1,47 +1,17 @@
 package com.superdinamita.parser;
-
-
 import com.superdinamita.lexer.TokenType;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+
 
 public abstract class Symbol {
 
      String value;
      abstract void eval(SyntaxAnalizer g) throws Exception;
-    /*public Symbol(String s)  {
 
-        if(s.matches("[A-Za-z][A-Za-z0-9]*")){ //Formato propio de nuestra sintaxis de gramáticas.
-            value = s;
-        }
-        else if ( s.matches(  "\\{(.*)}")  ){
-            value = s.substring(1, s.length() -1).trim();
-        }
-        else if (s.equals("?")) {
-            value = ;
-        }
-    }*/
-
-
-/*
-
-Pseudo codigo
-        if( this.type == terminal ) {
-            //////// emparejar(token);
-            //if(!this.soyvacio) nuevotoken;
-        }
-        else if( this.type == variable){
-
-            //evaluar error si nunguna regla tiene.
-        }
-*/
-
-/*
-    void emparejar(TokenType t){
-
-    }*/
-
+     public abstract Set<TokenType> firsts();
      public void syntaxError(List<Rule> reglasEsperadas){
           //<{linea},{col}> Error sintactico:
           // se encontro: {lexema del token encontrado};
@@ -51,8 +21,6 @@ Pseudo codigo
 
      static String mapTypeToExpected(TokenType type){
           switch(type){
-               case none:
-                    return "this shouldn't happen D:";
                case tk_id:
                     return "identifier";
                case tk_eof:
@@ -336,5 +304,46 @@ Pseudo codigo
           }
      }
 
-    public abstract HashSet<TokenType> firsts();
+
 }
+
+
+
+
+
+
+
+
+
+
+    /*public Symbol(String s)  {
+
+        if(s.matches("[A-Za-z][A-Za-z0-9]*")){ //Formato propio de nuestra sintaxis de gramáticas.
+            value = s;
+        }
+        else if ( s.matches(  "\\{(.*)}")  ){
+            value = s.substring(1, s.length() -1).trim();
+        }
+        else if (s.equals("?")) {
+            value = ;
+        }
+    }*/
+
+
+/*
+
+Pseudo codigo
+        if( this.type == terminal ) {
+            //////// emparejar(token);
+            //if(!this.soyvacio) nuevotoken;
+        }
+        else if( this.type == variable){
+
+            //evaluar error si nunguna regla tiene.
+        }
+*/
+
+/*
+    void emparejar(TokenType t){
+
+    }*/

@@ -34,7 +34,7 @@ public class GrammarReader {
                     }
                     String variable =  parts[0];
                     if(first){
-                        grammar.setFirst(variable);
+                        grammar.setFirstSymbol(variable);
                         first = false;
                     }
                     String[] rawSymbols = parts[1].split("[ \t]*\\|[ \t]*");  //Separa la parte derecha por el operador |
