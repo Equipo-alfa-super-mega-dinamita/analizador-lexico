@@ -15,10 +15,10 @@ public class Rule {
         "\nsymbols= [";
         for ( Symbol symbol:
             symbols) {
-            string+= "\n\t" + symbol.value;
+            string+= "\n\t" + symbol.value +":"+symbol.getClass().toString();
 
         };
-    return string + "\n]";
+    return string + "\n]}";
     }
 
     public final List<Symbol> symbols;

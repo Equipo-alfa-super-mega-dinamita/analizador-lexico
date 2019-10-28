@@ -34,7 +34,7 @@ public class Variable extends Symbol {
             }
         }
         //ERROR
-        syntaxError(rules);
+        syntaxError(rules,g);
     }
 
     @Override

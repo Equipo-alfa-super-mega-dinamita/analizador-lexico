@@ -1,7 +1,10 @@
-A : B |C
-A : {tk_P} | A | {tk_V}
-
-//kono giorno giovanna.
-
-B : {tk_ge} | C
-B : {tk_lt} | A
+S : A  B  {uno};
+A : {dos} B
+| ¿;
+B : C D
+ | {tres}
+ | ¿;
+C : {cuatro} A B
+| {cinco};
+D : {seis}
+| ¿;

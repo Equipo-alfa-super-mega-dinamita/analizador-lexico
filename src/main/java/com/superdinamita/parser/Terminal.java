@@ -29,7 +29,6 @@ public class Terminal extends Symbol {
             System.out.println(e);
             throw new Exception("El token "+ s + " no es válido. Revisa la gramática.");
         }
-        System.out.println(TokenType.tk_num_real +"");
     }
 
     @Override
