@@ -68,7 +68,7 @@ public class LexicalAnalyzer {
         tokenColumn = reader.getColumn();
         //caracter es EOF?
         if (lastChar == '¶') {
-            return new Token(tokenRow, tokenColumn, "EOF", TokenType.tk_eof);
+            return new Token(tokenRow, tokenColumn, "EOF", TokenType.EOF);
         }
         switch (lastChar) {
             case ',':

@@ -1,7 +1,0 @@
-A : B C |
-{ant} A {all}
-
-//kono giorno giovanna.
-
-B : {big} C
-| {bus} A

@@ -14,18 +14,12 @@ public class Token {
         this.type = type;
     }
 
-    public Token(int row, int column) {
-        this.row = row;
-        this.column = column;
-        this.type = TokenType.none;
-    }
-
     @Override
     public String toString() {
         if(this.type == TokenType.ERROR){
             return ">>> Error lexico(linea:"+(row+1)+",posicion:"+column+")";
         }
-        if(this.type == TokenType.tk_eof){
+        if(this.type == TokenType.EOF){
             return "";
         }
         if((type.toString()).equals("tk_num_real")){

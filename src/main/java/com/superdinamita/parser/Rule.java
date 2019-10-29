@@ -11,51 +11,31 @@ public class Rule {
     @Override
     public String toString() {
         String string =
-         "\nRule:{" +
-        "\nsymbols= [";
+         "Rule:\n{" +
+        "symbols= [";
         for ( Symbol symbol:
             symbols) {
-            string+= "\n\t" + symbol.value;
+            string+= "\n\t" + symbol.value +":"+symbol.getClass().toString();
 
         };
-    return string + "\n]";
+    return string + "\n]}";
     }
 
-    public PredictionSet set;
     public final List<Symbol> symbols;
+    //public
 
-    public Rule(List<Symbol> symbols) {
+
+    public Rule(List<Symbol> symbols) throws Exception {
 
         this.symbols = symbols;
-        this.set = new PredictionSet(); //TODO Generar conjuntos de predicción.
+        if(symbols.isEmpty()) throw new Exception("Las reglas no pueden estár vacías, si no producen nada, deben producir el símbolo vacío.");
 
     }
 
-    boolean contains(Token token) {
+    boolean contains(TokenType token) {
         //TODO Acá se verifica si es parte del conjunto de predicción.
         return false;
     }
-
-    public void createFirsts() throws Exception{
-        if(symbols.isEmpty()){
-            throw new Exception("Las reglas no pueden estar vacía. Si ves esto, algo salió muy mal.");
-        }
-
-        Symbol firstSymbol = symbols.get(0);
-
-        set.addFirsts(firstSymbol);
-
-
-    }
-
-    public HashSet<TokenType> getFirsts() throws Exception {
-
-        if(set.firsts.size() == 0){
-            createFirsts();
-        }
-        return set.firsts;
-    }
-
 
 
 }

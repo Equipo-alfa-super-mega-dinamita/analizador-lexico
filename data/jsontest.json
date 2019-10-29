@@ -1,0 +1,25 @@
+{
+  "grammar":  {
+    "variables": [
+
+
+
+      {
+        "name": "A",
+        "rules":  [
+          {"symbols": ["",2,2,2,3]},
+          {"symbols": ["",2,2,2,3]}
+                  ]
+      },
+      {
+        "name": "A",
+        "rules":  [
+            {"symbols": ["B", "C"]},
+            {"symbols": ["ant","A","all"]}
+                  ]
+      }
+
+
+                ]
+  }
+}

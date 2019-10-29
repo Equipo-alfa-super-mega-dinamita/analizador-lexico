@@ -2,28 +2,31 @@ package com.superdinamita.parser;
 
 import com.superdinamita.lexer.TokenType;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Empty extends Symbol{
 
 
     public Empty() {
+        this.hasEmpty = true;
+        this.value = "Empty:{}";
     }
 
     @Override
     public String toString() {
-        return "Empty: {}";
+        return this.value;
     }
 
     @Override
     void eval(SyntaxAnalizer g) {
-        //Emparejar empty?
+        //Emparejar empty(?)
         return;
     }
 
     @Override
-    public HashSet<TokenType> firsts() {
-        //TODO
-        return null;
+    public Set<TokenType> firsts() {
+        return new HashSet<>();
     }
 }
