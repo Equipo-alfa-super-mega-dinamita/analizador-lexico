@@ -31,10 +31,8 @@ public class Variable extends Symbol {
     void eval(SyntaxAnalizer g) throws Exception {
         if (!predictionSet.containsKey(g.token().type)) syntaxError(rules, g);
         Rule rule = predictionSet.get(g.token().type);
-        if (rule.contains(g.token().type)) { //Está en el conjunto de predicción de la regla?
-            for (Symbol s : rule.symbols) { //por cada cosa del lado derecho, ITERAR EN ORDEN
-                s.eval(g);
-            }
+        for (Symbol s : rule.symbols) {
+            s.eval(g);
         }
     }
 

@@ -1,4 +1,3 @@
-;
 RESOURCE : {tk_resource} {tk_id} PAREN INI {tk_end};
 PAREN    : {tk_lparen} {tk_rparen}
          | ¿;
@@ -13,7 +12,7 @@ GLOBAL_BODY_END: {tk_id}
 //Las formas que una setencia puede tener
 INI: VAR_CONST INI
    | ASSIGNMENTS INI
-   | Y  INI //operatores unitarios
+   | Y  INI
    | IMPORT INI
    | {tk_id} FUNC INI
    | {tk_stop} INI
@@ -24,7 +23,9 @@ INI: VAR_CONST INI
    | {tk_exit} INI
    | OPERATOR INI
    | PROC INI
-   | ¿;
+   | ¿
+   ;
+
 //Declaracion de variables y constantes
 VAR_CONST : TYPE {tk_id} ARRAY ASSIG CON V_C_END;
 TYPE : {tk_var}
@@ -35,7 +36,8 @@ ARRAY : {tk_lbracket} ARR_DAT VAL
 VAL : {tk_comma} ARR_DAT VAL
     | {tk_colon} ARR_DAT {tk_rbracket}
     | {tk_rbracket};
-ARR_DAT : A1;
+ARR_DAT : A1
+;
 //En caso que se haga una asignacion ":="
 ASSIG : B
      | ¿;
@@ -215,4 +217,4 @@ PAR_FUN:  {tk_id} N_PAR_FUN
        | ¿;
 
 N_PAR_FUN: {tk_comma} {tk_id} N_PAR_FUN
-         | ¿ ;
+         | ¿;

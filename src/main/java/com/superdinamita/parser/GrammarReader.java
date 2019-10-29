@@ -23,7 +23,6 @@ public class GrammarReader {
     private void read(String filename) {
         try {
             grammar = new Grammar();
-
             grammarFile = new File(filename);
             scanner = new Scanner(grammarFile).useDelimiter(";");
             //Para cada variable que se define en el archivo ---
@@ -48,6 +47,7 @@ public class GrammarReader {
                     //Para cada simbolo de la regla ---
                     for (String symbolRaw : symbolsRaw) {
                         Symbol tempSymbol;
+                        //System.out.println(symbolRaw);
                         if (symbolRaw.matches("[A-Z0-9_]*")) {
                             tempSymbol = grammar.getVariable(symbolRaw.trim());
                         }else if(symbolRaw.matches("\\{.*}")){
@@ -56,7 +56,7 @@ public class GrammarReader {
                             symbols.clear();
                             tempSymbol = grammar.empty();
                         }else{
-                            throw new Exception("Found invalid symbol: " + symbolRaw);
+                            throw new Exception("Found invalid symbol: " + symbolRaw + " after " );
                         }
                         symbols.add(tempSymbol);
                     }
