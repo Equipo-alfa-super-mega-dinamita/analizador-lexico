@@ -14,15 +14,16 @@ public class Terminal extends Symbol {
 
     @Override
     public String toString() {
-        return "\nTerminal: {" +
-                "\ntoken=" + expected +
-                "\n,value='" + value + '\'' +
-                "\n}";
+        return "\tTerminal: {" +
+                "token=" + expected +
+                ",value='" + value + '\'' +
+                "}\t";
     }
 
     public Terminal(String s) throws Exception{
 
         this.value = s;
+        this.hasEmpty = false;
         try {
             expected = TokenType.valueOf(s);
         }catch (Exception e){

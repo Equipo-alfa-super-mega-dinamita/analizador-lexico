@@ -1,0 +1,217 @@
+
+RESOURCE : {tk_resource} {tk_id} PAREN INI {tk_end};
+PAREN    : {tk_lparen} {tk_rparen}
+         | ¿;
+GLOBAL: {tk_global} GLOBAL_BODY_ID INI {tk_end} GLOBAL_BODY_END ;
+BODY:   {tk_body} GLOBAL_BODY_ID INI {tk_end} GLOBAL_BODY_END ;
+G_B_TYPE: {tk_global}
+        | {tk_body};
+GLOBAL_BODY_ID: {tk_id}
+              | {tk_file};
+GLOBAL_BODY_END: {tk_id}
+              | ¿;
+//Las formas que una setencia puede tener
+INI: VAR_CONST INI
+   | ASSIGNMENTS INI
+   | Y  INI //operatores unitarios
+   | IMPORT INI
+   | {tk_id} FUNC INI
+   | {tk_stop} INI
+   | {tk_semicolon} INI
+   | IF INI
+   | FOR INI
+   | DO INI
+   | {tk_exit} INI
+   | OPERATOR INI
+   | PROC INI
+   | ¿;
+//Declaracion de variables y constantes
+VAR_CONST : TYPE {tk_id} ARRAY ASSIG CON V_C_END;
+TYPE : {tk_var}
+   | {tk_const};
+//En caso que sea un arreglo [a,...,b]
+ARRAY : {tk_lbracket} ARR_DAT VAL
+     | ¿;
+VAL : {tk_comma} ARR_DAT VAL
+    | {tk_colon} ARR_DAT {tk_rbracket}
+    | {tk_rbracket};
+ARR_DAT : A1;
+//En caso que se haga una asignacion ":="
+ASSIG : B
+     | ¿;
+//En caso que se sigan declarando identificadores
+CON : {tk_comma} {tk_id} ARRAY ASSIG CON
+   | {tk_colon} {tk_id} ARRAY ASSIG CON
+   | ¿;
+//El final de la declaracion
+V_C_END : {tk_colon} DAT SEMICOLON;
+DAT : {tk_int}
+    | {tk_bool}
+    | {tk_real}
+    | {tk_char}
+    | {tk_string} ANY_STRING
+    | {tk_file}
+    | {tk_ptr}
+    | IDENT;
+ANY_STRING : {tk_lbracket} {tk_aster} {tk_rbracket}
+       | ¿;
+SEMICOLON : {tk_semicolon}
+          | ¿;
+
+// Manejo de las asignaciones especiales.
+ASSIGNMENTS :  {tk_id} NEXT_ASS AUG;
+NEXT_ASS : POINT {tk_id} NEXT_ASS
+         | ¿;
+AUG : A
+ | B
+ | C
+ | E
+ | G
+ | I;
+
+//Assignment operators
+//swap
+A : {tk_swap} IDENT;
+// assign
+B  : {tk_assign} CREATE B1 ON;
+B1 : K;
+ON : {tk_on} {tk_id}
+   | ¿;
+CREATE : {tk_create}
+       | ¿;
+// int/real
+C : {tk_aug_plus} D
+  | {tk_aug_minus} D
+  | {tk_aug_expon} D
+  | {tk_aug_div} D
+  | {tk_aug_aster} D;
+D : K;
+
+//Assignment bool or and
+E : {tk_aug_or} F
+  | {tk_aug_and} F;
+F : K;
+
+//Assignment concat
+G : {tk_aug_concat} H;
+H : K;
+
+//Assignment shift
+I : {tk_aug_lshift} J
+  | {tk_aug_rshift} J
+J : K;
+
+//////////Operators
+K : L KP;
+KP : {tk_or} L KP
+   | {tk_xor} L KP
+   | ¿;
+L  : O LP;
+LP :  {tk_and} O LP
+   | ¿;
+
+//real str
+O  : Q OP;
+OP : {tk_le} Q OP
+   | {tk_ge} Q OP
+   | {tk_lt} Q OP
+   | {tk_gt} Q OP
+   | {tk_ne} Q OP
+   | {tk_eq} Q OP
+   | ¿;
+
+//int
+Q  : S QP;
+QP : {tk_rshift} S QP
+   | {tk_lshift} S QP
+   | ¿;
+
+S  : U SP;
+SP : {tk_concat} U SP
+   | ¿;
+
+// int real
+U  : V UP;
+UP : {tk_minus} V UP
+   | {tk_plus} V UP
+   | ¿;
+  
+V  : W VP;
+VP :{tk_mod} W VP
+   | {tk_remdr} W VP
+   | {tk_div} W VP
+   | {tk_aster} W VP
+   | ¿;
+W  : Y {tk_expon} W
+   | Y;
+ ////////////
+Y  : {tk_qmark} Y
+   | {tk_addr} Y
+   | {tk_decr} Y
+   | {tk_incr} Y
+   | {tk_minus} Y
+   | {tk_plus}  Y
+   | {tk_not} Y
+   | Z;
+Z  : A1 ZP;
+ZP : {tk_hat} ZP;
+   | {tk_decr} ZP
+   | {tk_incr} ZP
+   | ¿;
+
+A1 : IDENT
+   | {tk_num_int_oct}
+   | {tk_num_int_dec}
+   | {tk_num_int_hex}
+   | {tk_true}
+   | {tk_false}
+   | {tk_cadena}
+   | {tk_caracter}
+   | {tk_num_real}
+   | {tk_lparem} K {tk_rparem};
+
+//Identificadores dado que puede ser id1.id2.id3.fun()
+IDENT      : {tk_id} NEXT_IDENT;
+NEXT_IDENT : {tk_period} {tk_id} NEXT_IDENT
+           | FUNC
+           | ANY_STRING
+           | ¿;
+//se toma que se tiene un identidicador o palabra reservada y lo siguiente solo se encarga del parentesis (a,...,b)
+//Funciones
+FUNC       : {tk_lparen} FUNC_POS NEXT_F;
+NEXT_F     : {tk_comma} FUNC_POS NEXT_F
+           | {tk_lparen};
+FUNC_POS   : K
+           | VAR_CONST
+           | {tk_id} FUNC_N;
+FUNC_N     : FUNC
+           | {tk_colon} DAT SEMICOLON;
+
+//Import
+IMPORT     : {tk_import} {tk_id} NEXT_IMPORT;
+NEXT_IMPORT: POINT {tk_id}  NEXT_IMPORT
+           | COMMA {tk_id} NEXT_IMPORT
+           | ¿;
+POINT: {tk_period};
+COMMA: {tk_comma};
+//IF
+IF: {tk_if} K {tk_arrow} INI ELSE {tk_fi};
+ELSE: {tk_square} NEXT_ELSE
+    | ¿;
+NEXT_ELSE: {tk_else} {tk_arrow} INI
+         | K {tk_arrow} INI NEXT_ELSE;
+//FOR
+FOR: {tk_fa} {tk_id} B {tk_to} A1 {tk_arrow} INI {tk_af};
+//DO
+DO: {tk_do} K {tk_arrow} INI {tk_od};
+OPERATOR: {tk_id} N_OPERA NE_OPERA;
+N_OPERA: FUNC
+       | {tk_colon} {tk_id};
+NE_OPERA: {tk_returns} {tk_id} {tk_colon} DAT
+       | ¿;
+//PROC
+PROC: {tk_proc} {tk_id} {tk_lparen} PAR_FUN {tk_rparen} INI {tk_end};
+PAR_FUN:  {tk_id} N_PAR_FUN
+       | ¿;
+N_PAR_FUN: {tk_comma} {tk_id} N_PAR_FUN
+         | ¿;

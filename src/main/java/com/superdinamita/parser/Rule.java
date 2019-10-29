@@ -11,8 +11,8 @@ public class Rule {
     @Override
     public String toString() {
         String string =
-         "\nRule:{" +
-        "\nsymbols= [";
+         "Rule:\n{" +
+        "symbols= [";
         for ( Symbol symbol:
             symbols) {
             string+= "\n\t" + symbol.value +":"+symbol.getClass().toString();
@@ -22,6 +22,8 @@ public class Rule {
     }
 
     public final List<Symbol> symbols;
+    //public
+
 
     public Rule(List<Symbol> symbols) throws Exception {
 
@@ -30,13 +32,10 @@ public class Rule {
 
     }
 
-    boolean contains(Token token) {
+    boolean contains(TokenType token) {
         //TODO Acá se verifica si es parte del conjunto de predicción.
         return false;
     }
 
 
-    public HashSet<TokenType> firsts() {
-        return PredictionSet.firsts(symbols);
-    }
 }

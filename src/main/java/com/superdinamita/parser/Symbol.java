@@ -11,9 +11,11 @@ import java.util.Set;
 
 public abstract class Symbol {
 
-    String value;
+     String value;
+     boolean hasEmpty;
+     abstract void eval(SyntaxAnalizer g) throws Exception;
 
-    abstract void eval(SyntaxAnalizer g) throws Exception;
+
     /*public Symbol(String s)  {
 
         if(s.matches("[A-Za-z][A-Za-z0-9]*")){ //Formato propio de nuestra sintaxis de gramáticas.
@@ -48,7 +50,7 @@ public abstract class Symbol {
                 return "this shouldn't happen D:";
             case tk_id:
                 return "identifier";
-            case tk_eof:
+            case EOF:
                 return "end of file";
             case tk_cadena:
                 return "string";
