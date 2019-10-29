@@ -215,4 +215,4 @@ PAR_FUN:  {tk_id} N_PAR_FUN
        | ¿;
 
 N_PAR_FUN: {tk_comma} {tk_id} N_PAR_FUN
-         | ¿;
+         | ¿ ;
