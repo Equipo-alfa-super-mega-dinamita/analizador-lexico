@@ -38,6 +38,8 @@ public class Terminal extends Symbol {
         if(received.type != this.expected){
             throw new Exception("<"+received.row+","+received.column+"> Error sintactico: se encontro: "+received.lexeme
                     +"; Se esperaba: "+ Symbol.mapTypeToExpected((this.expected)));
+        }else{
+            syntaxAnalizer.nextToken();
         }
     }
 
