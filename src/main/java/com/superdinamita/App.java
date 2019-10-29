@@ -11,20 +11,6 @@ import java.awt.*;
 
 public class App {
     public static void main(String[] args) {
-
-
-         /*LexicalAnalyzer lexer = new LexicalAnalyzer("data/3.txt");
-        Token myToken = lexer.nextToken();
-        while (myToken.type != TokenType.tk_eof     {
-            if (myToken.type == TokenType.ERROR) {
-                break;
-            }
-        System.out.println(myToken);
-        myToken = lexer.nextToken();
-        }
-        System.out.println(myToken);*/
-
-
         try {
             GrammarReader gr = new GrammarReader("grammar/grammar.txt");
             /*SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);

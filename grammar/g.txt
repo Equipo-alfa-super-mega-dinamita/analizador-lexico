@@ -1,4 +1,4 @@
-
+;
 RESOURCE : {tk_resource} {tk_id} PAREN INI {tk_end};
 PAREN    : {tk_lparen} {tk_rparen}
          | ¿;
@@ -154,7 +154,7 @@ Y  : {tk_qmark} Y
    | {tk_not} Y
    | Z;
 Z  : A1 ZP;
-ZP : {tk_hat} ZP;
+ZP : {tk_hat} ZP
    | {tk_decr} ZP
    | {tk_incr} ZP
    | ¿;
@@ -168,7 +168,7 @@ A1 : IDENT
    | {tk_cadena}
    | {tk_caracter}
    | {tk_num_real}
-   | {tk_lparem} K {tk_rparem};
+   | {tk_lparen} K {tk_rparen};
 
 //Identificadores dado que puede ser id1.id2.id3.fun()
 IDENT      : {tk_id} NEXT_IDENT;
@@ -213,5 +213,6 @@ NE_OPERA: {tk_returns} {tk_id} {tk_colon} DAT
 PROC: {tk_proc} {tk_id} {tk_lparen} PAR_FUN {tk_rparen} INI {tk_end};
 PAR_FUN:  {tk_id} N_PAR_FUN
        | ¿;
+
 N_PAR_FUN: {tk_comma} {tk_id} N_PAR_FUN
          | ¿;
