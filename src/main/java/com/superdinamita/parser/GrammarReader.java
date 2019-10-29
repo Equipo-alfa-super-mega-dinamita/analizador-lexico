@@ -54,7 +54,7 @@ public class GrammarReader {
                             tempSymbol = new Terminal(symbolRaw.substring(1, symbolRaw.length() - 1).trim());
                         }else if(symbolRaw.matches("¿")){
                             symbols.clear();
-                            tempSymbol = grammar.empty();
+                            tempSymbol = Grammar.empty();
                         }else{
                             throw new Exception("Found invalid symbol: " + symbolRaw + " after " );
                         }
@@ -63,7 +63,7 @@ public class GrammarReader {
                     grammar.addRule(variable,new Rule(symbols));
                 }
             }
-            System.out.println(grammar);
+            grammar.generatePredictionSets();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error: Open File");

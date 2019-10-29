@@ -40,7 +40,7 @@ public class Variable extends Symbol {
 
         for (TokenType token : tokensSet) {
             if(this.predictionSet.containsKey(token)){
-                String message = "Se ha detectado que el token " + token + " mapea a dos reglas distintas."
+                String message = value + ": Se ha detectado que el token " + token + " mapea a dos reglas distintas."
                  + "Las reglas " + rule + " y " + predictionSet.get(token);
                 throw new Exception(message);
             }

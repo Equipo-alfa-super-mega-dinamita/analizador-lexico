@@ -19,6 +19,7 @@ public class Grammar {
     }
 
     void addRule(String variableName, Rule rule ) {
+        if(initialVariable == null) initialVariable = getVariable(variableName);
         getVariable(variableName).addRule(rule);
     }
 

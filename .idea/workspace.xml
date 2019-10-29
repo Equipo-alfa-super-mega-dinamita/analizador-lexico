@@ -4,11 +4,8 @@
     <list default="true" id="c5e4054d-7a6a-4db7-9ec5-1d9cacb6b16a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grammar/g.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/g.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Grammar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Grammar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/GrammarReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/GrammarReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/PredictionSet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Rule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Variable.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

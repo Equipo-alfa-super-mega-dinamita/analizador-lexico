@@ -38,7 +38,9 @@ VAL : {tk_comma} ARR_DAT VAL
     | {tk_rbracket};
 ARR_DAT : A1
 ;
-//En caso que se haga una asignacion ":="
+//En caso que se haga una asignacion "dospuntos="
+
+
 ASSIG : B
      | ¿;
 //En caso que se sigan declarando identificadores
@@ -101,6 +103,7 @@ H : K;
 //Assignment shift
 I : {tk_aug_lshift} J
   | {tk_aug_rshift} J
+  ;
 J : K;
 
 //////////Operators
