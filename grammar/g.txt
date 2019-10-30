@@ -193,7 +193,7 @@ NEXT_IDENT : {tk_period} {tk_id} NEXT_IDENT
 //Funciones
 FUNC       : {tk_lparen} FUNC_POS NEXT_F;
 NEXT_F     : {tk_comma} FUNC_POS NEXT_F
-           | {tk_lparen};
+           | {tk_rparen};
 FUNC_POS   : K
            | VAR_CONST
            | {tk_id} FUNC_N;
