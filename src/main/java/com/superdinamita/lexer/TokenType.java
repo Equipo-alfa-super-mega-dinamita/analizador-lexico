@@ -13,6 +13,7 @@ public enum TokenType {
     EOF,
     tk_cadena,
     tk_caracter,
+    tk_suchthat,
     //Reserved words
     tk_P,
     tk_V,
