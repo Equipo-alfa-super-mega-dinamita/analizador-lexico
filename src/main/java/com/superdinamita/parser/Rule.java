@@ -5,9 +5,9 @@ public class Rule {
 
     @Override
     public String toString() {
-        String string ="Rule:\n{" + "symbols= [";
-        for ( Symbol symbol: symbols) string+= "\n\t" + symbol.value +":"+symbol.getClass().toString();
-        return string + "\n]}";
+        String string ="\nRule:{" + "symbols= [";
+        for ( Symbol symbol: symbols) string+= symbol.value +  "\t";
+        return string + "]}";
     }
 
     public final List<Symbol> symbols;
