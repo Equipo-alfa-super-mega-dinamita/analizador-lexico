@@ -36,13 +36,13 @@ public class GrammarReader {
 
                 String[] rules = parts[1].split("\\|");
                 //Para cada regla de la variable ---
-                System.out.println(" -----Variable: " + variable + " -----");
+                //System.out.println(" -----Variable: " + variable + " -----");
                 for (int i = 0; i < rules.length; i++) {
                     String ruleString = rules[i];
                     ruleString = ruleString.trim(); //Eliminar espacios
-                    System.out.println("-rule:" + ruleString + ";");
-                    String[] symbolsRaw = ruleString.split(" ");
-                    System.out.println("-Symbols:" + Arrays.toString(symbolsRaw));
+                    //System.out.println("-rule:" + ruleString + ";");
+                    String[] symbolsRaw = ruleString.split("[ \t]+");
+                    //System.out.println("-Symbols:" + Arrays.toString(symbolsRaw));
                     LinkedList<Symbol> symbols = new LinkedList<>();
                     //Para cada simbolo de la regla ---
                     for (String symbolRaw : symbolsRaw) {
@@ -64,7 +64,7 @@ public class GrammarReader {
                 }
             }
             grammar.generatePredictionSets();
-            System.out.println(grammar);
+            System.out.println("GRAMMAR: " + grammar);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error: Open File");

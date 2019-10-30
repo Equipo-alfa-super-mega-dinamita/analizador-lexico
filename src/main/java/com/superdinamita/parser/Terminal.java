@@ -22,7 +22,7 @@ public class Terminal extends Symbol {
 
     public Terminal(String s) throws Exception{
 
-        this.value = s;
+        this.value = "{" + s + "}";
         this.hasEmpty = false;
         try {
             expected = TokenType.valueOf(s);

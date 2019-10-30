@@ -4,6 +4,7 @@ import com.superdinamita.lexer.TokenType;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 public class Grammar {
 
@@ -27,8 +28,9 @@ public class Grammar {
     @Override
     public String toString() {
         return "\nGrammar: {" +
-                "\nsymbols=" + variables +
-                ",\nstartSymbol=" + initialVariable +
+                "\nstartSymbol=" + initialVariable +
+                ",\nsymbols=" + variables +
+
                 '}';
     }
 
@@ -62,13 +64,15 @@ public class Grammar {
         }*/
         generateFirsts();
         generateFollows();
+        System.out.println("----------------Conjuntos de predicción--------");
         for(Variable variable: variables.values()){
-            //System.out.println(variable.value);
-            //System.out.println(variable.firsts);
-            //System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
-            //System.out.println(variable.follows);
-            //System.out.println();
-            HashSet<TokenType> set, firsts, follows;
+            System.out.println("\n-------------------------------VARIABLE----------------------------------------");
+            System.out.println(variable.value);
+            System.out.println(variable.firsts);
+            System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
+            System.out.println(variable.follows);
+            System.out.println();
+            HashSet<TokenType> set, firsts;
             for(Rule rule :variable.rules){
                 set = new HashSet<>();
                 firsts = Variable.firsts(rule.symbols);
@@ -79,7 +83,18 @@ public class Grammar {
                 set.addAll(firsts);
                 variable.mapRule(set, rule);
             }
-            //System.out.println(variable.predictionSet);
+            System.out.println("Prediction set");
+            for ( TokenType tokenType : variable.predictionSet.keySet()){
+                System.out.println("TOKEN: " + tokenType);
+                for(Symbol s : variable.predictionSet.get(tokenType).symbols){
+                    System.out.print(s.value);
+                }
+                System.out.println();
+            }
+
+
+
+
         }
 
 

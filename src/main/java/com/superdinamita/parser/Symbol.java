@@ -34,9 +34,10 @@ public abstract class Symbol {
         //<{linea},{col}> Error sintactico:
         // se encontro: {lexema del token encontrado};
         // se esperaba: {lista de símbolos/tokens esperados separados por comas.}
-        System.out.println(variable);
+        System.out.println("ERROR EN VARIABLE: "+ variable);
         String expectedTokens = "";
         Token received = syntaxAnalizer.token();
+        if( variable.predictionSet.keySet().isEmpty() ) throw new Exception("No se esperaba ningún token, pero se encontró " + received);
         for (TokenType expected : variable.predictionSet.keySet()) {
             expectedTokens+=expected.toString()+", ";
         }

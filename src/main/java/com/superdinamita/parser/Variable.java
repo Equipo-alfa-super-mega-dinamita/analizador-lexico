@@ -58,8 +58,8 @@ public class Variable extends Symbol {
     @Override
     public String toString() {
         return "\tVariable: {" +
-                "rules=" + rules +
                 "value='" + value + '\'' +
+                "rules=" + rules +
                 "}\t";
     }
 
