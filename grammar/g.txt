@@ -39,7 +39,7 @@ SOMETHING: VAR_CONST SOMETHING
 //==================================================
 //optype
 OPTYPE: {tk_optype} OPERATOR;
-TK_TYPE: {tk_type} {tk_id} {tk_eq} {tk_id} FUNC;
+TK_TYPE: {tk_type} {tk_id} {tk_eq} {tk_id} PAREN;
 EXTEND: {tk_extend} {tk_id} NEXT_IMPORT_EX;
 EMP_IDENT: IDENT
          | ¿;
@@ -176,7 +176,7 @@ J : K;
 CALL: {tk_call} {tk_id} PRO_NEXT FUNC;
 PRO_NEXT: {tk_period} {tk_id} PRO_NEXT
              | ¿;
-SEND: {tk_send} {tk_id} PRO_NEXT FUNC;
+SEND: {tk_send} {tk_id} PRO_NEXT PAREN;
 
 CALL_OR_SEND: {tk_lbrace} CALL_SEND {tk_rbrace}
             | ¿;
