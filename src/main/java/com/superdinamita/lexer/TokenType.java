@@ -97,6 +97,7 @@ public enum TokenType {
     tk_var,
     tk_vm,
     tk_write,
+    tk_when, //en duda
     tk_xor,
     //Symbols
     tk_semicolon,

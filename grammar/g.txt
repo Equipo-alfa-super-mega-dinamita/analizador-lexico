@@ -23,6 +23,9 @@ INI: VAR_CONST INI
    | {tk_exit} INI
    | OPERATOR INI
    | PROC INI
+   | OPTYPE
+   | TK_TYPE
+   | EXTEND
    | ¿
    ;
 
@@ -77,12 +80,14 @@ AUG : A
 //swap
 A : {tk_swap} IDENT;
 // assign
-B  : {tk_assign} CREATE B1 ON;
+B  : {tk_assign} CREATE WHEN B1 CALL_SEND EMP_IDENT ON;
 B1 : K;
 ON : {tk_on} {tk_id}
    | ¿;
 CREATE : {tk_create}
        | ¿;
+WHEN : {tk_when}
+     | ¿;
 // int/real
 C : {tk_aug_plus} D
   | {tk_aug_minus} D
@@ -193,10 +198,10 @@ FUNC_N     : FUNC
            | {tk_colon} DAT SEMICOLON;
 
 //Import
-IMPORT     : {tk_import} {tk_id} NEXT_IMPORT;
-NEXT_IMPORT: POINT {tk_id}  NEXT_IMPORT
-           | COMMA {tk_id} NEXT_IMPORT
-           | ¿;
+IMPORT     : {tk_import} {tk_id} NEXT_IMPORT_EX;
+NEXT_IMPORT_EX: POINT {tk_id}  NEXT_IMPORT_EX
+              | COMMA {tk_id} NEXT_IMPORT_EX
+              | ¿;
 POINT: {tk_period};
 COMMA: {tk_comma};
 //IF
@@ -209,9 +214,10 @@ NEXT_ELSE: {tk_else} {tk_arrow} INI
 FOR: {tk_fa} {tk_id} B {tk_to} A1 {tk_arrow} INI {tk_af};
 //DO
 DO: {tk_do} K {tk_arrow} INI {tk_od};
+//Operator
 OPERATOR: {tk_id} N_OPERA NE_OPERA;
 N_OPERA: FUNC
-       | {tk_colon} {tk_id};
+       | {tk_colon} {tk_id} N_OPERA;
 NE_OPERA: {tk_returns} {tk_id} {tk_colon} DAT
        | ¿;
 //PROC
@@ -220,4 +226,32 @@ PAR_FUN:  {tk_id} N_PAR_FUN
        | ¿;
 
 N_PAR_FUN: {tk_comma} {tk_id} N_PAR_FUN
+         | ¿;
+//Call y send
+CALL: {tk_call} {tk_id} PRO_NEXT FUNC;
+PRO_NEXT: {tk_period} {tk_id} PRO_NEXT
+             | ¿;
+SEND: {tk_send} {{tk_id} SEND_PRO_NEXT FUNC;
+
+CALL_OR_SEND: {tk_lbrace} CALL_SEND {tk_rbrace}
+            | ¿;
+CALL_SEND: {tk_send}
+         | {tk_call}
+         | ¿;
+//OP
+TK_OP: {tk_op} {tk_id} PRO_NEXT FUNC CALL_SEND;
+//write
+WRITE: {tk_write} FUNC;
+//in
+IN: {tk_in} {tk_id} FUNC R_WORD {tk_arrow} INI MORE_IN {tk_ni};
+R_WORD: {tk_and} K
+      | {tk_by} IDENT
+      | ¿;
+MORE_IN: {tk_square} IDENT {tk_arrow} INI MORE_IN
+       | ¿;
+//optype
+OPTYPE: {tk_optype} OPERATOR;
+TK_TYPE: tk_type {tk_id} {tk_eq} {tk_id} FUNC
+EXTEND: {tk_extend} {tk_id} NEXT_IMPORT_EX;
+EMP_IDENT: IDENT
          | ¿;
