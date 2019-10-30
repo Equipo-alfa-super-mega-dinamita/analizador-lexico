@@ -810,7 +810,7 @@ end_id:
 
 id_opt:
         ¿
-    |   TK_ID
+    |   {tk_id}
     ;
 
 id_ls:
@@ -819,8 +819,8 @@ id_ls:
     ;
 
 id_lp:
-        TK_ID
-    |   id_lp {tk_comma} TK_ID
+        {tk_id}
+    |   id_lp {tk_comma} {tk_id}
     ;
 
 id_subs: {tk_id} id_subs_P;
@@ -828,8 +828,8 @@ id_subs_P: ¿
          |subscripts;
 
 id_subs:
-        TK_ID
-    |   TK_ID subscripts
+        {tk_id}
+    |   {tk_id} subscripts
     ;
 
 subscripts:
