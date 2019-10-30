@@ -184,7 +184,7 @@ CALL_SEND: {tk_send}
 IDENT      : {tk_id} NEXT_IDENT;
 NEXT_IDENT : {tk_period} {tk_id} NEXT_IDENT
            | PAREN
-           | ANY_STRING
+           | {tk_lbracket} {tk_aster} {tk_rbracket}
            | ¿;
 //se toma que se tiene un identidicador o palabra reservada y lo siguiente solo se encarga del parentesis (a,...,b)
 //paren
