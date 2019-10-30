@@ -67,6 +67,7 @@ public class Grammar {
         System.out.println("----------------Conjuntos de predicción--------");
         for(Variable variable: variables.values()){
             System.out.println("\n-------------------------------VARIABLE----------------------------------------");
+            System.out.println(variable);
             System.out.println(variable.value);
             System.out.println(variable.firsts);
             System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
