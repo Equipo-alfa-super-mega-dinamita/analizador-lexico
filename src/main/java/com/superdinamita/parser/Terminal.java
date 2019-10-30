@@ -10,20 +10,20 @@ import java.util.Set;
 
 public class Terminal extends Symbol {
 
-    TokenType expected;
+    private TokenType expected;
 
     @Override
     public String toString() {
         return "\tTerminal: {" +
                 "token=" + expected +
-                ",value='" + value + '\'' +
+                ",value='" + value() + '\'' +
                 "}\t";
     }
 
-    public Terminal(String s) throws Exception{
+    Terminal(String s) throws Exception{
 
-        this.value = "{" + s + "}";
-        this.hasEmpty = false;
+        this.setValue("{" + s + "}");
+        this.setHasEmpty(false);
         try {
             expected = TokenType.valueOf(s);
         }catch (Exception e){

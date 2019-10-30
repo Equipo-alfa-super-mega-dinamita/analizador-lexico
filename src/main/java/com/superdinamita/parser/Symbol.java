@@ -4,43 +4,57 @@ package com.superdinamita.parser;
 import com.superdinamita.lexer.Token;
 import com.superdinamita.lexer.TokenType;
 
-import java.util.List;
 import java.util.Set;
 
 
 
 public abstract class Symbol {
 
-     String value;
-     boolean hasEmpty;
+     private String value;
+     private boolean hasEmpty;
      abstract void eval(SyntaxAnalizer g) throws Exception;
 
+    String value() {
+        return value;
+    }
+
+    void setValue(String value) {
+        this.value = value;
+    }
+
+    boolean hasEmpty() {
+        return hasEmpty;
+    }
+
+    void setHasEmpty(boolean hasEmpty) {
+        this.hasEmpty = hasEmpty;
+    }
 
     /*public Symbol(String s)  {
 
-        if(s.matches("[A-Za-z][A-Za-z0-9]*")){ //Formato propio de nuestra sintaxis de gramáticas.
-            value = s;
-        }
-        else if ( s.matches(  "\\{(.*)}")  ){
-            value = s.substring(1, s.length() -1).trim();
-        }
-        else if (s.equals("?")) {
-            value = ;
-        }
-    }*/
+            if(s.matches("[A-Za-z][A-Za-z0-9]*")){ //Formato propio de nuestra sintaxis de gramáticas.
+                value = s;
+            }
+            else if ( s.matches(  "\\{(.*)}")  ){
+                value = s.substring(1, s.length() -1).trim();
+            }
+            else if (s.equals("?")) {
+                value = ;
+            }
+        }*/
      public abstract Set<TokenType> firsts();
 
-    public void syntaxError(Variable variable, SyntaxAnalizer syntaxAnalizer) throws Exception {
+    void syntaxError(Variable variable, SyntaxAnalizer syntaxAnalizer) throws Exception {
         //<{linea},{col}> Error sintactico:
         // se encontro: {lexema del token encontrado};
         // se esperaba: {lista de símbolos/tokens esperados separados por comas.}
         System.out.println("ERROR EN VARIABLE: "+ variable);
-        String expectedTokens = "";
+        StringBuilder expectedTokens = new StringBuilder();
         Token received = syntaxAnalizer.token();
-        if( variable.predictionSet.keySet().isEmpty() ) throw new Exception("No se esperaba ningún token, pero se encontró " + received);
-        for (TokenType expected : variable.predictionSet.keySet()) {
+        if( variable.predictionSet().keySet().isEmpty() ) throw new Exception("No se esperaba ningún token, pero se encontró " + received);
+        for (TokenType expected : variable.predictionSet().keySet()) {
             //expectedTokens+=mapTypeToExpected(expected)+", ";
-            expectedTokens+=expected.toString()+", ";
+            expectedTokens.append(expected.toString()).append(", ");
         }
         throw new Exception("<" + (received.row+1) + "," + received.column + "> Error sintactico: se encontro: " + received.type
                 + "; Se esperaba: " + expectedTokens);
@@ -336,44 +350,3 @@ public abstract class Symbol {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-    /*public Symbol(String s)  {
-
-        if(s.matches("[A-Za-z][A-Za-z0-9]*")){ //Formato propio de nuestra sintaxis de gramáticas.
-            value = s;
-        }
-        else if ( s.matches(  "\\{(.*)}")  ){
-            value = s.substring(1, s.length() -1).trim();
-        }
-        else if (s.equals("?")) {
-            value = ;
-        }
-    }*/
-
-
-/*
-
-Pseudo codigo
-        if( this.type == terminal ) {
-            //////// emparejar(token);
-            //if(!this.soyvacio) nuevotoken;
-        }
-        else if( this.type == variable){
-
-            //evaluar error si nunguna regla tiene.
-        }
-*/
-
-/*
-    void emparejar(TokenType t){
-
-    }*/

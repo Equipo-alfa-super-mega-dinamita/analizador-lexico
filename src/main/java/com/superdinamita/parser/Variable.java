@@ -1,6 +1,5 @@
 package com.superdinamita.parser;
 
-import com.superdinamita.lexer.Token;
 import com.superdinamita.lexer.TokenType;
 
 import java.util.*;
@@ -9,20 +8,20 @@ public class Variable extends Symbol {
 
 
     List<Rule> rules;
-    public HashMap<TokenType, Rule> predictionSet;
-    HashSet<TokenType> firsts;
-    HashSet<TokenType> follows;
-    Grammar grammar;
+    private HashMap<TokenType, Rule> predictionSet;
+    private HashSet<TokenType> firsts;
+    private HashSet<TokenType> follows;
+    private Grammar grammar;
 
 
 
     public Variable(String s, Grammar grammar) {
-        this.value = s;
+        this.setValue(s);
         this.rules = new LinkedList<>();
         this.firsts = new HashSet<>();
         this.follows = new HashSet<>();
         this.grammar = grammar;
-        this.hasEmpty = false;
+        this.setHasEmpty(false);
         this.predictionSet = new HashMap<>();
 
     }
@@ -31,20 +30,23 @@ public class Variable extends Symbol {
     void eval(SyntaxAnalizer g) throws Exception {
         if (!predictionSet.containsKey(g.token().type)) syntaxError(this, g);
         Rule rule = predictionSet.get(g.token().type);
-        for (Symbol s : rule.symbols) {
+        for (Symbol s : rule.symbols()) {
             s.eval(g);
         }
     }
 
-    public void mapRule( Set<TokenType> tokensSet, Rule rule ) throws Exception{
+    void mapRule(Set<TokenType> tokensSet, Rule rule) {
 
         for (TokenType token : tokensSet) {
-            if(this.predictionSet.containsKey(token)){
-                String message = value + ": Se ha detectado que el token " + token + " mapea a dos reglas distintas."
+
+            if(this.predictionSet.containsKey(token) && this.predictionSet.get(token) != rule){
+
+                String message = value() + ": Se ha detectado que el token " + token + " mapea a dos reglas distintas.\n"
                  + "Las reglas " + rule + " y " + predictionSet.get(token);
                 System.out.println(message);
-            }
-            this.predictionSet.put(token, rule);
+
+
+            } else this.predictionSet.put(token, rule);
         }
     }
 
@@ -54,32 +56,40 @@ public class Variable extends Symbol {
         return firsts;
     }
 
+    Set<TokenType> follows() {
+        return follows;
+    }
+
+    HashMap<TokenType, Rule> predictionSet(){
+        return predictionSet;
+    }
+
 
     @Override
     public String toString() {
         return "\n\nVariable: {" +
-                "value='" + value + '\'' +
+                "value='" + value() + '\'' +
                 "rules=" + rules +
                 "}\t";
     }
 
-    public void addRule(Rule rule) {
+    void addRule(Rule rule) {
         this.rules.add(rule);
     }
 
-    public boolean createFirsts() {
+    boolean createFirsts() {
         boolean changed = false;
         Symbol symbol;
         int initialSize = this.firsts.size();
         for (Rule rule : rules) {
             //int i = rule.symbols.size() - 1; i >= 0; i--
-            int n = rule.symbols.size();
+            int n = rule.symbols().size();
             for (int i = 0; i < n; i++) {
-                symbol = rule.symbols.get(i);
+                symbol = rule.symbols().get(i);
                 this.firsts.addAll(symbol.firsts());
-                if (symbol.hasEmpty) {
+                if (symbol.hasEmpty()) {
                     if (n - i == 1) { // ¿NO es el ultimo?
-                        this.hasEmpty = true;
+                        this.setHasEmpty(true);
                         break;
                     } //Else continue the loop
                 } else break;
@@ -89,18 +99,18 @@ public class Variable extends Symbol {
         return changed;
     }
 
-    public boolean createNexts() {
+    boolean createNexts() {
 
         boolean changed = false;
         Symbol symbol;
 
         for (Rule rule : rules) {
-            int n = rule.symbols.size();
+            int n = rule.symbols().size();
             for (int i = 0; i < n; i++) { //For each symbol...
-                symbol = rule.symbols.get(i);
+                symbol = rule.symbols().get(i);
                 if(symbol instanceof Variable){
                     Variable variable = (Variable) symbol; //A
-                    HashSet<TokenType> subFirsts = Variable.firsts(rule.symbols.subList(i + 1, n));  //Beta
+                    HashSet<TokenType> subFirsts = Variable.firsts(rule.symbols().subList(i + 1, n));  //Beta
                     int initialSize = variable.follows.size();
                     variable.follows.addAll(subFirsts);
                     if (subFirsts.contains(TokenType.EPSILON)) {
@@ -116,7 +126,7 @@ public class Variable extends Symbol {
     }
 
 
-    public static HashSet<TokenType> firsts(List<Symbol> symbols){
+    static HashSet<TokenType> firsts(List<Symbol> symbols){
         HashSet<TokenType> temp = new HashSet<>();
         Symbol s;
         int n = symbols.size();
@@ -124,7 +134,7 @@ public class Variable extends Symbol {
         for (int i = 0; i < n; i++) { //For each symbol
             s = symbols.get(i);
             temp.addAll(s.firsts());
-            if(s.hasEmpty) {
+            if(s.hasEmpty()) {
                 if (n - i == 1) { // ¿es el ultimo?
                     temp.add(TokenType.EPSILON);
                     break;
