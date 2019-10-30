@@ -30,16 +30,17 @@ public abstract class Symbol {
     }*/
      public abstract Set<TokenType> firsts();
 
-    public void syntaxError(List<Rule> reglasEsperadas, SyntaxAnalizer syntaxAnalizer) throws Exception {
+    public void syntaxError(Variable variable, SyntaxAnalizer syntaxAnalizer) throws Exception {
         //<{linea},{col}> Error sintactico:
         // se encontro: {lexema del token encontrado};
         // se esperaba: {lista de símbolos/tokens esperados separados por comas.}
+        System.out.println(variable);
         String expectedTokens = "";
         Token received = syntaxAnalizer.token();
-        for (Rule rule : reglasEsperadas) {
-            //TODO Concatenar conjuntos de prediccion a expectedTokens convertidos
+        for (TokenType expected : variable.predictionSet.keySet()) {
+            expectedTokens+=expected.toString()+", ";
         }
-        throw new Exception("<" + received.row + "," + received.column + "> Error sintactico: se encontro: " + received.lexeme
+        throw new Exception("<" + (received.row+1) + "," + received.column + "> Error sintactico: se encontro: " + received.lexeme
                 + "; Se esperaba: " + expectedTokens);
 
     }

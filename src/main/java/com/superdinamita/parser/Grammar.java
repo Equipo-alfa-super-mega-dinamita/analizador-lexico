@@ -63,11 +63,11 @@ public class Grammar {
         generateFirsts();
         generateFollows();
         for(Variable variable: variables.values()){
-            System.out.println(variable.value);
-            System.out.println(variable.firsts);
-            System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
-            System.out.println(variable.follows);
-            System.out.println();
+            //System.out.println(variable.value);
+            //System.out.println(variable.firsts);
+            //System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
+            //System.out.println(variable.follows);
+            //System.out.println();
             HashSet<TokenType> set, firsts, follows;
             for(Rule rule :variable.rules){
                 set = new HashSet<>();
@@ -79,7 +79,7 @@ public class Grammar {
                 set.addAll(firsts);
                 variable.mapRule(set, rule);
             }
-            System.out.println(variable.predictionSet);
+            //System.out.println(variable.predictionSet);
         }
 
 

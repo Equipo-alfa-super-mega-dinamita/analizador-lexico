@@ -9,7 +9,7 @@ public class Variable extends Symbol {
 
 
     List<Rule> rules;
-    HashMap<TokenType, Rule> predictionSet;
+    public HashMap<TokenType, Rule> predictionSet;
     HashSet<TokenType> firsts;
     HashSet<TokenType> follows;
     Grammar grammar;
@@ -29,7 +29,7 @@ public class Variable extends Symbol {
 
     @Override
     void eval(SyntaxAnalizer g) throws Exception {
-        if (!predictionSet.containsKey(g.token().type)) syntaxError(rules, g);
+        if (!predictionSet.containsKey(g.token().type)) syntaxError(this, g);
         Rule rule = predictionSet.get(g.token().type);
         for (Symbol s : rule.symbols) {
             s.eval(g);
@@ -58,7 +58,7 @@ public class Variable extends Symbol {
     @Override
     public String toString() {
         return "\tVariable: {" +
-                //"rules=" + rules +
+                "rules=" + rules +
                 "value='" + value + '\'' +
                 "}\t";
     }

@@ -64,6 +64,7 @@ public class GrammarReader {
                 }
             }
             grammar.generatePredictionSets();
+            System.out.println(grammar);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error: Open File");
