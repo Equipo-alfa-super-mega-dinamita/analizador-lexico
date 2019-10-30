@@ -1,34 +1,94 @@
-RESOURCE : {tk_resource} {tk_id} PAREN INI {tk_end};
+START: RESOURCE START
+     | GLOBAL START
+     | BODY START;
+//RESOURCE GLOBAL BODY
+RESOURCE : {tk_resource} {tk_id} PAREN SOMETHING {tk_end};
 PAREN    : {tk_lparen} {tk_rparen}
          | ¿;
-GLOBAL: {tk_global} GLOBAL_BODY_ID INI {tk_end} GLOBAL_BODY_END ;
-BODY:   {tk_body} GLOBAL_BODY_ID INI {tk_end} GLOBAL_BODY_END ;
+GLOBAL: {tk_global} GLOBAL_BODY_ID SOMETHING {tk_end} GLOBAL_BODY_END ;
+BODY:   {tk_body} GLOBAL_BODY_ID SOMETHING {tk_end} GLOBAL_BODY_END ;
 G_B_TYPE: {tk_global}
         | {tk_body};
 GLOBAL_BODY_ID: {tk_id}
               | {tk_file};
 GLOBAL_BODY_END: {tk_id}
               | ¿;
+//========================================
 //Las formas que una setencia puede tener
-INI: VAR_CONST INI
-   | ASSIGNMENTS INI
-   | Y  INI
-   | IMPORT INI
-   | {tk_id} FUNC INI
-   | {tk_stop} INI
-   | {tk_semicolon} INI
-   | IF INI
-   | FOR INI
-   | DO INI
-   | {tk_exit} INI
-   | OPERATOR INI
-   | PROC INI
-   | OPTYPE
-   | TK_TYPE
-   | EXTEND
+SOMETHING: VAR_CONST SOMETHING
+   | ASSIGNMENTS SOMETHING
+   | Y  SOMETHING
+   | IMPORT SOMETHING
+   | {tk_id} FUNC SOMETHING
+   | {tk_stop} SOMETHING
+   | {tk_semicolon} SOMETHING
+   | IF SOMETHING
+   | FOR SOMETHING
+   | DO SOMETHING
+   | {tk_exit} SOMETHING
+   | OPERATOR SOMETHING
+   | PROC SOMETHING
+   | OPTYPE SOMETHING
+   | TK_TYPE SOMETHING
+   | EXTEND SOMETHING
+   | IN SOMETHING
+   | WRITE SOMETHING
    | ¿
    ;
+//==================================================
+//optype
+OPTYPE: {tk_optype} OPERATOR;
+TK_TYPE: tk_type {tk_id} {tk_eq} {tk_id} FUNC
+EXTEND: {tk_extend} {tk_id} NEXT_IMPORT_EX;
+EMP_IDENT: IDENT
+         | ¿;
+//in
+IN: {tk_in} {tk_id} FUNC R_WORD {tk_arrow} SOMETHING MORE_IN {tk_ni};
+R_WORD: {tk_and} K
+      | {tk_by} IDENT
+      | ¿;
+MORE_IN: {tk_square} IDENT {tk_arrow} SOMETHING MORE_IN
+       | ¿;
 
+//Import
+IMPORT     : {tk_import} {tk_id} NEXT_IMPORT_EX;
+NEXT_IMPORT_EX: POINT {tk_id}  NEXT_IMPORT_EX
+              | COMMA {tk_id} NEXT_IMPORT_EX
+              | ¿;
+//FOR
+FOR: {tk_fa} {tk_id} B {tk_to} A1 {tk_arrow} SOMETHING {tk_af};
+
+//DO
+DO: {tk_do} K {tk_arrow} SOMETHING {tk_od};
+
+//Operator
+OPERATOR: {tk_id} N_OPERA NE_OPERA;
+N_OPERA: FUNC
+       | {tk_colon} {tk_id} N_OPERA;
+NE_OPERA: {tk_returns} {tk_id} {tk_colon} DAT
+       | ¿;
+
+//PROC
+PROC: {tk_proc} {tk_id} {tk_lparen} PAR_FUN {tk_rparen} SOMETHING {tk_end};
+PAR_FUN:  {tk_id} N_PAR_FUN
+       | ¿;
+N_PAR_FUN: {tk_comma} {tk_id} N_PAR_FUN
+         | ¿;
+
+//OP
+TK_OP: {tk_op} {tk_id} PRO_NEXT FUNC CALL_SEND;
+//write
+WRITE: {tk_write} FUNC;
+//IF
+IF: {tk_if} K {tk_arrow} SOMETHING ELSE {tk_fi};
+ELSE: {tk_square} NEXT_ELSE
+    | ¿;
+NEXT_ELSE: {tk_else} {tk_arrow} SOMETHING
+         | K {tk_arrow} SOMETHING NEXT_ELSE;
+POINT: {tk_period};
+COMMA: {tk_comma};
+
+//====================================================
 //Declaracion de variables y constantes
 VAR_CONST : TYPE {tk_id} ARRAY ASSIG CON V_C_END;
 TYPE : {tk_var}
@@ -75,7 +135,7 @@ AUG : A
  | E
  | G
  | I;
-
+//======================================================
 //Assignment operators
 //swap
 A : {tk_swap} IDENT;
@@ -110,7 +170,7 @@ I : {tk_aug_lshift} J
   | {tk_aug_rshift} J
   ;
 J : K;
-
+//====================================================
 //////////Operators
 K : L KP;
 KP : {tk_or} L KP
@@ -179,7 +239,18 @@ A1 : IDENT
    | {tk_caracter}
    | {tk_num_real}
    | {tk_lparen} K {tk_rparen};
+//=========================================
+//Call y send
+CALL: {tk_call} {tk_id} PRO_NEXT FUNC;
+PRO_NEXT: {tk_period} {tk_id} PRO_NEXT
+             | ¿;
+SEND: {tk_send} {{tk_id} SEND_PRO_NEXT FUNC;
 
+CALL_OR_SEND: {tk_lbrace} CALL_SEND {tk_rbrace}
+            | ¿;
+CALL_SEND: {tk_send}
+         | {tk_call}
+         | ¿;
 //Identificadores dado que puede ser id1.id2.id3.fun()
 IDENT      : {tk_id} NEXT_IDENT;
 NEXT_IDENT : {tk_period} {tk_id} NEXT_IDENT
@@ -196,62 +267,3 @@ FUNC_POS   : K
            | {tk_id} FUNC_N;
 FUNC_N     : FUNC
            | {tk_colon} DAT SEMICOLON;
-
-//Import
-IMPORT     : {tk_import} {tk_id} NEXT_IMPORT_EX;
-NEXT_IMPORT_EX: POINT {tk_id}  NEXT_IMPORT_EX
-              | COMMA {tk_id} NEXT_IMPORT_EX
-              | ¿;
-POINT: {tk_period};
-COMMA: {tk_comma};
-//IF
-IF: {tk_if} K {tk_arrow} INI ELSE {tk_fi};
-ELSE: {tk_square} NEXT_ELSE
-    | ¿;
-NEXT_ELSE: {tk_else} {tk_arrow} INI
-         | K {tk_arrow} INI NEXT_ELSE;
-//FOR
-FOR: {tk_fa} {tk_id} B {tk_to} A1 {tk_arrow} INI {tk_af};
-//DO
-DO: {tk_do} K {tk_arrow} INI {tk_od};
-//Operator
-OPERATOR: {tk_id} N_OPERA NE_OPERA;
-N_OPERA: FUNC
-       | {tk_colon} {tk_id} N_OPERA;
-NE_OPERA: {tk_returns} {tk_id} {tk_colon} DAT
-       | ¿;
-//PROC
-PROC: {tk_proc} {tk_id} {tk_lparen} PAR_FUN {tk_rparen} INI {tk_end};
-PAR_FUN:  {tk_id} N_PAR_FUN
-       | ¿;
-
-N_PAR_FUN: {tk_comma} {tk_id} N_PAR_FUN
-         | ¿;
-//Call y send
-CALL: {tk_call} {tk_id} PRO_NEXT FUNC;
-PRO_NEXT: {tk_period} {tk_id} PRO_NEXT
-             | ¿;
-SEND: {tk_send} {{tk_id} SEND_PRO_NEXT FUNC;
-
-CALL_OR_SEND: {tk_lbrace} CALL_SEND {tk_rbrace}
-            | ¿;
-CALL_SEND: {tk_send}
-         | {tk_call}
-         | ¿;
-//OP
-TK_OP: {tk_op} {tk_id} PRO_NEXT FUNC CALL_SEND;
-//write
-WRITE: {tk_write} FUNC;
-//in
-IN: {tk_in} {tk_id} FUNC R_WORD {tk_arrow} INI MORE_IN {tk_ni};
-R_WORD: {tk_and} K
-      | {tk_by} IDENT
-      | ¿;
-MORE_IN: {tk_square} IDENT {tk_arrow} INI MORE_IN
-       | ¿;
-//optype
-OPTYPE: {tk_optype} OPERATOR;
-TK_TYPE: tk_type {tk_id} {tk_eq} {tk_id} FUNC
-EXTEND: {tk_extend} {tk_id} NEXT_IMPORT_EX;
-EMP_IDENT: IDENT
-         | ¿;
