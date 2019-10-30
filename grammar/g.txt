@@ -4,8 +4,6 @@ START: RESOURCE START
      | BODY START;
 //RESOURCE GLOBAL BODY
 RESOURCE : {tk_resource} {tk_id} PAREN SOMETHING {tk_end};
-PAREN    : {tk_lparen} {tk_rparen}
-         | ¿;
 GLOBAL: {tk_global} GLOBAL_BODY_ID SOMETHING {tk_end} GLOBAL_BODY_END ;
 BODY:   {tk_body} GLOBAL_BODY_ID SOMETHING {tk_end} GLOBAL_BODY_END ;
 G_B_TYPE: {tk_global}
@@ -267,4 +265,4 @@ A1 : IDENT
    | {tk_cadena}
    | {tk_caracter}
    | {tk_num_real}
-   | {tk_lparen} K {tk_rparen};
+   | PAREN;
