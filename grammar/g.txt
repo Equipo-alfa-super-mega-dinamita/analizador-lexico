@@ -4,6 +4,8 @@ START: RESOURCE START
      | BODY START;
 //RESOURCE GLOBAL BODY
 RESOURCE : {tk_resource} {tk_id} PAREN SOMETHING {tk_end};
+PAREN    : {tk_lparen} {tk_rparen}
+         | ¿;
 GLOBAL: {tk_global} GLOBAL_BODY_ID SOMETHING {tk_end} GLOBAL_BODY_END ;
 BODY:   {tk_body} GLOBAL_BODY_ID SOMETHING {tk_end} GLOBAL_BODY_END ;
 G_B_TYPE: {tk_global}
@@ -16,9 +18,9 @@ GLOBAL_BODY_END: {tk_id}
 //Las formas que una setencia puede tener
 SOMETHING: VAR_CONST SOMETHING
    | ASSIGNMENTS SOMETHING
-   | Y  SOMETHING
+   | Y SOMETHING
    | IMPORT SOMETHING
-   | {tk_id} PAREN SOMETHING
+   | {tk_id} FUNC SOMETHING
    | {tk_stop} SOMETHING
    | {tk_semicolon} SOMETHING
    | IF SOMETHING
@@ -42,7 +44,7 @@ EXTEND: {tk_extend} {tk_id} NEXT_IMPORT_EX;
 EMP_IDENT: IDENT
          | ¿;
 //in
-IN: {tk_in} {tk_id} PAREN R_WORD {tk_arrow} SOMETHING MORE_IN {tk_ni};
+IN: {tk_in} {tk_id} FUNC R_WORD {tk_arrow} SOMETHING MORE_IN {tk_ni};
 R_WORD: {tk_and} K
       | {tk_by} IDENT
       | ¿;
@@ -51,7 +53,7 @@ MORE_IN: {tk_square} IDENT {tk_arrow} SOMETHING MORE_IN
 
 //Import
 IMPORT     : {tk_import} {tk_id} NEXT_IMPORT_EX;
-NEXT_IMPORT_EX: POINT {tk_id}  NEXT_IMPORT_EX
+NEXT_IMPORT_EX: POINT {tk_id} NEXT_IMPORT_EX
               | COMMA {tk_id} NEXT_IMPORT_EX
               | ¿;
 //FOR
@@ -62,7 +64,7 @@ DO: {tk_do} K {tk_arrow} SOMETHING {tk_od};
 
 //Operator
 OPERATOR: {tk_id} N_OPERA NE_OPERA;
-N_OPERA: PAREN
+N_OPERA: FUNC
        | {tk_colon} {tk_id} N_OPERA;
 NE_OPERA: {tk_returns} {tk_id} {tk_colon} DAT
        | ¿;
@@ -75,9 +77,9 @@ N_PAR_FUN: {tk_comma} {tk_id} N_PAR_FUN
          | ¿;
 
 //OP
-TK_OP: {tk_op} {tk_id} PRO_NEXT PAREN CALL_SEND;
+TK_OP: {tk_op} {tk_id} PRO_NEXT FUNC CALL_SEND;
 //write
-WRITE: {tk_write} PAREN;
+WRITE: {tk_write} FUNC;
 //IF
 IF: {tk_if} K {tk_arrow} SOMETHING ELSE {tk_fi};
 ELSE: {tk_square} NEXT_ELSE
@@ -171,10 +173,10 @@ I : {tk_aug_lshift} J
 J : K;
 //====================================================
 //Call y send
-CALL: {tk_call} {tk_id} PRO_NEXT PAREN;
+CALL: {tk_call} {tk_id} PRO_NEXT FUNC;
 PRO_NEXT: {tk_period} {tk_id} PRO_NEXT
              | ¿;
-SEND: {tk_send} {tk_id} SEND_PRO_NEXT FUNC;
+SEND: {tk_send} {tk_id} PRO_NEXT FUNC;
 
 CALL_OR_SEND: {tk_lbrace} CALL_SEND {tk_rbrace}
             | ¿;
@@ -184,19 +186,18 @@ CALL_SEND: {tk_send}
 //Identificadores dado que puede ser id1.id2.id3.fun()
 IDENT      : {tk_id} NEXT_IDENT;
 NEXT_IDENT : {tk_period} {tk_id} NEXT_IDENT
-           | PAREN
+           | FUNC
            | ANY_STRING
            | ¿;
 //se toma que se tiene un identidicador o palabra reservada y lo siguiente solo se encarga del parentesis (a,...,b)
-//Paren
-PAREN       : {tk_lparen} PAREN_POS NEXT_P {tk_rparen};
-PAREN_POS   : K
-            | VAR_CONST
-            | {tk_id} PAREN_N
-            | ¿;
-NEXT_P     : {tk_comma} PAREN_POS NEXT_P
-           | ¿;
-PAREN_N    : PAREN
+//Funciones
+FUNC       : {tk_lparen} FUNC_POS NEXT_F;
+NEXT_F     : {tk_comma} FUNC_POS NEXT_F
+           | {tk_rparen};
+FUNC_POS   : K
+           | VAR_CONST
+           | {tk_id} FUNC_N;
+FUNC_N     : FUNC
            | {tk_colon} DAT SEMICOLON;
 //====================================================
 //////////Operators
@@ -248,7 +249,7 @@ Y  : {tk_qmark} Y
    | {tk_decr} Y
    | {tk_incr} Y
    | {tk_minus} Y
-   | {tk_plus}  Y
+   | {tk_plus} Y
    | {tk_not} Y
    | Z;
 Z  : A1 ZP;
