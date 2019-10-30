@@ -3,9 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="d0a3b67c-b3a6-4d0e-aaed-5e64f73223df" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/g.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/g.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grammar/g.txt" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/g.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Empty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Grammar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Grammar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/GrammarReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/GrammarReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Symbol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Symbol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/SyntaxAnalizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/SyntaxAnalizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Terminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Terminal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/superdinamita/parser/Variable.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

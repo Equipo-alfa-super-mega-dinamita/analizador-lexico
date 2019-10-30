@@ -141,7 +141,7 @@ oper_def:
 oper_def2:
 		op_prototype
 	|	colon_opt qualified_id
-
+	;
 colon_opt:
 	    ¿
 	|   {tk_colon}
@@ -362,8 +362,9 @@ basic_type:
 string_def:
 	    {tk_string} string_def_p
 	;
-string_def_p: {tk_lbracket} string_lim {tk_rbracket}
-            |{tk_lparen} string_lim {tk_rparen};
+string_def_p:
+	{tk_lbracket} string_lim {tk_rbracket}
+        |{tk_lparen} string_lim {tk_rparen};
 string_lim:
 	    expr
 	|   {tk_aster}
@@ -376,10 +377,11 @@ enum_def:
 pointer_def:
 	    {tk_ptr}   pointer_def_p
 	;
-pointer_def_p: type
-             | {tk_any};
+pointer_def_p:
+	type
+        | {tk_any};
 record_def:
-	    {tk_rec}   {tk_lparen} field_lp {tk_rparen}
+	    {tk_rec} {tk_lparen} field_lp {tk_rparen}
 	;
 
 union_def:
@@ -838,15 +840,17 @@ id_subs:
 	;
 
 id_subs2:
-	    ¿
+ 	   ¿
 	|   subscripts
 	;
 
 subscripts:
         bracketed_list subscripts_P
-    ;
-subscripts_P: ¿
-            | subscripts;
+    	;
+subscripts_P:
+	¿
+        | subscripts
+        ;
 
 
 subscripts_opt:
@@ -861,14 +865,17 @@ bracketed_list:
 bound_lp:
         bounds bound_lp_p
     ;
-bound_lp_p: {tk_comma} bounds bound_lp_p
-          | ¿;
+bound_lp_p:
+ {tk_comma} bounds bound_lp_p
+  	| ¿;
 bounds:
-        bound bounds_P
+     bound bounds_P
     ;
-bounds_P: ¿
+bounds_P:
+    ¿
     | {tk_colon} bound;
 
 bound:
         expr
-    |   {tk_aster};
+    |   {tk_aster}
+    ;

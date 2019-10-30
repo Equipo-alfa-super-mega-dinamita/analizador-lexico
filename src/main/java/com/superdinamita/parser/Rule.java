@@ -5,14 +5,18 @@ public class Rule {
 
     @Override
     public String toString() {
-        String string ="\nRule:{" + "symbols= [";
-        for ( Symbol symbol: symbols) string+= symbol.value +  "\t";
+        StringBuilder string = new StringBuilder("\nRule:{" + "symbols= [");
+        for ( Symbol symbol: symbols) string.append(symbol.value()).append("\t");
         return string + "]}";
     }
 
-    public final List<Symbol> symbols;
+    List<Symbol> symbols() {
+        return symbols;
+    }
 
-    public Rule(List<Symbol> symbols) throws Exception {
+    private final List<Symbol> symbols;
+
+    Rule(List<Symbol> symbols) throws Exception {
         this.symbols = symbols;
         if(symbols.isEmpty()) throw new Exception("Las reglas no pueden estár vacías, si no producen nada, deben producir el símbolo vacío.");
     }
