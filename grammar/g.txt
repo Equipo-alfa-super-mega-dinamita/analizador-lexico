@@ -38,7 +38,7 @@ SOMETHING: VAR_CONST SOMETHING
 //==================================================
 //optype
 OPTYPE: {tk_optype} OPERATOR;
-TK_TYPE: tk_type {tk_id} {tk_eq} {tk_id} FUNC
+TK_TYPE: {tk_type} {tk_id} {tk_eq} {tk_id} FUNC
 EXTEND: {tk_extend} {tk_id} NEXT_IMPORT_EX;
 EMP_IDENT: IDENT
          | ¿;
