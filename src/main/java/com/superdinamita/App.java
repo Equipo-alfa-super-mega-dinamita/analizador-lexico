@@ -22,7 +22,7 @@ public class App {
 
 
         try {
-            GrammarReader gr = new GrammarReader("grammar/g.txt");
+            GrammarReader gr = new GrammarReader("grammar/g.y");
             SyntaxAnalizer sa = new SyntaxAnalizer(new LexicalAnalyzer("data/prueba.txt"), gr.grammar);
             sa.analyse();
             System.out.println("El analisis sintactico ha finalizado exitosamente.");
