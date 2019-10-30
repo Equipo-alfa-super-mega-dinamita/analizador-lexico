@@ -34,10 +34,6 @@ public class Grammar {
                 '}';
     }
 
-    public void setFirstSymbol(String variable) {
-        initialVariable = getVariable(variable);
-    }
-
     public Variable getVariable(String variableName) {
         if(!variables.containsKey(variableName)){
             variables.put(variableName, new Variable(variableName, this));
@@ -52,27 +48,17 @@ public class Grammar {
 
     public void generatePredictionSets() throws Exception {
 
-        //initialVariable.createFirsts();
-        //La gramática debe garantizar que todas las variables pueden aparecer después de
-        //una sustitución por la izquierda de la variable inicial. Las variables que no sean alcanzadas
-        //son inalcanzables.
-        /* TODO ¿¿Es verdad esto??
-        for (Variable var : variables.values()) {
-            if( !var.firstsDone ){
-                throw new Exception("La gramática tiene símbolos alcanzables. El símbolo " + var.value +" nunca puede aparecer tras sutituir la variable inicial.");
-            }
-        }*/
         generateFirsts();
         generateFollows();
-        //System.out.println("----------------Conjuntos de predicción--------");
+        System.out.println("----------------Conjuntos de predicción--------");
         for(Variable variable: variables.values()){
-            //System.out.println("\n-------------------------------VARIABLE----------------------------------------");
-            //System.out.println(variable);
-            //System.out.println(variable.value);
-            //System.out.println(variable.firsts);
-            //System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
-            //System.out.println(variable.follows);
-            //System.out.println();
+            System.out.println("\n-------------------------------VARIABLE----------------------------------------");
+            System.out.println(variable);
+            System.out.println(variable.value);
+            System.out.println(variable.firsts);
+            System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
+            System.out.println(variable.follows);
+            System.out.println();
             HashSet<TokenType> set, firsts;
             for(Rule rule :variable.rules){
                 set = new HashSet<>();
@@ -84,19 +70,21 @@ public class Grammar {
                 set.addAll(firsts);
                 variable.mapRule(set, rule);
             }
-            //System.out.println("Prediction set");
+            System.out.println("Prediction set");
             for ( TokenType tokenType : variable.predictionSet.keySet()){
-                //System.out.println("TOKEN: " + tokenType);
+                System.out.println("TOKEN: " + tokenType);
                 for(Symbol s : variable.predictionSet.get(tokenType).symbols){
-                    //System.out.print(s.value);
+                    System.out.print(s.value + " ");
                 }
-                //System.out.println();
+                System.out.println();
             }
 
 
 
 
         }
+
+        System.out.println(this + "\n\n\n");
 
 
 
@@ -128,5 +116,13 @@ public class Grammar {
     }
 
 
+    public void checkEmpty() {
 
+
+        for(Variable variable: variables.values()){
+            if(variable.rules.isEmpty()){
+                System.out.println("La variable \"" + variable.value + "\" no tiene reglas al finalizar la lectura." );
+            }
+        }
+    }
 }

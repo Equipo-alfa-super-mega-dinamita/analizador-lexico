@@ -45,12 +45,13 @@ public class GrammarReader {
                     System.out.println("-rule:" + ruleString + ";");
                     String[] symbolsRaw = ruleString.split("[ \t]+");
                     System.out.println("-Symbols:" + Arrays.toString(symbolsRaw));
+
                     LinkedList<Symbol> symbols = new LinkedList<>();
                     //Para cada simbolo de la regla ---
                     for (String symbolRaw : symbolsRaw) {
                         Symbol tempSymbol;
                         //System.out.println(symbolRaw);
-                        if (symbolRaw.matches("[A-Za-z0-9_]*")) {
+                        if (symbolRaw.matches("[A-Za-z0-9_]+")) {
                             tempSymbol = grammar.getVariable(symbolRaw.trim());
                         }else if(symbolRaw.matches("\\{.*}")){
                             tempSymbol = new Terminal(symbolRaw.substring(1, symbolRaw.length() - 1).trim());
@@ -58,13 +59,14 @@ public class GrammarReader {
                             symbols.clear();
                             tempSymbol = Grammar.empty();
                         }else{
-                            throw new Exception("Found invalid symbol: " + symbolRaw + " after " );
+                            throw new Exception("Found invalid symbol: " + symbolRaw + " after ");
                         }
                         symbols.add(tempSymbol);
                     }
                     grammar.addRule(variable,new Rule(symbols));
                 }
             }
+            grammar.checkEmpty();
             grammar.generatePredictionSets();
             //System.out.println("GRAMMAR: " + grammar);
         } catch (Exception e) {

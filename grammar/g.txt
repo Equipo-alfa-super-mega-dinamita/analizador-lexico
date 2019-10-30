@@ -218,7 +218,7 @@ prototype:
 
 parameters:
 	    {tk_lparen} param_spec_ls {tk_rparen}
-	;
+	    ;
 
 param_spec_ls:
 	    ¿
@@ -230,12 +230,12 @@ param_spec_lp:
 	;
 
 param_spec_lp2:
-	| {tk_semicolon} param_spec_lp3
+	{tk_semicolon} param_spec_lp3
 	| ¿
 	;
 
 param_spec_lp3:
-	| {tk_semicolon} param_spec_lp
+	{tk_semicolon} param_spec_lp
 	| ¿
 	;
 
@@ -423,7 +423,7 @@ eq_opt:
 	;
 
 op_restriction_opt:
-	|   {tk_lbrace} op_restriction {tk_rbrace}
+	 {tk_lbrace} op_restriction {tk_rbrace}
 	;
 
 op_restriction:
@@ -740,7 +740,8 @@ paren_expr:
 	;
 
 suffix_expr: expr suffix_expr_P;
-suffix_expr_P:{tk_incr}
+suffix_expr_P:
+        {tk_incr}
 	|    {tk_decr}
 	|    {tk_hat}
 	|    {tk_period} {tk_id}

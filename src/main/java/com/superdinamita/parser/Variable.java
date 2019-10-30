@@ -42,7 +42,6 @@ public class Variable extends Symbol {
             if(this.predictionSet.containsKey(token)){
                 String message = value + ": Se ha detectado que el token " + token + " mapea a dos reglas distintas."
                  + "Las reglas " + rule + " y " + predictionSet.get(token);
-                //throw new Exception(message);
                 System.out.println(message);
             }
             this.predictionSet.put(token, rule);
@@ -58,7 +57,7 @@ public class Variable extends Symbol {
 
     @Override
     public String toString() {
-        return "\tVariable: {" +
+        return "\n\nVariable: {" +
                 "value='" + value + '\'' +
                 "rules=" + rules +
                 "}\t";
