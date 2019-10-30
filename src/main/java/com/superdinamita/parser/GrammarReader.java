@@ -16,11 +16,11 @@ public class GrammarReader {
     private BufferedReader buffer;
     private Scanner scanner;
 
-    public GrammarReader(String filename) {
+    public GrammarReader(String filename) throws Exception {
         read(filename);
     }
 
-    private void read(String filename) {
+    private void read(String filename) throws Exception {
         try {
             grammar = new Grammar();
             grammarFile = new File(filename);
@@ -50,7 +50,7 @@ public class GrammarReader {
                     for (String symbolRaw : symbolsRaw) {
                         Symbol tempSymbol;
                         //System.out.println(symbolRaw);
-                        if (symbolRaw.matches("[A-Z0-9_]*")) {
+                        if (symbolRaw.matches("[A-Za-z0-9_]*")) {
                             tempSymbol = grammar.getVariable(symbolRaw.trim());
                         }else if(symbolRaw.matches("\\{.*}")){
                             tempSymbol = new Terminal(symbolRaw.substring(1, symbolRaw.length() - 1).trim());
@@ -68,9 +68,12 @@ public class GrammarReader {
             grammar.generatePredictionSets();
             //System.out.println("GRAMMAR: " + grammar);
         } catch (Exception e) {
+            if (scanner != null) {
+                scanner.close();
+            }
             e.printStackTrace();
             System.out.println("Error: Open File");
-
+            throw e;
         } finally {
             try {
                 if (scanner != null) {

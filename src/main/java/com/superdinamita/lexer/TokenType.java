@@ -7,6 +7,7 @@ public enum TokenType {
     none,
     ERROR,
     //nuevos
+    tk_bogus,
     EPSILON,
     tk_id,
     EOF,

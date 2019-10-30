@@ -64,15 +64,15 @@ public class Grammar {
         }*/
         generateFirsts();
         generateFollows();
-        System.out.println("----------------Conjuntos de predicción--------");
+        //System.out.println("----------------Conjuntos de predicción--------");
         for(Variable variable: variables.values()){
-            System.out.println("\n-------------------------------VARIABLE----------------------------------------");
-            System.out.println(variable);
-            System.out.println(variable.value);
-            System.out.println(variable.firsts);
-            System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
-            System.out.println(variable.follows);
-            System.out.println();
+            //System.out.println("\n-------------------------------VARIABLE----------------------------------------");
+            //System.out.println(variable);
+            //System.out.println(variable.value);
+            //System.out.println(variable.firsts);
+            //System.out.println(variable.hasEmpty ? "Has empty" : "Not empty");
+            //System.out.println(variable.follows);
+            //System.out.println();
             HashSet<TokenType> set, firsts;
             for(Rule rule :variable.rules){
                 set = new HashSet<>();
@@ -84,13 +84,13 @@ public class Grammar {
                 set.addAll(firsts);
                 variable.mapRule(set, rule);
             }
-            System.out.println("Prediction set");
+            //System.out.println("Prediction set");
             for ( TokenType tokenType : variable.predictionSet.keySet()){
-                System.out.println("TOKEN: " + tokenType);
+                //System.out.println("TOKEN: " + tokenType);
                 for(Symbol s : variable.predictionSet.get(tokenType).symbols){
-                    System.out.print(s.value);
+                    //System.out.print(s.value);
                 }
-                System.out.println();
+                //System.out.println();
             }
 
 

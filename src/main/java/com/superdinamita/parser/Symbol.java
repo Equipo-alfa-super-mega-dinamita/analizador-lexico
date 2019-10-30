@@ -39,9 +39,10 @@ public abstract class Symbol {
         Token received = syntaxAnalizer.token();
         if( variable.predictionSet.keySet().isEmpty() ) throw new Exception("No se esperaba ningún token, pero se encontró " + received);
         for (TokenType expected : variable.predictionSet.keySet()) {
+            //expectedTokens+=mapTypeToExpected(expected)+", ";
             expectedTokens+=expected.toString()+", ";
         }
-        throw new Exception("<" + (received.row+1) + "," + received.column + "> Error sintactico: se encontro: " + received.lexeme
+        throw new Exception("<" + (received.row+1) + "," + received.column + "> Error sintactico: se encontro: " + received.type
                 + "; Se esperaba: " + expectedTokens);
 
     }
