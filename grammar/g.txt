@@ -1,4 +1,4 @@
-//===========================================
+;
 START: RESOURCE START
      | GLOBAL START
      | BODY START;
