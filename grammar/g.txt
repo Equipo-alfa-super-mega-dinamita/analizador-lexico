@@ -1,3 +1,4 @@
+//===========================================
 START: RESOURCE START
      | GLOBAL START
      | BODY START;
@@ -171,6 +172,34 @@ I : {tk_aug_lshift} J
   ;
 J : K;
 //====================================================
+//Call y send
+CALL: {tk_call} {tk_id} PRO_NEXT FUNC;
+PRO_NEXT: {tk_period} {tk_id} PRO_NEXT
+             | ¿;
+SEND: {tk_send} {{tk_id} SEND_PRO_NEXT FUNC;
+
+CALL_OR_SEND: {tk_lbrace} CALL_SEND {tk_rbrace}
+            | ¿;
+CALL_SEND: {tk_send}
+         | {tk_call}
+         | ¿;
+//Identificadores dado que puede ser id1.id2.id3.fun()
+IDENT      : {tk_id} NEXT_IDENT;
+NEXT_IDENT : {tk_period} {tk_id} NEXT_IDENT
+           | FUNC
+           | ANY_STRING
+           | ¿;
+//se toma que se tiene un identidicador o palabra reservada y lo siguiente solo se encarga del parentesis (a,...,b)
+//Funciones
+FUNC       : {tk_lparen} FUNC_POS NEXT_F;
+NEXT_F     : {tk_comma} FUNC_POS NEXT_F
+           | {tk_lparen};
+FUNC_POS   : K
+           | VAR_CONST
+           | {tk_id} FUNC_N;
+FUNC_N     : FUNC
+           | {tk_colon} DAT SEMICOLON;
+//====================================================
 //////////Operators
 K : L KP;
 KP : {tk_or} L KP
@@ -240,30 +269,3 @@ A1 : IDENT
    | {tk_num_real}
    | {tk_lparen} K {tk_rparen};
 //=========================================
-//Call y send
-CALL: {tk_call} {tk_id} PRO_NEXT FUNC;
-PRO_NEXT: {tk_period} {tk_id} PRO_NEXT
-             | ¿;
-SEND: {tk_send} {{tk_id} SEND_PRO_NEXT FUNC;
-
-CALL_OR_SEND: {tk_lbrace} CALL_SEND {tk_rbrace}
-            | ¿;
-CALL_SEND: {tk_send}
-         | {tk_call}
-         | ¿;
-//Identificadores dado que puede ser id1.id2.id3.fun()
-IDENT      : {tk_id} NEXT_IDENT;
-NEXT_IDENT : {tk_period} {tk_id} NEXT_IDENT
-           | FUNC
-           | ANY_STRING
-           | ¿;
-//se toma que se tiene un identidicador o palabra reservada y lo siguiente solo se encarga del parentesis (a,...,b)
-//Funciones
-FUNC       : {tk_lparen} FUNC_POS NEXT_F;
-NEXT_F     : {tk_comma} FUNC_POS NEXT_F
-           | {tk_lparen};
-FUNC_POS   : K
-           | VAR_CONST
-           | {tk_id} FUNC_N;
-FUNC_N     : FUNC
-           | {tk_colon} DAT SEMICOLON;
