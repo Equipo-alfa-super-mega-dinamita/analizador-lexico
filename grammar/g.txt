@@ -548,7 +548,7 @@ guarded_cmd_lp:
 	    guarded_cmd guarded_cmd_lp_p
 	;
 guarded_cmd_lp_p: {tk_square} guarded_cmd guarded_cmd_lp_p
-                | ¿;
+                | ¿ ;
 guarded_cmd:
 	    expr {tk_arrow} block
 	;
@@ -823,14 +823,23 @@ id_lp:
     |   id_lp {tk_comma} {tk_id}
     ;
 
-id_subs: {tk_id} id_subs_P;
-id_subs_P: ¿
-         |subscripts;
+id_subs_lp:
+	    id_subs	id_subs_lp2
+	;
+
+id_subs_lp2:
+		{tk_comma} id_subs id_subs_lp2
+		| ¿
+	;
 
 id_subs:
-        {tk_id}
-    |   {tk_id} subscripts
-    ;
+	    {tk_id} id_subs2
+	;
+
+id_subs2:
+	    ¿
+	|   subscripts
+	;
 
 subscripts:
         bracketed_list subscripts_P
